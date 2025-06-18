@@ -10,6 +10,7 @@
     "pnpm": ">=8.0.0"
   },
   "scripts": {
+    "install:all": "pnpm i -r ",
     "test": "echo \"Error: no test specified\" && exit 1",
     "clear": "rimraf -g ./node_modules ./packages/**/node_modules ./packages/**/dist"
   },
