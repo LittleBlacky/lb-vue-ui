@@ -1,0 +1,12 @@
+# 默认忽略的文件
+/shelf/
+/workspace.xml
+# 基于编辑器的 HTTP 客户端请求
+/httpRequests/
+# Datasource local storage ignored files
+/dataSources/
+/dataSources.local.xml
+# 所有文件夹下的node_modules文件夹
+node_modules/
+# 所有文件夹下的dist文件夹
+dist/
