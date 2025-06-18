@@ -1,0 +1,120 @@
+// 定义颜色映射（SCSS Map）
+$colors: (
+  "primary": #3498db,
+  "secondary": #2ecc71,
+  "success": #27ae60,
+  "warning": #f39c12,
+  "danger": #e74c3c,
+  "info": #909399,
+  "dark": #2c3e50,
+  "light": #ecf0f1
+) !default;
+
+:root {
+
+  /* colors */
+  --lb-color-white: #ffffff;
+  --lb-color-black: #000000;
+  --sizes: small, base, large;
+  @each $type, $color in $colors {
+    // 基础颜色
+    --lb-color-#{$type}: #{$color};
+
+    // 生成浅色变体（light-2, light-4, light-6, light-8）
+    @for $i from 1 through 4 {
+      $weight: $i * 2; // 2, 4, 6, 8
+      $percentage: $weight * 10%; // 20%, 40%, 60%, 80%
+      --lb-color-#{$type}-light-#{$weight}: #{mix(#fff, $color, $percentage)};
+    }
+
+    // 生成深色变体（dark-2, dark-4, dark-6, dark-8）
+    @for $i from 1 through 4 {
+      $weight: $i * 2; // 2, 4, 6, 8
+      $percentage: $weight * 10%; // 20%, 40%, 60%, 80%
+      --lb-color-#{$type}-dark-#{$weight}: #{mix(#000, $color, $percentage)};
+    }
+  }
+
+  --lb-bg-color: #ffffff;
+  --lb-bg-color-page: #f2f3f5;
+  --lb-bg-color-overlay: #ffffff;
+  --lb-text-color-primary: #303133;
+  --lb-text-color-regular: #606266;
+  --lb-text-color-secondary: #909399;
+  --lb-text-color-placeholder: #a8abb2;
+  --lb-text-color-disabled: #c0c4cc;
+  --lb-border-color: #dcdfe6;
+  --lb-border-color-light: #e4e7ed;
+  --lb-border-color-lighter: #ebeef5;
+  --lb-border-color-extra-light: #f2f6fc;
+  --lb-border-color-dark: #d4d7de;
+  --lb-border-color-darker: #cdd0d6;
+  --lb-fill-color: #f0f2f5;
+  --lb-fill-color-light: #f5f7fa;
+  --lb-fill-color-lighter: #fafafa;
+  --lb-fill-color-extra-light: #fafcff;
+  --lb-fill-color-dark: #ebedf0;
+  --lb-fill-color-darker: #e6e8eb;
+  --lb-fill-color-blank: #ffffff;
+
+  /* height */
+  --lb-height-base: 2rem;
+  --lb-height-small: 1.5rem;
+  --lb-height-large: 2.5rem;
+
+  /* width */
+  --lb-width-base: 2rem;
+  --lb-width-small: 1.5rem;
+  --lb-width-large: 2.5rem;
+  --lb-width-full: 100%;
+  --lb-width-half: 50%;
+  --lb-width-third: 33.3333%;
+  --lb-width-quarter: 25%;
+  --lb-width-fifth: 20%;
+  --lb-width-sixth: 16.6667%;
+
+  /* border */
+  --lb-border-width: 1px;
+  --lb-border-style: solid;
+  --lb-border-color-hover: var(--lb-text-color-disabled);
+  --lb-border: var(--lb-border-width) var(--lb-border-style) var(--lb-border-color);
+  --lb-border-radius-base: 0.25rem;
+  --lb-border-radius-small: 0.125rem;
+  --lb-border-radius-round: 1.25rem;
+  --lb-border-radius-circle: 100%;
+
+  /*font 使用rem单位*/
+  --lb-font-size-extra-large: 1.25rem;
+  --lb-font-size-medium: 1rem;
+  --lb-font-size-base: 0.875rem;
+  --lb-font-size-small: 0.75rem;
+  --lb-font-size-large: 1.125rem;
+  --lb-font-size-extra-small: 0.625rem;
+  --lb-font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', '\5fae\8f6f\96c5\9ed1', Arial, sans-serif;
+  --lb-font-weight-primary: 700;
+
+  /*disabled*/
+  --lb-disabled-bg-color: var(--lb-fill-color-light);
+  --lb-disabled-text-color: var(--lb-text-color-placeholder);
+  --lb-disabled-border-color: var(--lb-border-color-light);
+
+  /*animation*/
+  --lb-transition-duration-slow: 0.5s;
+  --lb-transition-duration: 0.3s;
+  --lb-transition-duration-fast: 0.2s;
+  --lb-transition-timing-function-fast-to-slow: cubic-bezier(0, 0, 0, 1);
+
+  /*gap*/
+  --lb-gap-base: 1rem;
+  --lb-gap-small: 0.5rem;
+  --lb-gap-large: 2rem;
+  --lb-gap-extra-large: 3rem;
+  --lb-gap-extra-extra-large: 4rem;
+  --lb-gap-extra-extra-extra-large: 5rem;
+  --lb-gap-extra-small: 0.25rem;
+  --lb-gap-extra-extra-small: 0.125rem;
+
+  /*z-index*/
+  --lb-z-index-top: 2000;
+  --lb-z-index-normal: 1000;
+}
