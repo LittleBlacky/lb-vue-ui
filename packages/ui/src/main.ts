@@ -1,11 +1,14 @@
-import './assets/main.css'
+import LbButton from './components/button'
+import LbInput from './components/input'
+import type { App } from 'vue'
 
-import { createApp } from 'vue'
-import { createPinia } from 'pinia'
-import App from './App.vue'
+export const LbUIinstall = (app: App) => {
+  [LbButton, LbInput].forEach((component) => {
+    app.component(component.name as string, component)
+  })
+}
 
-const app = createApp(App)
-
-app.use(createPinia())
-
-app.mount('#app')
+export {
+  LbButton,
+  LbInput
+}

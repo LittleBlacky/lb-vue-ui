@@ -12,6 +12,8 @@
   "scripts": {
     "install:all": "pnpm i -r ",
     "dev": "pnpm -F @lb-vue-monorepo/editor dev",
+    "build": "pnpm -F @lb-vue-monorepo/ui build  && pnpm -F @lb-vue-monorepo/editor build",
+    "build:editor": "pnpm -F @lb-vue-monorepo/editor build",
     "build:ui": "pnpm -F @lb-vue-monorepo/ui build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "clear": "rimraf -g ./node_modules ./packages/**/node_modules ./packages/**/dist",
