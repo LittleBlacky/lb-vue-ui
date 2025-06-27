@@ -27,7 +27,7 @@
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
-    "create": "node scripts/create-components/index.js",
+    "new:component": "node scripts/create-components.js",
     "preview": "vite preview",
     "test:unit": "vitest",
     "build-only": "vite build",
