@@ -1,10 +1,12 @@
-<script setup>
+<script setup lang="ts">
 import { RouterView } from 'vue-router'
 </script>
 
 <template>
-  <LbButton>按钮</LbButton>
+  <lb-button></lb-button>
   <RouterView />
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+</style>

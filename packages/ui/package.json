@@ -5,6 +5,7 @@
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
+  "types": "./dist/types/main.d.ts",
   "files": [
     "dist",
     "package.json",
@@ -22,7 +23,11 @@
       "import": "./dist/styles/*.css",
       "require": "./dist/styles/*.css"
     },
-    "./resolver": "./dist/utils/resolver.js"
+    "./resolver": {
+      "types": "./dist/types/utils/resolver.d.ts",
+      "import": "./dist/utils/resolver.js",
+      "require": "./dist/utils/resolver.cjs"
+    }
   },
   "scripts": {
     "dev": "vite",

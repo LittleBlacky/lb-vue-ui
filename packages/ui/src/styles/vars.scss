@@ -1,3 +1,5 @@
+@use "sass:color";
+ 
 // 定义颜色映射（SCSS Map）
 $colors: (
   "primary": #3498db,
@@ -24,14 +26,14 @@ $colors: (
     @for $i from 1 through 4 {
       $weight: $i * 2; // 2, 4, 6, 8
       $percentage: $weight * 10%; // 20%, 40%, 60%, 80%
-      --lb-color-#{$type}-light-#{$weight}: #{mix(#fff, $color, $percentage)};
+      --lb-color-#{$type}-light-#{$weight}: #{color.mix(#fff, $color, $percentage)};
     }
 
     // 生成深色变体（dark-2, dark-4, dark-6, dark-8）
     @for $i from 1 through 4 {
       $weight: $i * 2; // 2, 4, 6, 8
       $percentage: $weight * 10%; // 20%, 40%, 60%, 80%
-      --lb-color-#{$type}-dark-#{$weight}: #{mix(#000, $color, $percentage)};
+      --lb-color-#{$type}-dark-#{$weight}: #{color.mix(#000, $color, $percentage)};
     }
   }
 

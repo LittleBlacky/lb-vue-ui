@@ -5,8 +5,7 @@
   "compilerOptions": {
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "paths": {
-      "lb-ui": ["./dist/types/index.d.ts"],
-      "lb-ui/*": ["./dist/types/components/*/index.d.ts"]
+      "@/*": ["./src/*"],
     }
   }
 }

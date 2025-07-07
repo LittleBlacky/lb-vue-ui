@@ -1,5 +1,5 @@
 <template>
-  <input class="lb-input"></input>
+  <input class="lb-input" />
 </template>
 
 <script setup lang="ts">

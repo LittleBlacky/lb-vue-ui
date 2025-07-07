@@ -72,7 +72,7 @@ fs.writeFileSync(path.join(baseComponentPath, `${baseName}.vue`), vueTemplate)
 // 创建 index.ts 文件
 const indexTsTemplate = `
 import ${baseUpperName}Component from './${baseName}.vue';
-import { withInstall } from '@/utils/install.ts';
+import { withInstall } from '../../utils/install.ts';
 const ${baseUpperName} = withInstall(${baseUpperName}Component);
 export default ${baseUpperName};
 // 导出类型

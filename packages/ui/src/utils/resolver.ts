@@ -1,7 +1,7 @@
 // my-resolver.ts
 import type { ComponentResolverFunction } from 'unplugin-vue-components/types'
 
-interface LbsolverOptions {
+export interface LbsolverOptions {
   /**
    * 是否自动导入组件（默认 true）
    */
@@ -24,10 +24,10 @@ interface LbsolverOptions {
   stylePath?: string
 }
 
-export function LbResolver(options: LbsolverOptions = {}): ComponentResolverFunction {
+export const LbResolver = (options: LbsolverOptions = {}): ComponentResolverFunction => {
   const {
     autoImportStyle = true,
-    prefix = 'Lb', // 组件前缀
+    prefix = 'lb', // 组件前缀
     libraryName = '@lb-vue-monorepo/ui', // 组件库名称
     stylePath = `${libraryName}/styles`, //样式文件路径
   } = options;
@@ -45,7 +45,7 @@ export function LbResolver(options: LbsolverOptions = {}): ComponentResolverFunc
       type: 'component',
       from: libraryName,
       as: componentName,
-      name: name
+      name: componentName.toLowerCase()
     };
     // 1. 处理样式导入
     if (autoImportStyle && stylePath) {

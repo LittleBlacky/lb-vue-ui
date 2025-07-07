@@ -10,11 +10,10 @@
     "pnpm": ">=8.0.0"
   },
   "scripts": {
-    "install": "pnpm i -r ",
     "ui": "pnpm -F @lb-vue-monorepo/ui",
     "editor": "pnpm -F @lb-vue-monorepo/editor",
     "dev": "pnpm editor dev",
-    "build": "pnpm build:ui && build:editor",
+    "build": "pnpm build:ui && pnpm build:editor",
     "build:editor": "pnpm editor build",
     "build:ui": "pnpm ui build",
     "test": "echo \"Error: no test specified\" && exit 1",

@@ -2,6 +2,7 @@ import { fileURLToPath, URL } from 'node:url'
 import { resolve } from 'path'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import dts from 'vite-plugin-dts'
 import fs from 'fs'
 
 // 获取所有组件的入口
@@ -45,6 +46,11 @@ function getUtilsEntries() {
 export default defineConfig({
   plugins: [
     vue(),
+    dts({
+      entryRoot: 'src',
+      outDir: 'dist/types',
+      tsconfigPath: 'tsconfig.app.json'
+    })
   ],
   build: {
     outDir: `dist/`,
