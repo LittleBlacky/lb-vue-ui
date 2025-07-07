@@ -14,3 +14,4 @@ defineOptions({
 });
 
 const props = defineProps<LbContainerProps>();
+</script>

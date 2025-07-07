@@ -65,6 +65,7 @@ defineOptions({
 });
 
 const props = defineProps<${pascalCase}Props>();
+</script>
 `
 
 fs.writeFileSync(path.join(baseComponentPath, `${baseName}.vue`), vueTemplate)
