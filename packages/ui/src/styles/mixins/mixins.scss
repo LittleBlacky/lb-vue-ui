@@ -1,0 +1,37 @@
+@use 'config' as *;
+
+// .lb-button
+@mixin b($block) {
+    $B: $namespace + '-' + $block;
+    .#{$B} {
+        @content;
+    }
+}
+
+// .lb-button.is-xxx
+@mixin when($state) {
+    @at-root {
+        &.#{$state-prefix + $state} {
+            @content;
+        }
+    }
+}
+
+// &--primary => .lb-button--primary
+@mixin m($modifier) {
+    @at-root {
+        #{&+$modifier-separator+$modifier} {
+            @content;
+        }
+    }
+}
+
+// &__header => .lb-button__header
+@mixin e($element) {
+    @at-root {
+        #{&+$element-separator+$element} {
+            @content;
+        }
+    }
+}
+
