@@ -1,5 +1,83 @@
 @use 'vars' as v;
+@use 'sass:map';
+@use 'sass:color';
+@use 'mixins/mixins.scss' as mix;
+@use './vars.scss' as *;
 
-.lb-button {
-    background-color: black;
+@include mix.b(button) {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 1;
+  height: 32px;
+  white-space: nowrap;
+  cursor: pointer;
+  background: var(--lb-bg-color);
+  border: var(--lb-border);
+  color: var(--lb-text-color-regular);
+  -webkit-appearance: none;
+  text-align: center;
+  box-sizing: border-box;
+  outline: none;
+  margin: 0;
+  transition: var(--lb-transition-duration);
+  font-weight: var(--lb-font-weight-primary);
+  padding: var(--lb-gap-small) var(--lb-gap-base);
+  font-size: var(--lb-font-size-base);
+  border-radius: var(--lb-border-radius-base);
+
+  &:hover,
+  &:focus {
+    color: var(--lb-color-primary);
+    border-color: var(--lb-color-primary);
+    background-color: var(--lb-color-primary-light-8);
+    outline: none;
+  }
+
+  @include mix.when(disabled) {
+    cursor: not-allowed;
+    opacity: 0.6;
+    &:hover,
+    &:focus {
+      color: var(--lb-text-color-regular);
+      border-color: var(--lb-border-color);
+      background-color: var(--lb-bg-color);
+    }
+  }
+
+  @each $type in map.keys($colors) {
+    @include mix.m(#{$type}) {
+      color: var(--lb-color-white);
+      background-color: var(--lb-color-#{$type});
+      border-color: var(--lb-color-#{$type});
+
+      &:hover,
+      &:focus {
+        background: var(--lb-color-#{$type}-light-2);
+        border-color: var(--lb-color-#{$type}-light-2);
+        color: var(--lb-color-white);
+      }
+    }
+  }
+
+  @each $size in (small, base, large) {
+    @include mix.m(#{$size}) {
+      @if $size == small {
+        height: var(--lb-height-small);
+        padding: var(--lb-gap-extra-small) var(--lb-gap-small);
+        font-size: var(--lb-font-size-small);
+        border-radius: var(--lb-border-radius-small);
+      } @else if $size == base {
+        height: var(--lb-height-base);
+        padding: var(--lb-gap-small) var(--lb-gap-base);
+        font-size: var(--lb-font-size-base);
+        border-radius: var(--lb-border-radius-base);
+      } @else if $size == large {
+        height: var(--lb-height-large);
+        padding: var(--lb-gap-base) var(--lb-gap-large);
+        font-size: var(--lb-font-size-large);
+        border-radius: var(--lb-border-radius-base);
+      }
+    }
+  }
 }
