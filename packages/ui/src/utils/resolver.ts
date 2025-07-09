@@ -24,16 +24,19 @@ export interface LbsolverOptions {
   stylePath?: string
 }
 
+const upperName = (name: string) => name[0].toUpperCase() + name.slice(1);
+
 export const LbResolver = (options: LbsolverOptions = {}): ComponentResolverFunction => {
   const {
     autoImportStyle = true,
-    prefix = 'lb', // 组件前缀
+    prefix = 'Lb', // 组件前缀
     libraryName = '@lb-vue-monorepo/ui', // 组件库名称
     stylePath = `${libraryName}/styles`, //样式文件路径
   } = options;
   return (name: string) => {
     if (prefix && !name.startsWith(prefix)) return undefined
-    const componentName = prefix ? name.slice(prefix.length) : name;
+    const tagName = prefix ? name.slice(prefix.length).toLowerCase() : name;
+    const ComponentName = name;
     // 返回的解析结果
     const result: {
       type: 'component';
@@ -44,8 +47,8 @@ export const LbResolver = (options: LbsolverOptions = {}): ComponentResolverFunc
     } = {
       type: 'component',
       from: libraryName,
-      as: componentName,
-      name: componentName.toLowerCase()
+      as: ComponentName,
+      name: ComponentName
     };
     // 1. 处理样式导入
     if (autoImportStyle && stylePath) {
@@ -54,7 +57,7 @@ export const LbResolver = (options: LbsolverOptions = {}): ComponentResolverFunc
           autoImportStyle === 'sass' ? 'scss' : 'css';
 
       result.sideEffects = [
-        `${stylePath}/${componentName.toLowerCase()}.${styleExt}`,
+        `${stylePath}/${tagName}.${styleExt}`,
       ];
     }
     return Object.keys(result).length > 0 ? result : undefined;
