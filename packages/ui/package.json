@@ -3,9 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
+  "types": "./dist/types/main.d.ts",
+  "typings": "./dist/types/main.d.ts",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
-  "types": "./dist/types/main.d.ts",
   "files": [
     "dist",
     "package.json",
@@ -16,6 +17,7 @@
   ],
   "exports": {
     ".": {
+      "types": "./dist/types/main.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
@@ -39,9 +41,6 @@
     "type-check": "vue-tsc --build",
     "lint": "eslint . --fix",
     "format": "prettier --write src/"
-  },
-  "dependencies": {
-    "vue": "^3.5.13"
   },
   "devDependencies": {
     "@tsconfig/node22": "^22.0.1",
@@ -68,7 +67,9 @@
     "vite": "^6.2.4",
     "vite-plugin-dts": "^4.5.4",
     "vite-plugin-vue-devtools": "^7.7.2",
+    "vitepress": "^1.6.3",
     "vitest": "^3.1.1",
+    "vue": "^3.5.16",
     "vue-tsc": "^2.2.8"
   }
 }

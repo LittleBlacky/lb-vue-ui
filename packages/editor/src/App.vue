@@ -3,7 +3,7 @@ import { RouterView } from 'vue-router'
 </script>
 
 <template>
-  <lb-button></lb-button>
+  <lb-button type="info">123123</lb-button>
   <RouterView />
 </template>
 
