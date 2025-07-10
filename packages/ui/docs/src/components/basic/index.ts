@@ -5,11 +5,11 @@ export default {
   collapsed: false,
   items: [
     {
-      text: 'Icon 图标✅',
+      text: 'Icon 图标',
       link: '/icon/icon',
     },
     {
-      text: 'Button 按钮✅',
+      text: 'Button 按钮',
       link: '/button/button',
     },
     {
