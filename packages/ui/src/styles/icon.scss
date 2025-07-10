@@ -1,4 +1,4 @@
-@use '@/styles/vars.scss' as *;
+@use '@/styles/common/vars' as *;
 @use '@/styles/mixins/mixins.scss' as *;
 
 @include b(icon) {
