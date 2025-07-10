@@ -51,5 +51,3 @@ export const createNamespace = (block: string) => {
     is,
   }
 }
-
-console.log(createNamespace('button').)

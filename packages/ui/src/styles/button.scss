@@ -2,7 +2,6 @@
 @use 'sass:map';
 @use 'sass:color';
 @use 'mixins/mixins.scss' as mix;
-@use './vars.scss' as *;
 
 @include mix.b(button) {
   display: inline-flex;
@@ -45,7 +44,7 @@
     }
   }
 
-  @each $type in map.keys($colors) {
+  @each $type in map.keys(v.$colors) {
     @include mix.m(#{$type}) {
       color: var(--lb-color-white);
       background-color: var(--lb-color-#{$type});

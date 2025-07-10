@@ -12,6 +12,7 @@ import { createNamespace } from '@/utils/createNamespace';
 defineOptions({
   name: 'LbIcon',
 });
+const bem = createNamespace('icon');
 const props = defineProps<LbIconProps>();
 const style = computed(() => {
   return {
@@ -19,4 +20,7 @@ const style = computed(() => {
     ...(props.color ? { color: props.color } : {}),
   };
 })
+const className = computed(() => ([
+  bem.b()
+]))
 </script>

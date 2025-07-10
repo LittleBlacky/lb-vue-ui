@@ -1,5 +1,5 @@
 @use '@/styles/vars.scss' as *;
-@use '@/styles/mixins.scss' as *;
+@use '@/styles/mixins/mixins.scss' as *;
 
 @include b(icon) {
   display: inline-block;
