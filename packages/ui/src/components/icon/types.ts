@@ -1,7 +1,7 @@
 export interface LbIconProps {
-  color: string,
-  size: number,
-  name: string
+  color?: string,
+  size?: number | string,
+  spin?: boolean,
 }
 
 export type LbIconEmits = {

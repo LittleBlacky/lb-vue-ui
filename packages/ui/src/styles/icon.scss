@@ -1,10 +1,24 @@
 @use '@/styles/common/vars' as *;
 @use '@/styles/mixins/mixins.scss' as *;
 
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 @include b(icon) {
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 1em;
   height: 1em;
   vertical-align: middle;
   fill: currentColor;
+  @include when(spin) {
+    animation: spin 2s linear infinite;
+  }
 }
