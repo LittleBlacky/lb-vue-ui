@@ -6,19 +6,19 @@ export default {
   items: [
     {
       text: 'Icon 图标✅',
-      link: '/icon',
+      link: '/icon/icon',
     },
     {
       text: 'Button 按钮✅',
-      link: '/button',
+      link: '/button/button',
     },
     {
       text: 'Container 布局容器',
-      link: '/container',
+      link: '/container/container',
     },
     {
       text: 'Layout 布局',
-      link: '/layout',
+      link: '/layout/layout',
     },
   ].map((item) => {
     return {
