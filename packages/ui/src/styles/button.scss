@@ -7,8 +7,9 @@
   display: inline-flex;
   justify-content: center;
   align-items: center;
+  gap: var(--lb-gap-small);
   line-height: 1;
-  height: 32px;
+  height: var(--lb-height-base);
   white-space: nowrap;
   cursor: pointer;
   background: var(--lb-bg-color);
@@ -36,11 +37,41 @@
   @include mix.when(disabled) {
     cursor: not-allowed;
     opacity: 0.6;
+  }
+
+  @include mix.when(plain) {
+    background-color: transparent;
+    border-color: var(--lb-color-primary);
+    color: var(--lb-text-color-regular);
+    &:hover,
+    &focus {
+      color: var(--lb-color-primary);
+    }
+  }
+
+  @include mix.when(text) {
+    border-color: transparent;
+    color: var(--lb-text-color-primary);
+    background: transparent;
+    padding-left: 0;
+    padding-right: 0;
+
     &:hover,
     &:focus {
       color: var(--lb-text-color-regular);
-      border-color: var(--lb-border-color);
-      background-color: var(--lb-bg-color);
+    }
+  }
+
+  @include mix.when(link) {
+    border-color: transparent;
+    color: var(--lb-text-color-primary);
+    background: transparent;
+    padding-left: 0;
+    padding-right: 0;
+
+    &:hover,
+    &:focus {
+      color: var(--lb-text-color-regular);
     }
   }
 
@@ -55,6 +86,43 @@
         background: var(--lb-color-#{$type}-light-2);
         border-color: var(--lb-color-#{$type}-light-2);
         color: var(--lb-color-white);
+      }
+
+      @include mix.when(plain) {
+        color: var(--lb-color-#{$type});
+        background-color: var(--lb-color-#{$type}-light-6);
+        border-color: var(--lb-color-#{$type}-light-4);
+
+        &:hover,
+        &:focus {
+          background-color: var(--lb-color-#{$type});
+          border-color: var(--lb-color-#{$type});
+          color: var(--lb-color-white);
+        }
+      }
+
+      @include mix.when(text) {
+        border-color: transparent;
+        color: var(--lb-color-#{$type});
+        background: transparent;
+        padding-left: 0;
+        padding-right: 0;
+
+        &:hover,
+        &:focus {
+          color: var(--lb-color-#{$type}-light-4);
+        }
+      }
+
+      @include mix.when(link) {
+        border-color: transparent;
+        color: var(--lb-color-#{$type});
+        background: transparent;
+
+        &:hover,
+        &:focus {
+          color: var(--lb-color-#{$type}-light-4);
+        }
       }
     }
   }
@@ -78,5 +146,16 @@
         border-radius: var(--lb-border-radius-base);
       }
     }
+  }
+
+  @include mix.when(round) {
+    border-radius: var(--lb-border-radius-round);
+  }
+
+  @include mix.when(circle) {
+    border-radius: 50%;
+    width: var(--lb-height-base);
+    height: var(--lb-height-base);
+    padding: 0;
   }
 }

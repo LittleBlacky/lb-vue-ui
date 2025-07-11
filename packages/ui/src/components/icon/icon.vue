@@ -15,7 +15,6 @@ defineOptions({
 })
 const bem = createNamespace('icon')
 const props = withDefaults(defineProps<LbIconProps>(), {
-  color: '#000',
   size: '1rem',
 })
 const style = computed(() => {
