@@ -1,0 +1,10 @@
+@use '@/styles/common/vars' as *;
+@use '@/styles/mixins/mixins.scss' as mix;
+
+@include mix.b(main) {
+  display: block;
+  flex: 1;
+  flex-basis: auto;
+  overflow: auto;
+  box-sizing: border-box;
+}

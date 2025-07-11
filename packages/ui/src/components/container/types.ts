@@ -2,7 +2,7 @@ export interface LbContainerProps {
   /**
    * 示例属性
    */
-  exampleProp?: string;
+  direction?: 'horizontal' | 'vertical';
   // 添加更多 props...
 }
 

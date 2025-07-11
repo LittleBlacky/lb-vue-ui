@@ -1,5 +1,15 @@
 @use '@/styles/common/vars' as *;
+@use '@/styles/mixins/mixins.scss' as mix;
 
-.lb-container {
-  // LbContainer 组件样式
+@include mix.b(container) {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  box-sizing: border-box;
+  flex-basis: auto;
+  min-width: 0;
+
+  @include mix.when(vertical) {
+    flex-direction: column;
+  }
 }

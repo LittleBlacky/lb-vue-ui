@@ -19,7 +19,7 @@ export default {
     {
       text: 'Layout 布局',
       link: '/layout/layout',
-    },
+    }
   ].map((item) => {
     return {
       ...item,
