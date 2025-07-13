@@ -51,7 +51,7 @@ fs.mkdirSync(path.join(baseComponentPath, '__tests__'), { recursive: true })
 // 创建 Vue 组件文件
 const vueTemplate = `
 <template>
-  <div class="${kebabCase}">
+  <div :class="${baseName}Class">
     <!-- ${pascalCase} 组件内容 -->
     <slot />
   </div>
@@ -59,12 +59,21 @@ const vueTemplate = `
 
 <script lang="ts" setup>
 import type { ${pascalCase}Props } from './types';
-
+import { computed } from 'vue';
+import { createNamespace } from '@/utils/createNamespace';
 defineOptions({
   name: '${pascalCase}',
 });
 
 const props = defineProps<${pascalCase}Props>();
+
+const bem = createNamespace('${baseName}');
+
+const ${baseName}Class = computed(() => {
+  return [
+    bem.b()
+  ]
+})
 </script>
 `
 
@@ -73,7 +82,7 @@ fs.writeFileSync(path.join(baseComponentPath, `${baseName}.vue`), vueTemplate)
 // 创建 index.ts 文件
 const indexTsTemplate = `
 import ${baseUpperName}Component from './${baseName}.vue';
-import { withInstall } from '../../utils/install.ts';
+import { withInstall } from '@/utils/install.ts';
 const ${baseUpperName} = withInstall(${baseUpperName}Component);
 export default ${baseUpperName};
 // 导出类型
