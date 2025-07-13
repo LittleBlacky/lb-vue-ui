@@ -1,0 +1,37 @@
+@use 'common/vars' as *;
+@use 'mixins/mixins.scss' as mix;
+
+@include mix.b(row) {
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+
+  @include mix.m(start) {
+    justify-content: flex-start;
+  }
+  @include mix.m(end) {
+    justify-content: flex-end;
+  }
+  @include mix.m(center) {
+    justify-content: center;
+  }
+  @include mix.m(space-around) {
+    justify-content: space-around;
+  }
+  @include mix.m(space-between) {
+    justify-content: space-between;
+  }
+  @include mix.m(space-evenly) {
+    justify-content: space-evenly;
+  }
+
+  @include mix.m(top) {
+    align-items: flex-start;
+  }
+  @include mix.m(middle) {
+    align-items: center;
+  }
+  @include mix.m(bottom) {
+    align-items: flex-end;
+  }
+}
