@@ -1,36 +1,55 @@
 <template>
-  <div style="display: flex; gap: 10px;">
-    <LbButton>
-      <template #icon>
-        <LbIcon><Search /></LbIcon>
-      </template>
-      搜索
-    </LbButton>
-    <LbButton type="primary">
-      <template #icon>
-        <LbIcon><PencilSharp /></LbIcon>
-      </template>
-      编辑
-    </LbButton>
-    <LbButton type="success">
-      <template #icon>
-        <LbIcon><CheckmarkCircle /></LbIcon>
-      </template>
-      确认
-    </LbButton>
-    <LbButton type="danger">
-      <template #icon>
-        <LbIcon><Trash /></LbIcon>
-      </template>
-    </LbButton>
-    <LbButton type="info">
-      <template #icon>
-        <LbIcon><InformationCircle /></LbIcon>
-      </template>
-    </LbButton>
+  <div class="button-group">
+    <LbButton circle
+      ><LbIcon><CheckmarkCircle /></LbIcon
+    ></LbButton>
+    <LbButton type="primary" circle
+      ><LbIcon><CheckmarkCircle /></LbIcon
+    ></LbButton>
+    <LbButton type="success" circle
+      ><LbIcon><CheckmarkCircle /></LbIcon
+    ></LbButton>
+    <LbButton type="warning" circle
+      ><LbIcon><CheckmarkCircle /></LbIcon
+    ></LbButton>
+    <LbButton type="danger" circle
+      ><LbIcon><CheckmarkCircle /></LbIcon
+    ></LbButton>
+    <LbButton type="info" circle
+      ><LbIcon><CheckmarkCircle /></LbIcon
+    ></LbButton>
+  </div>
+  <div class="button-group">
+    <LbButton
+      ><LbIcon><CheckmarkCircle /></LbIcon>Default</LbButton
+    >
+    <LbButton type="primary"
+      ><LbIcon><CheckmarkCircle /></LbIcon>Priamry</LbButton
+    >
+    <LbButton type="success"
+      ><LbIcon><CheckmarkCircle /></LbIcon>Success</LbButton
+    >
+    <LbButton type="warning"
+      ><LbIcon><CheckmarkCircle /></LbIcon>Warning</LbButton
+    >
+    <LbButton type="danger"
+      ><LbIcon><CheckmarkCircle /></LbIcon>Danger</LbButton
+    >
+    <LbButton type="info"
+      ><LbIcon><CheckmarkCircle /></LbIcon>Info</LbButton
+    >
   </div>
 </template>
 
 <script setup lang="ts">
 import { Search, PencilSharp, CheckmarkCircle, Trash, InformationCircle } from '@vicons/ionicons5';
 </script>
+
+<style scoped>
+.button-group {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+</style>
