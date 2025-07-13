@@ -8,15 +8,9 @@ import LbHeader from './components/header';
 import LbAside from './components/aside';
 import LbMain from './components/main';
 import LbFooter from './components/footer';
-import type { App } from 'vue'
+import type { App } from 'vue';
 
-export default (app: App) => {
-  [LbButton, LbInput, LbIcon, LbRow, LbCol, LbContainer, LbHeader, LbAside, LbMain, LbFooter].forEach((component) => {
-    app.component(component.name as string, component)
-  })
-}
-
-export {
+const components = {
   LbButton,
   LbInput,
   LbIcon,
@@ -26,5 +20,15 @@ export {
   LbHeader,
   LbAside,
   LbMain,
-  LbFooter
-}
+  LbFooter,
+};
+
+export default {
+  name: 'LbUI',
+  ...components,
+  install: (app: App) => {
+    Object.values(components).forEach((component) => {
+      app.component(component.name as string, component);
+    });
+  },
+};
