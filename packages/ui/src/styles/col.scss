@@ -7,21 +7,21 @@
 
   @for $i from 0 through 24 {
     @include mix.m(#{$i}) {
-      width: (1 / 24 * $i * 100%);
+      width: calc(1 / 24 * $i * 100%);
     }
 
     @include mix.m(offset-#{$i}) {
-      margin-left: (1 / 24 * $i * 100%);
+      margin-left: calc(1 / 24 * $i * 100%);
     }
 
     @include mix.m(pull-#{$i}) {
       position: relative;
-      right: (1 / 24 * $i * 100%);
+      right: calc(1 / 24 * $i * 100%);
     }
 
     @include mix.m(push-#{$i}) {
       position: relative;
-      left: (1 / 24 * $i * 100%);
+      left: calc(1 / 24 * $i * 100%);
     }
   }
 
@@ -31,21 +31,21 @@
     @media (min-width: $width) {
       @for $i from 0 through 24 {
         @include mix.m(#{$breakpoint}-#{$i}) {
-          width: (1 / 24 * $i * 100%);
+          width: calc(1 / 24 * $i * 100%);
         }
 
         @include mix.m(#{$breakpoint}-offset-#{$i}) {
-          margin-left: (1 / 24 * $i * 100%);
+          margin-left: calc(1 / 24 * $i * 100%);
         }
 
         @include mix.m(#{$breakpoint}-pull-#{$i}) {
           position: relative;
-          right: (1 / 24 * $i * 100%);
+          right: calc(1 / 24 * $i * 100%);
         }
 
         @include mix.m(#{$breakpoint}-push-#{$i}) {
           position: relative;
-          left: (1 / 24 * $i * 100%);
+          left: calc(1 / 24 * $i * 100%);
         }
       }
     }
