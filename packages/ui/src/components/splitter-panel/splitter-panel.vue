@@ -136,12 +136,12 @@ const onCollapse = (index: number, pos: string) => {
   if (!splitter || !panelInstance) return
   const curSize = splitter.panelInstances.value[index].sizeRef
   const nextSize = splitter.panelInstances.value[index + 1].sizeRef
-  if (!curSize.value || !nextSize.value) return
+  if (curSize.value === undefined || nextSize.value === undefined) return
   if (pos === 'end') {
-    curSize.value += nextSize.value
+    curSize.value += nextSize.value ?? 0
     nextSize.value = 0
   } else {
-    nextSize.value += curSize.value
+    nextSize.value += curSize.value ?? 0
     curSize.value = 0
   }
 }
