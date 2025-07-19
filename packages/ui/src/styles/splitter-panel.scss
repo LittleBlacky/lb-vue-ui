@@ -1,0 +1,8 @@
+@use 'sass:map';
+
+@use './mixins/mixins.scss' as mix;
+@use './splitter-bar.scss' as *;
+
+@include mix.b(splitter-panel) {
+  overflow: auto;
+}

@@ -8,7 +8,18 @@ import LbHeader from './components/header';
 import LbAside from './components/aside';
 import LbMain from './components/main';
 import LbFooter from './components/footer';
-import type { App } from 'vue';
+import LbSplitter from './components/splitter';
+import LbSplitterPanel from './components/splitter-panel';
+import main from './APP.vue';
+import './styles/index.scss';
+import { type App, createApp } from 'vue';
+
+const app = createApp(main);
+
+app.use(LbSplitter);
+app.use(LbSplitterPanel);
+
+app.mount('#app');
 
 const components = {
   LbButton,
@@ -21,6 +32,8 @@ const components = {
   LbAside,
   LbMain,
   LbFooter,
+  LbSplitter,
+  LbSplitterPanel,
 };
 
 export default {

@@ -9,12 +9,14 @@ import fs from 'fs'
 function getComponentsEntrys() {
   const componentsDir = resolve(__dirname, 'src/components')
   const files = fs.readdirSync(componentsDir)
-  return files.reduce((entrys: Record<string, string>, component) => {
-    const componentPath = resolve(componentsDir, component, 'index.ts')
-    if (fs.existsSync(componentPath))
-      entrys[`components/${component}`] = componentPath
-    return entrys
-  }, {} as Record<string, string>)
+  return files.reduce(
+    (entrys: Record<string, string>, component) => {
+      const componentPath = resolve(componentsDir, component, 'index.ts')
+      if (fs.existsSync(componentPath)) entrys[`components/${component}`] = componentPath
+      return entrys
+    },
+    {} as Record<string, string>,
+  )
 }
 
 // 获取所有样式入口
@@ -22,24 +24,30 @@ function getStyleEntries() {
   const stylesDir = resolve(__dirname, 'src/styles')
   const files = fs.readdirSync(stylesDir)
   return files
-    .filter(file => file.endsWith('.scss'))
-    .reduce((entries, file) => {
-      const name = file.replace('.scss', '')
-      entries[`styles/${name}`] = resolve(stylesDir, file)
-      return entries
-    }, {} as Record<string, string>)
+    .filter((file) => file.endsWith('.scss'))
+    .reduce(
+      (entries, file) => {
+        const name = file.replace('.scss', '')
+        entries[`styles/${name}`] = resolve(stylesDir, file)
+        return entries
+      },
+      {} as Record<string, string>,
+    )
 }
 
 function getUtilsEntries() {
   const utilsDir = resolve(__dirname, 'src/utils')
   const files = fs.readdirSync(utilsDir)
   return files
-    .filter(file => file.endsWith('.ts'))
-    .reduce((entries, file) => {
-      const name = file.replace('.ts', '')
-      entries[`utils/${name}`] = resolve(utilsDir, file)
-      return entries
-    }, {} as Record<string, string>)
+    .filter((file) => file.endsWith('.ts'))
+    .reduce(
+      (entries, file) => {
+        const name = file.replace('.ts', '')
+        entries[`utils/${name}`] = resolve(utilsDir, file)
+        return entries
+      },
+      {} as Record<string, string>,
+    )
 }
 
 // https://vite.dev/config/
@@ -49,8 +57,8 @@ export default defineConfig({
     dts({
       entryRoot: 'src',
       outDir: 'dist/types',
-      tsconfigPath: 'tsconfig.app.json'
-    })
+      tsconfigPath: 'tsconfig.app.json',
+    }),
   ],
   build: {
     outDir: `dist/`,
@@ -69,9 +77,7 @@ export default defineConfig({
         if (entryName === 'index') {
           return format === 'es' ? 'index.js' : 'index.cjs'
         }
-        return format === 'es'
-          ? `${entryName}.js`
-          : `${entryName}.cjs`
+        return format === 'es' ? `${entryName}.js` : `${entryName}.cjs`
       },
       formats: ['es', 'cjs'],
     },

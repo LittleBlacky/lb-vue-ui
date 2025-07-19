@@ -1,0 +1,93 @@
+@use '@/styles/common/vars.scss' as *;
+@use '@/styles/mixins/mixins.scss' as mix;
+
+@include mix.b(splitter-bar) {
+  --lb-splitter-bar-gutter-width: 5px;
+  --lb-splitter-bar-gutter-height: 100%;
+  --lb-splitter-bar-collapse-capacity: 0;
+  --lb-splitter-bar-collapse-rotate: 0deg;
+  --lb-splitter-bar-collapse-color: var(--lb-color-info);
+  --lb-splitter-bar-collapse-width: 18px;
+  --lb-splitter-bar-collapse-height: 18px;
+  --lb-splitter-bar-gutter-cursor: none;
+  --lb-splitter-bar-collapse-capacity-start-right: none;
+  --lb-splitter-bar-collapse-capacity-end-left: none;
+  --lb-splitter-bar-collapse-capacity-start-bottom: none;
+  --lb-splitter-bar-collapse-capacity-end-top: none;
+}
+
+@include mix.b(splitter-bar) {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  &:hover {
+    --lb-splitter-bar-collapse-capacity: 1;
+  }
+
+  @include mix.e(collapse) {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    justify-content: center;
+    width: 18px;
+    height: 25px;
+    background-color: var(--lb-color-info-light-6);
+    border: var(--lb-color-info-light-2) 2px solid;
+    border-radius: var(--lb-border-radius-base);
+    color: var(--lb-splitter-bar-collapse-color);
+    rotate: var(--lb-splitter-bar-collapse-rotate);
+    z-index: 999;
+    opacity: var(--lb-splitter-bar-collapse-capacity);
+    transition: opacity var(--lb-transition-duration);
+    &:hover {
+      background-color: var(--lb-color-primary-light-6);
+      border-color: var(--lb-color-primary-light-2);
+      --lb-splitter-bar-collapse-capacity: 1;
+      --lb-splitter-bar-collapse-color: var(--lb-color-primary-light-2);
+    }
+  }
+
+  @include mix.e(gutter) {
+    background-color: var(--lb-color-info-light-4);
+    transition: background-color var(--lb-transition-duration);
+    width: var(--lb-splitter-bar-gutter-width);
+    height: var(--lb-splitter-bar-gutter-height);
+    cursor: var(--lb-splitter-bar-gutter-cursor);
+    &:hover {
+      background-color: var(--lb-color-primary-light-4);
+    }
+  }
+
+  @include mix.e(collapse--start) {
+    right: var(--lb-splitter-bar-collapse-capacity-start-right);
+    bottom: var(--lb-splitter-bar-collapse-capacity-start-bottom);
+  }
+
+  @include mix.e(collapse--end) {
+    left: var(--lb-splitter-bar-collapse-capacity-end-left);
+    top: var(--lb-splitter-bar-collapse-capacity-end-top);
+  }
+
+  @include mix.m(horizontal) {
+    flex-direction: row;
+    --lb-splitter-bar-gutter-cursor: col-resize;
+    --lb-splitter-bar-gutter-width: 3px;
+    --lb-splitter-bar-gutter-height: 100%;
+    --lb-splitter-bar-collapse-capacity-start-right: var(--lb-gap-small);
+    --lb-splitter-bar-collapse-capacity-end-left: var(--lb-gap-small);
+    --lb-splitter-bar-collapse-width: 18px;
+    --lb-splitter-bar-collapse-height: 25px;
+  }
+
+  @include mix.m(vertical) {
+    flex-direction: column;
+    --lb-splitter-bar-gutter-cursor: row-resize;
+    --lb-splitter-bar-gutter-height: 3px;
+    --lb-splitter-bar-gutter-width: 100%;
+    --lb-splitter-bar-collapse-rotate: 90deg;
+    --lb-splitter-bar-collapse-capacity-start-bottom: var(--lb-gap-extra-small);
+    --lb-splitter-bar-collapse-capacity-end-top: var(--lb-gap-extra-small);
+  }
+}
