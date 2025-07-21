@@ -14,8 +14,8 @@ jobs:
         with:
           node-version: 20
       - run: npm i pnpm -g
-      - run: cd ./packages/ui
       - run: pnpm i
+      - run: cd ./packages/ui
 
       - name: Build
         run: pnpm docs:build
