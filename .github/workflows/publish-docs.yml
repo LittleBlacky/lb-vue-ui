@@ -43,12 +43,12 @@ jobs:
           cache: npm # 或 pnpm / yarn
       - name: Setup Pages
         uses: actions/configure-pages@v4
-      - name: Install dependencies
+      - name: Install pnpm
         run: npm i pnpm -g
+      - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
       - name: Build with VitePress
-        run: cd ./packages/ui
-        run: pnpm docs:build
+        run: pnpm ui docs:build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
