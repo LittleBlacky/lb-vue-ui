@@ -6,40 +6,40 @@ export default {
   items: [
     {
       text: 'Card 卡片',
-      link: '/card'
+      link: '/card/card',
     },
     {
       text: 'Image 图片',
-      link: '/image'
+      link: '/image/image',
     },
     {
       text: 'Infinite Scroll 无限滚动',
-      link: '/infinite-scroll',
+      link: '/infinite-scroll/infinite-scroll',
     },
     {
       text: 'Pagination 分页',
-      link: '/pagination'
+      link: '/pagination/pagination',
     },
     {
       text: 'Skeleton 骨架屏',
-      link: '/skeleton'
+      link: '/skeleton/skeleton',
     },
     {
       text: 'Table 表格',
-      link: '/table'
+      link: '/table/table',
     },
     {
       text: 'Tree 树形控件',
-      link: '/tree'
+      link: '/tree/tree',
     },
     {
       text: 'Tour 漫游引导',
-      link: '/tour'
-    }
+      link: '/tour/tour',
+    },
   ].map((item) => {
     return {
       ...item,
-      link: root + item.link
+      link: root + item.link,
     }
-  })
+  }),
 }
