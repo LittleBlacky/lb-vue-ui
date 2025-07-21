@@ -77,8 +77,8 @@ const classes = computed(() => [bem.b()])
 
 const styles = computed(() => {
   const style: Record<string, string> = {}
+  sizeModel.value = Math.max(props.minSize, Math.min(props.maxSize, sizeModel.value as number))
   const size = sizeModel.value ?? 0
-  sizeModel.value = Math.max(props.minSize, Math.min(props.maxSize, size))
   style.flexBasis = `${size}px`
   style.flexGrow = '0'
   style.flexShrink = '0'
