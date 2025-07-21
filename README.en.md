@@ -3,6 +3,9 @@
 #### Introduction
 lb-vue is a Vue 3 based component library, providing a series of high-quality UI components to help developers quickly build modern Web applications.
 
+#### User Manual Link
+https://littleblacky.github.io/lb-vue-ui/
+
 #### Software Architecture
 - Built with Vue 3 and TypeScript
 - Developed using Composition API
@@ -25,24 +28,26 @@ pnpm add @lb-vue/ui
 
 ##### Full Import
 ```javascript
-import { createApp } from 'vue';
-import LbVue from '@lb-vue/ui';
-import '@lb-vue/ui/dist/style.css';
+import { createApp } from "vue";
+import LbVue from "@lb-vue/ui";
+import "@lb-vue/ui/dist/style.css";
 
 const app = createApp(App);
 app.use(LbVue);
-app.mount('#app');
+app.mount("#app");
 ```
 
 ##### On-demand Import
-```javascript
-import { createApp } from 'vue';
-import { LbButton, LbInput } from '@lb-vue/ui';
-import '@lb-vue/ui/dist/style.css';
+```vue
+<script setup>
+import { RouterView } from "vue-router";
+import { LbButton } from "@lb-vue/ui";
+import "@lb-vue/ui/styles/button.css";
+</script>
 
-const app = createApp(App);
-app.use(LbButton).use(LbInput);
-app.mount('#app');
+<template>
+  <lb-button>Button</lb-button>
+</template>
 ```
 
 ##### Automatic On-demand Import
@@ -50,31 +55,28 @@ Requires installing the [unplugin-vue-components](https://github.com/antfu/unplu
 
 ```javascript
 // vite.config.js
-import Components from 'unplugin-vue-components/vite';
-import { LbResolver } from '@lb-vue/ui/resolver';
+import Components from "unplugin-vue-components/vite";
+import { LbResolver } from "@lb-vue/ui/resolver";
 
 export default {
   plugins: [
     Components({
-      resolvers: [LbResolver()]
-    })
-  ]
-}
+      resolvers: [LbResolver()],
+    }),
+  ],
+};
 ```
+Subsequent direct use of components, no manual import required.
+```vue
+<script setup>
+  
+</script>
 
-#### Component List
-- Button
-- Input
-- Container
-- Skeleton
-- VirtualList
-- Splitter
+<template>
+  <lb-button>Button</lb-button>
+</template>
 
-#### Contribution
-1. Fork the repository
-2. Create Feat_xxx branch
-3. Commit your code
-4. Create Pull Request
+```
 
 #### License
 MIT
