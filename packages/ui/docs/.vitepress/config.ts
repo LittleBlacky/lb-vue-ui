@@ -24,6 +24,6 @@ export default defineConfig({
       '/': [Guide, Components],
     },
 
-    socialLinks: [{ icon: 'github', link: 'https://github.com/vuejs/vitepress' }],
+    socialLinks: [{ icon: 'github', link: 'https://github.com/LittleBlacky/lb-vue' }],
   },
 })

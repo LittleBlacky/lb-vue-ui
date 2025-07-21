@@ -6,8 +6,8 @@ import './style.css'
 import LbUI from '../../../../ui/dist/index'
 import '../../../../ui/dist/styles/index.css'
 
-
 export default {
+  base: '/lb-vue-ui/',
   extends: DefaultTheme,
   Layout: () => {
     return h(DefaultTheme.Layout, null, {
@@ -17,4 +17,4 @@ export default {
   enhanceApp({app}) {
     app.use(LbUI);
   },
-} satisfies Theme
+}
