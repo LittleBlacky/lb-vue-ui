@@ -5,6 +5,7 @@ import { vitepressDemoPlugin } from 'vitepress-demo-plugin'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  base: '/lb-vue-ui/',
   title: 'lb-vue-ui',
   description: '基于vue3的组件库',
   markdown: {
@@ -24,6 +25,6 @@ export default defineConfig({
       '/': [Guide, Components],
     },
 
-    socialLinks: [{ icon: 'github', link: 'https://github.com/LittleBlacky/lb-vue' }],
+    socialLinks: [{ icon: 'github', link: 'https://github.com/LittleBlacky/lb-vue-ui' }],
   },
 })

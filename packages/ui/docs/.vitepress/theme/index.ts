@@ -7,14 +7,13 @@ import LbUI from '../../../../ui/dist/index'
 import '../../../../ui/dist/styles/index.css'
 
 export default {
-  base: '/lb-vue-ui/',
   extends: DefaultTheme,
   Layout: () => {
     return h(DefaultTheme.Layout, null, {
       // https://vitepress.dev/guide/extending-default-theme#layout-slots
     })
   },
-  enhanceApp({app}) {
-    app.use(LbUI);
+  enhanceApp({ app }) {
+    app.use(LbUI)
   },
-}
+} satisfies Theme
