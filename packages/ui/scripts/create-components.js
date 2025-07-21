@@ -114,8 +114,9 @@ fs.writeFileSync(path.join(baseComponentPath, 'types.ts'), typesTsTemplate)
 // 创建 SCSS 文件（如果启用）
 if (options.styles) {
   const scssTemplate = `@use '@/styles/vars.scss' as *;
+@use '@/styles/mixins.scss' as mix;
 
-.${kebabCase} {
+@include mix.b(${baseName}) {
   // ${pascalCase} 组件样式
 }
 `
