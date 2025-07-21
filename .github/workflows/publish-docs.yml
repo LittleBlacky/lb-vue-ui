@@ -15,10 +15,9 @@ jobs:
           node-version: 20
       - run: npm i pnpm -g
       - run: pnpm install --no-frozen-lockfile
-      - run: cd ./packages/ui
 
       - name: Build
-        run: pnpm docs:build
+        run: pnpm ui docs:build
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
