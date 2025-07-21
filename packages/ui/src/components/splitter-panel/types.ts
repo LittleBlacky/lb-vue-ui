@@ -15,4 +15,5 @@ export type LbSplitterPanelInstance = {
   uid: number
   index: number
   sizeRef: Ref<number | undefined>
-} & LbSplitterPanelProps
+  props: LbSplitterPanelProps
+}

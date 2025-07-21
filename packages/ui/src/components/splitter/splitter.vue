@@ -64,7 +64,7 @@ const registerPanel = (instance: ShallowReactive<LbSplitterPanelInstance>) => {
 
 const unregisterPanel = (index: number) => {
   panelInstances.value.splice(index, 1)
-  for (let i = index; i < panelInstances.value.length; i++) panelInstances.value[i].index--
+  for (let i = index; i < panelInstances.value.length; ++i) --panelInstances.value[i].index
 }
 
 const panelTotalSize = computed(() => {
