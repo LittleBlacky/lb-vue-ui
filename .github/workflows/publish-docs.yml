@@ -14,7 +14,7 @@ jobs:
         with:
           node-version: 20
       - run: npm i pnpm -g
-      - run: pnpm i
+      - run: pnpm install --no-frozen-lockfile
       - run: cd ./packages/ui
 
       - name: Build
