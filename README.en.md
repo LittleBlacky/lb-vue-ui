@@ -1,36 +1,80 @@
 # lb-vue
 
-#### Description
-{**When you're done, you can delete the content in this README and update the file with details for others getting started with your repository**}
+#### Introduction
+lb-vue is a Vue 3 based component library, providing a series of high-quality UI components to help developers quickly build modern Web applications.
 
 #### Software Architecture
-Software architecture description
+- Built with Vue 3 and TypeScript
+- Developed using Composition API
+- Supports on-demand loading
+- Provides complete TypeScript type definitions
 
 #### Installation
+```bash
+# Using npm
+npm install @lb-vue/ui
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+# Using yarn
+yarn add @lb-vue/ui
 
-#### Instructions
+# Using pnpm
+pnpm add @lb-vue/ui
+```
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+#### Usage
+
+##### Full Import
+```javascript
+import { createApp } from 'vue';
+import LbVue from '@lb-vue/ui';
+import '@lb-vue/ui/dist/style.css';
+
+const app = createApp(App);
+app.use(LbVue);
+app.mount('#app');
+```
+
+##### On-demand Import
+```javascript
+import { createApp } from 'vue';
+import { LbButton, LbInput } from '@lb-vue/ui';
+import '@lb-vue/ui/dist/style.css';
+
+const app = createApp(App);
+app.use(LbButton).use(LbInput);
+app.mount('#app');
+```
+
+##### Automatic On-demand Import
+Requires installing the [unplugin-vue-components](https://github.com/antfu/unplugin-vue-components) plugin.
+
+```javascript
+// vite.config.js
+import Components from 'unplugin-vue-components/vite';
+import { LbResolver } from '@lb-vue/ui/resolver';
+
+export default {
+  plugins: [
+    Components({
+      resolvers: [LbResolver()]
+    })
+  ]
+}
+```
+
+#### Component List
+- Button
+- Input
+- Container
+- Skeleton
+- VirtualList
+- Splitter
 
 #### Contribution
+1. Fork the repository
+2. Create Feat_xxx branch
+3. Commit your code
+4. Create Pull Request
 
-1.  Fork the repository
-2.  Create Feat_xxx branch
-3.  Commit your code
-4.  Create Pull Request
-
-
-#### Gitee Feature
-
-1.  You can use Readme\_XXX.md to support different languages, such as Readme\_en.md, Readme\_zh.md
-2.  Gitee blog [blog.gitee.com](https://blog.gitee.com)
-3.  Explore open source project [https://gitee.com/explore](https://gitee.com/explore)
-4.  The most valuable open source project [GVP](https://gitee.com/gvp)
-5.  The manual of Gitee [https://gitee.com/help](https://gitee.com/help)
-6.  The most popular members  [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+#### License
+MIT
