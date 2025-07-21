@@ -19,6 +19,10 @@ export default {
     {
       text: 'Layout 布局',
       link: '/layout/layout',
+    },
+    {
+      text: 'Splitter 分隔面板',
+      link: '/splitter/splitter',
     }
   ].map((item) => {
     return {

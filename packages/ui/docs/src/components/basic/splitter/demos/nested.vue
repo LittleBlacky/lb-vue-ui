@@ -1,10 +1,17 @@
 <template>
   <lb-splitter style="height: 300px; border: 1px solid #dcdfe6">
     <lb-splitter-panel>
-      <div class="content">Left</div>
+      <div class="content">Outer Left</div>
     </lb-splitter-panel>
     <lb-splitter-panel>
-      <div class="content">Right</div>
+      <lb-splitter direction="vertical" style="height: 100%;">
+        <lb-splitter-panel>
+          <div class="content">Inner Top</div>
+        </lb-splitter-panel>
+        <lb-splitter-panel>
+          <div class="content">Inner Bottom</div>
+        </lb-splitter-panel>
+      </lb-splitter>
     </lb-splitter-panel>
   </lb-splitter>
 </template>
