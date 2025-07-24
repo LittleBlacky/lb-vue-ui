@@ -1,0 +1,36 @@
+@use 'sass:map';
+@use './mixins/mixins.scss' as *;
+@use './common/vars.scss' as *;
+
+@include b(virtual-list) {
+  box-sizing: border-box;
+  flex-shrink: 0;
+  width: 100%;
+  height: 100%;
+
+  @include e(container) {
+    height: 100%;
+    overflow-y: auto;
+    position: relative;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  @include e(phantom) {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    z-index: -1;
+  }
+
+  @include e(content) {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+  }
+
+  @include e(item) {
+    box-sizing: border-box;
+  }
+}

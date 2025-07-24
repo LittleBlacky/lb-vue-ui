@@ -1,0 +1,14 @@
+{
+  "name": "@lb-vue-ui/components",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "vite build",
+    "test": "vitest",
+    "test:ui": "vitest --ui"
+  },
+  "keywords": [],
+  "author": "LittleBlacky",
+  "license": "ISC"
+}

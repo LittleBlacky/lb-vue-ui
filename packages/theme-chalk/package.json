@@ -1,0 +1,15 @@
+{
+  "name": "@lb-vue-ui/theme-chalk",
+  "version": "0.0.0",
+  "private": true,
+  "main": "dist/index.css",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "sass src/index.scss dist/index.css"
+  },
+  "devDependencies": {
+    "sass": "^1.89.2"
+  }
+}

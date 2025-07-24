@@ -1,0 +1,1 @@
+import '@Lb-vue-ui/theme-chalk/splitter-bar.scss'

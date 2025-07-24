@@ -1,0 +1,1 @@
+import '@lb-vue-ui/theme-chalk/skeleton-item.scss'

@@ -30,7 +30,7 @@ pnpm add @lb-vue/ui
 ```javascript
 import { createApp } from "vue";
 import LbVue from "@lb-vue/ui";
-import "@lb-vue/ui/dist/style.css";
+import "@lb-vue/theme-chalk/dist/index.css";
 
 const app = createApp(App);
 app.use(LbVue);
@@ -42,7 +42,7 @@ app.mount("#app");
 <script setup>
 import { RouterView } from "vue-router";
 import { LbButton } from "@lb-vue/ui";
-import "@lb-vue/ui/styles/button.css";
+import "@lb-vue/theme-chalk/dist/button.css";
 </script>
 
 <template>
@@ -56,7 +56,7 @@ Requires installing the [unplugin-vue-components](https://github.com/antfu/unplu
 ```javascript
 // vite.config.js
 import Components from "unplugin-vue-components/vite";
-import { LbResolver } from "@lb-vue/ui/resolver";
+import { LbResolver } from '@lb-vue/ui/resolver';
 
 export default {
   plugins: [

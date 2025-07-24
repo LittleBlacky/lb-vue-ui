@@ -35,7 +35,7 @@ pnpm add @lb-vue/ui
 ```javascript
 import { createApp } from "vue";
 import LbVue from "@lb-vue/ui";
-import "@lb-vue-ui/ui/dist/style.css";
+import "@lb-vue-ui/theme-chalk/dist/index.css";
 
 const app = createApp(App);
 app.use(LbVue);
@@ -47,8 +47,8 @@ app.mount("#app");
 ```vue
 <script setup>
 import { RouterView } from "vue-router";
-import { LbButton } from "@lb-vue-ui/ui";
-import "@lb-vue-ui/ui/styles/button.css";
+import { LbButton } from "@lb-vue/ui";
+import "@lb-vue-ui/theme-chalk/dist/button.css";
 </script>
 
 <template>
@@ -63,7 +63,7 @@ import "@lb-vue-ui/ui/styles/button.css";
 ```javascript
 // vite.config.js
 import Components from "unplugin-vue-components/vite";
-import { LbResolver } from "@lb-vue-ui/ui/resolver";
+import { LbResolver } from "@lb-vue/ui/resolver";
 
 export default {
   plugins: [
