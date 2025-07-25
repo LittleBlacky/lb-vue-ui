@@ -1,5 +1,5 @@
-@use '@/styles/common/vars' as *;
-@use '@/styles/mixins/mixins.scss' as *;
+@use 'common/vars' as *;
+@use 'mixins/mixins.scss' as *;
 
 @keyframes spin {
   0% {

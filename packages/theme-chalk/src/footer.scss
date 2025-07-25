@@ -1,5 +1,5 @@
-@use '@/styles/common/vars' as *;
-@use '@/styles/mixins/mixins.scss' as mix;
+@use 'common/vars' as *;
+@use 'mixins/mixins.scss' as mix;
 
 @include mix.b(footer) {
   box-sizing: border-box;

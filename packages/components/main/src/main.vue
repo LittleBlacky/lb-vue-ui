@@ -6,8 +6,7 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue';
-import { createNamespace } from '@/utils/createNamespace';
-import type { LbMainProps } from '../index';
+import { createNamespace } from '@lb-vue-ui/utils/createNamespace';
 
 defineOptions({
   name: 'LbMain',

@@ -15,7 +15,7 @@ hero:
       link: /src/guide/install
 
 features:
-  - title: Feature A
+  - title: a
     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
   - title: Feature B
     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit

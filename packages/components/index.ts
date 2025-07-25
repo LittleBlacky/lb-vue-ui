@@ -1,13 +1,16 @@
-import { type App } from "vue";
-import * as components from "./components";
-export default {
-  name: "LbUI",
-  ...components,
-  install: (app: App) => {
-    Object.entries(components).forEach(([key, value]) => {
-      app.component(key as string, value);
-    });
-  },
-};
-
-export * from "./components";
+export * from "./aside/index";
+export * from "./button/index";
+export * from "./container/index";
+export * from "./header/index";
+export * from "./main/index";
+export * from "./footer/index";
+export * from "./input/index";
+export * from "./icon/index";
+export * from "./row/index";
+export * from "./col/index";
+export * from "./skeleton/index";
+export * from "./skeleton-item/index";
+export * from "./splitter/index";
+export * from "./splitter-bar/index";
+export * from "./splitter-panel/index";
+export * from "./virtual-list/index";

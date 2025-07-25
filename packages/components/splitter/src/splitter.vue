@@ -20,7 +20,7 @@ import {
   type LbSplitterEmits,
   LbSplitterContextKey,
 } from "../index";
-import { type LbSplitterPanelInstance } from "../../splitter-panel/types";
+import { type LbSplitterPanelInstance } from "../../splitter-panel/src/types";
 import { withDefaults, defineEmits } from "vue";
 
 defineOptions({

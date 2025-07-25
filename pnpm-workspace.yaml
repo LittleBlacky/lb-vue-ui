@@ -1,3 +1,4 @@
 packages:
-  - 'packages/*'
-  - 'packages/theme-chalk'
+  - 'packages/**' # 所有的包
+  - 'docs' # 文档项目
+  - 'play' # 示例项目

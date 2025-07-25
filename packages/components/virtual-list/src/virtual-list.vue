@@ -18,8 +18,8 @@
 
 <script lang="ts" setup>
 import { ref, computed, onMounted, watch } from 'vue'
-import { createNamespace } from '@/utils/createNamespace'
-import type { LbVirtualListProps } from '../index'
+import { createNamespace } from '@lb-vue-ui/utils/createNamespace'
+import type { LbVirtualListProps } from './types'
 
 defineOptions({
   name: 'LbVirtualList',

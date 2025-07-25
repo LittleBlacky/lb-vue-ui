@@ -17,7 +17,7 @@ import { computed } from 'vue'
 import type { LbButtonProps } from './types'
 import { createNamespace } from '@lb-vue-ui/utils/createNamespace'
 import { Sync } from '@vicons/ionicons5'
-import LbIcon from '../icon/icon.vue'
+import LbIcon from '../../icon/src/icon.vue'
 
 const bem = createNamespace('button')
 
