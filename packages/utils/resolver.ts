@@ -24,14 +24,12 @@ export interface LbsolverOptions {
   stylePath?: string
 }
 
-const upperName = (name: string) => name[0].toUpperCase() + name.slice(1);
-
 export const LbResolver = (options: LbsolverOptions = {}): ComponentResolverFunction => {
   const {
     autoImportStyle = true,
     prefix = 'Lb', // 组件前缀
-    libraryName = '@lb-vue-monorepo/ui', // 组件库名称
-    stylePath = `${libraryName}/styles`, //样式文件路径
+    libraryName = '@lb-vue-ui', // 组件库名称
+    stylePath = `${libraryName}/theme-chalk`, //样式文件路径
   } = options;
   return (name: string) => {
     if (prefix && !name.startsWith(prefix)) return undefined
