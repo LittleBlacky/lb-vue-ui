@@ -35,7 +35,7 @@
   "license": "ISC",
   "dependencies": {
     "@lb-vue-ui/components": "workspace:*",
-    "@lb-vue-ui/core": "workspace:*",
+    "@littleblacky/lb-vue-ui": "workspace:*",
     "@lb-vue-ui/theme-chalk": "workspace:*",
     "@lb-vue-ui/utils": "workspace:*",
     "@popperjs/core": "^2.11.8",
