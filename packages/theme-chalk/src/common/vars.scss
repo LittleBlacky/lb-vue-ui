@@ -1,5 +1,5 @@
 @use "sass:color";
- 
+
 // 定义颜色映射（SCSS Map）
 $colors: (
   "primary": #3498db,
@@ -9,11 +9,10 @@ $colors: (
   "danger": #e74c3c,
   "info": #909399,
   "dark": #2c3e50,
-  "light": #ecf0f1
+  "light": #ecf0f1,
 ) !default;
 
 :root {
-
   /* colors */
   --lb-color-white: #ffffff;
   --lb-color-black: #000000;
@@ -26,14 +25,22 @@ $colors: (
     @for $i from 1 through 4 {
       $weight: $i * 2; // 2, 4, 6, 8
       $percentage: $weight * 10%; // 20%, 40%, 60%, 80%
-      --lb-color-#{$type}-light-#{$weight}: #{color.mix(#fff, $color, $percentage)};
+      --lb-color-#{$type}-light-#{$weight}: #{color.mix(
+          #fff,
+          $color,
+          $percentage
+        )};
     }
 
     // 生成深色变体（dark-2, dark-4, dark-6, dark-8）
     @for $i from 1 through 4 {
       $weight: $i * 2; // 2, 4, 6, 8
       $percentage: $weight * 10%; // 20%, 40%, 60%, 80%
-      --lb-color-#{$type}-dark-#{$weight}: #{color.mix(#000, $color, $percentage)};
+      --lb-color-#{$type}-dark-#{$weight}: #{color.mix(
+          #000,
+          $color,
+          $percentage
+        )};
     }
   }
 
@@ -79,7 +86,8 @@ $colors: (
   --lb-border-width: 1px;
   --lb-border-style: solid;
   --lb-border-color-hover: var(--lb-text-color-disabled);
-  --lb-border: var(--lb-border-width) var(--lb-border-style) var(--lb-border-color);
+  --lb-border: var(--lb-border-width) var(--lb-border-style)
+    var(--lb-border-color);
   --lb-border-radius-base: 0.25rem;
   --lb-border-radius-small: 0.125rem;
   --lb-border-radius-round: 1.25rem;
@@ -92,7 +100,9 @@ $colors: (
   --lb-font-size-small: 0.75rem;
   --lb-font-size-large: 1.125rem;
   --lb-font-size-extra-small: 0.625rem;
-  --lb-font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', '\5fae\8f6f\96c5\9ed1', Arial, sans-serif;
+  --lb-font-family:
+    "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", "\5fae\8f6f\96c5\9ed1", Arial, sans-serif;
   --lb-font-weight-primary: 700;
 
   /*disabled*/

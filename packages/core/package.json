@@ -1,40 +1,58 @@
 {
-  "name": "@lb-vue-ui/core",
-  "version": "1.0.0",
-  "description": "",
-  "main": "dist/umd/index.js",
-  "module": "dist/es/index.js",
-  "types": "dist/types/index.d.ts",
+  "name": "@littleblacky/lb-vue-ui",
+  "version": "0.0.1",
+  "description": "littleblacky's components library",
+  "main": "dist/lb-vue-ui.umd.js",
+  "module": "dist/es/core/index.js",
+  "types": "dist/types/core/index.d.ts",
   "type": "module",
   "exports": {
     ".": {
-      "import": "./dist/esm/index.js",
-      "require": "./dist/umd/lb-vue-ui.umd.js",
+      "import": "./dist/es/core/index.js",
+      "require": "./dist/lib/core/index.cjs",
       "types": "./dist/types/core/index.d.ts"
     },
     "./dist": {
       "import": "./dist/",
       "require": "./dist/"
+    },
+    "./style": {
+      "import": "./dist/theme-chalk/index.css",
+      "require": "./dist/theme-chalk/index.css"
+    },
+    "./resolver": {
+      "import": "./dist/es/utils/resolver.js",
+      "require": "./dist/lib/utils/resolver.cjs",
+      "types": "./dist/types/utils/resolver.d.ts"
     }
   },
   "sideEffects": [
-    "./dist/index.css"
+    "dist/**/*.css"
   ],
   "scripts": {
-    "build": "pnpm run build-es && pnpm run build-umd",
+    "build": "pnpm run build-umd && pnpm run build-cjs && pnpm -F @lb-vue-ui/theme-chalk build && pnpm run build-es",
     "build-es": "vite build --config vite.es.config.ts",
     "build-umd": "vite build --config vite.umd.config.ts",
+    "build-cjs": "vite build --config vite.lib.config.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@lb-vue-ui/components": "workspace:*"
+    "@lb-vue-ui/components": "workspace:*",
+    "@lb-vue-ui/theme-chalk": "workspace:*",
+    "@lb-vue-ui/utils": "workspace:*"
   },
   "devDependencies": {
     "vite": "^4.0.0",
     "@vitejs/plugin-vue": "^4.0.0",
     "path": "^0.12.7"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "vue",
+    "ui",
+    "components",
+    "utils",
+    "theme-chalk"
+  ],
+  "author": "littleblacky",
   "license": "ISC"
 }

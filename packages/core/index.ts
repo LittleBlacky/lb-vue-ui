@@ -1,6 +1,6 @@
 import {type App} from "vue";
-import * as components from "@lb-vue-ui/components";
-import "@lb-vue-ui/theme-chalk/src/index.scss";
+import * as components from "../components";
+
 export default {
   name: "LbUI",
   ...components,
@@ -10,4 +10,4 @@ export default {
     });
   },
 };
-export * from "@lb-vue-ui/components";
+export * from "../components";

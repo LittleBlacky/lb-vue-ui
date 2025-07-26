@@ -1,5 +1,5 @@
-@use 'common/vars' as *;
-@use 'mixins/mixins.scss' as *;
+@use "common/vars" as *;
+@use "mixins/mixins.scss" as *;
 
 @keyframes spin {
   0% {
@@ -22,3 +22,4 @@
     animation: spin 2s linear infinite;
   }
 }
+

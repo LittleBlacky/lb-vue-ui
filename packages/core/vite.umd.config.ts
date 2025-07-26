@@ -1,38 +1,30 @@
-import {defineConfig} from "vite";
+import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
-import {resolve} from "path";
-import {readdirSync} from "fs";
+import { resolve } from "path";
+import { rollupPluginCompileStyleEntry } from "./plugins/compileStyleEntry";
 
-function getDirectoriesSync(source: string): string[] {
-  return readdirSync(source, {withFileTypes: true})
-    .filter((dirent) => dirent.isDirectory())
-    .map((dirent) => dirent.name);
-}
-
+const rootPath = resolve(__dirname, '../');
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [rollupPluginCompileStyleEntry(), vue()],
   build: {
-    outDir: resolve(__dirname, "dist/umd"),
+    outDir: resolve("dist/"),
     lib: {
-      entry: resolve(__dirname, "src/index.ts"),
+      entry: ["./index.ts"],
       name: "LbVueUi",
-      fileName: "index",
-      formats: ["umd"],
+      formats: ["umd", "iife"],
+      fileName: (format) => `lb-vue-ui.${format}.js`,
     },
     rollupOptions: {
-      external: ["vue"],
+      external: [
+        "vue",
+        "@vicons/ionicons5",
+        "@popperjs/core",
+        "async-validator",
+        /@lb-vue-ui\/theme-chalk\/.*/,
+      ],
       output: {
-        assetFileNames: (assetInfo) => {
-          const { name } = assetInfo;
-          if (name === "style.css") return "index.css";
-          if (assetInfo.type === "asset" && /\.(css|scss)$/i.test(name as string)) {
-            return "theme-chalk/[name].[extname]";
-          }
-          return name as string;
-        },
-        globals: {
-          vue: "Vue",
-        },
+        exports: "named",
+        preserveModulesRoot: rootPath,
       },
     },
   },

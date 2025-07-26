@@ -1,1 +1,1 @@
-import "@lb-vue-ui/theme-chalk/header.scss";
+import "@lb-vue-ui/theme-chalk/src/header.scss";

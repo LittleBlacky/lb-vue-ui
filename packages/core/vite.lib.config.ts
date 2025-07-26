@@ -2,10 +2,9 @@ import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import { resolve, join } from "path";
 import fg from "fast-glob";
-import dts from "vite-plugin-dts";
 import { rollupPluginCompileStyleEntry } from "./plugins/compileStyleEntry";
 
-const rootPath = resolve(__dirname, "../");
+const rootPath = resolve(__dirname, '../');
 const files = await fg.glob("**/index.{ts, vue, js}", {
   cwd: rootPath,
   absolute: true,
@@ -17,17 +16,13 @@ export default defineConfig({
   plugins: [
     rollupPluginCompileStyleEntry(),
     vue(),
-    dts({
-      tsconfigPath: "../../tsconfig.build.json",
-      outDir: resolve("dist/types"),
-    }),
   ],
   build: {
-    outDir: join("dist", "es"),
+    outDir: join("dist", "lib"),
     lib: {
       entry: files,
       name: "LbVueUi",
-      formats: ["es"],
+      formats: ["cjs"],
     },
     rollupOptions: {
       external: [

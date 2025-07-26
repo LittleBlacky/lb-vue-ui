@@ -1,1 +1,1 @@
-import "@lb-vue-ui/theme-chalk/virtual-list.scss";
+import "@lb-vue-ui/theme-chalk/src/virtual-list.scss";

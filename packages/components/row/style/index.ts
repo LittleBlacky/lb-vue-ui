@@ -1,1 +1,1 @@
-import "@lb-vue-ui/theme-chalk/row.scss";
+import "@lb-vue-ui/theme-chalk/src/row.scss";

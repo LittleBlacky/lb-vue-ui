@@ -7,7 +7,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "sass src/index.scss dist/index.css"
+    "build": "sass src:../core/dist/theme-chalk --style compressed --no-source-map"
   },
   "devDependencies": {
     "sass": "^1.89.2"

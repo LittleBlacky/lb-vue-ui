@@ -1,1 +1,1 @@
-import '@Lb-vue-ui/theme-chalk/splitter-bar.scss'
+import "@lb-vue-ui/theme-chalk/src/splitter-bar.scss";

@@ -10,6 +10,12 @@
     "test": "vitest",
     "test:ui": "vitest --ui"
   },
+  "exports": {
+    ".": {
+      "import": "./index.ts",
+      "require": "./index.ts"
+    }
+  },
   "keywords": [],
   "author": "LittleBlacky",
   "license": "ISC"

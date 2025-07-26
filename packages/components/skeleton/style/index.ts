@@ -1,1 +1,1 @@
-import '@lb-vue-ui/theme-chalk/skeleton.scss'
+import '@lb-vue-ui/theme-chalk/src/skeleton.scss'

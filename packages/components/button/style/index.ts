@@ -1,1 +1,1 @@
-import '@lb-vue-ui/theme-chalk/src/button.scss'
+import "@lb-vue-ui/theme-chalk/src/button.scss";
