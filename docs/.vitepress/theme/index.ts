@@ -3,8 +3,8 @@ import { h } from "vue";
 import type { Theme } from "vitepress";
 import DefaultTheme from "vitepress/theme";
 import "./style.css";
-import LbUI from "@lb-vue-ui/core";
-import "@lb-vue-ui/theme-chalk/dist/index.css";
+import LbUI from "@littleblacky/lb-vue-ui";
+import "@littleblacky/lb-vue-ui/style";
 
 export default {
   extends: DefaultTheme,

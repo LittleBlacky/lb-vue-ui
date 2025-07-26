@@ -5,7 +5,6 @@ layout: home
 hero:
   name: "lb-vue-ui"
   text: "基于vue3+vite的组件库"
-  tagline: My great project tagline
   actions:
     - theme: brand
       text: 使用指南
@@ -15,8 +14,8 @@ hero:
       link: /src/guide/install
 
 features:
-  - title: a
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  - title: 三种模式导入
+    details: 支持全量引入、按需引入、自动导入
   - title: Feature B
     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
   - title: Feature C
