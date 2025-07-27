@@ -10,7 +10,7 @@ pnpm add @vicons/ionicons5
 
 ## 基本用法
 
-<demo vue="./demos/BasicUsage.vue"></demo>
+<preview path="./demos/BasicUsage.vue"></preview>
 
 ## 属性
 
@@ -24,12 +24,12 @@ pnpm add @vicons/ionicons5
 
 ### 不同颜色
 
-<demo vue="./demos/DifferentColors.vue"></demo>
+<preview path="./demos/DifferentColors.vue"></preview>
 
 ### 不同大小
 
-<demo vue="./demos/DifferentSizes.vue"></demo>
+<preview path="./demos/DifferentSizes.vue"></preview>
 
 ### 旋转效果
 
-<demo vue="./demos/SpinEffect.vue"></demo>
+<preview path="./demos/SpinEffect.vue"></preview>

@@ -1,9 +1,11 @@
-import { defineConfig } from "vitepress";
+import {vitepressDemoPlugin} from "vitepress-demo-plugin";
+import {defineConfig} from "vitepress";
 import Guide from "../src/guide";
 import Components from "../src/components";
-import { vitepressDemoPlugin } from "vitepress-demo-plugin";
-
-
+import {
+  containerPreview,
+  componentPreview,
+} from "@vitepress-demo-preview/plugin";
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   base: "/lb-vue-ui/",
@@ -11,15 +13,23 @@ export default defineConfig({
   description: "基于vue3的组件库",
   markdown: {
     config(md) {
-      md.use(vitepressDemoPlugin);
+      md.use(vitepressDemoPlugin, {
+        stackblitz: {
+          show: true,
+        },
+        codesandbox: {
+          show: true,
+        },
+      });
+      md.use(containerPreview);
+      md.use(componentPreview);
     },
   },
-
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: "首页", link: "/" },
-      { text: "指南", link: "/src/guide/introduction" },
+      {text: "首页", link: "/"},
+      {text: "指南", link: "/src/guide/introduction"},
     ],
 
     sidebar: {
@@ -27,7 +37,7 @@ export default defineConfig({
     },
 
     socialLinks: [
-      { icon: "github", link: "https://github.com/LittleBlacky/lb-vue-ui" },
+      {icon: "github", link: "https://github.com/LittleBlacky/lb-vue-ui"},
     ],
   },
 });

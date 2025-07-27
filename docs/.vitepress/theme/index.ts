@@ -1,19 +1,18 @@
 // https://vitepress.dev/guide/custom-theme
-import { h } from "vue";
-import type { Theme } from "vitepress";
 import DefaultTheme from "vitepress/theme";
+import "vitepress-demo-plugin/dist/style.css";
 import "./style.css";
 import LbUI from "@littleblacky/lb-vue-ui";
 import "@littleblacky/lb-vue-ui/style";
+import {
+  ElementPlusContainer,
+} from "@vitepress-demo-preview/component";
+import "@vitepress-demo-preview/component/dist/style.css";
 
 export default {
-  extends: DefaultTheme,
-  Layout: () => {
-    return h(DefaultTheme.Layout, null, {
-      // https://vitepress.dev/guide/extending-default-theme#layout-slots
-    });
+  ...DefaultTheme,
+  enhanceApp({ app }: { app }) {
+    app.component("demo-preview", ElementPlusContainer);
+    app.use(LbUI)
   },
-  enhanceApp({ app }) {
-    app.use(LbUI);
-  },
-} satisfies Theme;
+};

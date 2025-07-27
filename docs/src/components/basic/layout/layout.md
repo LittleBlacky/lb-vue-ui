@@ -4,19 +4,19 @@
 
 ## 基础用法
 
-<demo vue="./demos/grid-basic.vue"></demo>
+<preview path="./demos/grid-basic.vue"></preview>
 
 ## 响应式布局
 
-<demo vue="./demos/grid-responsive.vue"></demo>
+<preview path="./demos/grid-responsive.vue"></preview>
 
 ## 栅格间隔
 
-<demo vue="./demos/grid-gutter.vue"></demo>
+<preview path="./demos/grid-gutter.vue"></preview>
 
 ## 对齐方式
 
-<demo vue="./demos/grid-align.vue"></demo>
+<preview path="./demos/grid-align.vue"></preview>
 
 ## Row Attributes
 

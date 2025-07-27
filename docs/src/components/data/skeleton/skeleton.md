@@ -12,19 +12,19 @@
 
 通过 `loading` 属性控制骨架屏的显示与隐藏。
 
-<demo vue="./demos/BasicUsage.vue"></demo>
+<preview path="./demos/BasicUsage.vue"></preview>
 
 ### 动画效果
 
 通过 `animated` 属性开启骨架屏的动画效果。
 
-<demo vue="./demos/AnimatedSkeleton.vue"></demo>
+<preview path="./demos/AnimatedSkeleton.vue"></preview>
 
 ### 自定义行数和数量
 
 通过 `rows` 和 `count` 属性控制骨架屏的行数和数量。
 
-<demo vue="./demos/CustomRowsAndCount.vue"></demo>
+<preview path="./demos/CustomRowsAndCount.vue"></preview>
 
 ## LbSkeleton Props
 

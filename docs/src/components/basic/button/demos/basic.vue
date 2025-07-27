@@ -9,11 +9,14 @@
   </div>
 </template>
 
+<script setup lang="ts">
+</script>
+
 <style scoped>
-  .button-group {
-    margin-bottom: 20px;
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
+.button-group {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 </style>

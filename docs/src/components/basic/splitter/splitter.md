@@ -2,23 +2,23 @@
 
 ## 基础用法
 
-<demo vue="./demos/basic.vue"></demo>
+<preview path="./demos/basic.vue"></preview>
 
 ## 折叠功能
 
-<demo vue="./demos/collapse.vue"></demo>
+<preview path="./demos/collapse.vue"></preview>
 
 ## 垂直分割
 
-<demo vue="./demos/vertical.vue"></demo>
+<preview path="./demos/vertical.vue"></preview>
 
 ## 最小/最大尺寸
 
-<demo vue="./demos/min-max-size.vue"></demo>
+<preview path="./demos/min-max-size.vue"></preview>
 
 ## 嵌套使用
 
-<demo vue="./demos/nested.vue"></demo>
+<preview path="./demos/nested.vue"></preview>
 
 ## Splitter
 

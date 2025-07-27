@@ -5,3 +5,5 @@
     <LbButton size="large">Large</LbButton>
   </div>
 </template>
+
+<script setup lang="ts"></script>

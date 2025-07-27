@@ -5,12 +5,12 @@
 ## 基础用法
 
 ### 常见页面布局
-<demo vue="./demos/common1.vue"></demo>
-<demo vue="./demos/common2.vue"></demo>
-<demo vue="./demos/common3.vue"></demo>
-<demo vue="./demos/common4.vue"></demo>
-<demo vue="./demos/common5.vue"></demo>
-<demo vue="./demos/common6.vue"></demo>
+<preview path="./demos/common1.vue"></preview>
+<preview path="./demos/common2.vue"></preview>
+<preview path="./demos/common3.vue"></preview>
+<preview path="./demos/common4.vue"></preview>
+<preview path="./demos/common5.vue"></preview>
+<preview path="./demos/common6.vue"></preview>
 ## Container 属性
 
 | Attribute | Description | Type | Accepted Values | Default |
