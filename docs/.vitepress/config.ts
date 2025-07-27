@@ -1,4 +1,3 @@
-import {vitepressDemoPlugin} from "vitepress-demo-plugin";
 import {defineConfig} from "vitepress";
 import Guide from "../src/guide";
 import Components from "../src/components";
@@ -13,14 +12,6 @@ export default defineConfig({
   description: "基于vue3的组件库",
   markdown: {
     config(md) {
-      md.use(vitepressDemoPlugin, {
-        stackblitz: {
-          show: true,
-        },
-        codesandbox: {
-          show: true,
-        },
-      });
       md.use(containerPreview);
       md.use(componentPreview);
     },
