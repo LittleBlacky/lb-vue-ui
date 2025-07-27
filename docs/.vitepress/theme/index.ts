@@ -1,6 +1,5 @@
 // https://vitepress.dev/guide/custom-theme
 import DefaultTheme from "vitepress/theme";
-import "vitepress-demo-plugin/dist/style.css";
 import "./style.css";
 import LbUI from "@littleblacky/lb-vue-ui";
 import "@littleblacky/lb-vue-ui/style";
