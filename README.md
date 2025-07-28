@@ -1,8 +1,8 @@
-# lb-vue
+# lb-vue-ui
 
 #### 介绍
 
-lb-vue 是一个基于 Vue 3 的组件库，提供了一系列高质量的 UI 组件，帮助开发者快速构建现代化的 Web 应用。
+lb-vue-ui 是一个基于 Vue 3 的组件库，提供了一系列高质量的 UI 组件，帮助开发者快速构建现代化的 Web 应用。
 
 #### 使用手册链接
 
@@ -46,7 +46,6 @@ app.mount("#app");
 
 ```vue
 <script setup>
-import { RouterView } from "vue-router";
 import { LbButton } from "@littleblacky/lb-vue-ui";
 import "@littleblacky/lb-vue-ui/style";
 
@@ -85,7 +84,3 @@ export default {
 </template>
 
 ```
-
-#### 许可证
-
-MIT

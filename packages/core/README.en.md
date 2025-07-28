@@ -1,7 +1,7 @@
-# lb-vue
+# lb-vue-ui
 
 #### Introduction
-lb-vue is a Vue 3 based component library, providing a series of high-quality UI components to help developers quickly build modern Web applications.
+lb-vue-ui is a Vue 3 based component library, providing a series of high-quality UI components to help developers quickly build modern Web applications.
 
 #### User Manual Link
 https://littleblacky.github.io/lb-vue-ui/
@@ -77,6 +77,3 @@ Subsequent direct use of components, no manual import required.
 </template>
 
 ```
-
-#### License
-MIT
