@@ -5,8 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "pnpm @littleblacky/lb-vue-ui && vitepress dev .",
-    "build": "pnpm @littleblacky/lb-vue-ui && vitepress build ."
+    "dev": "pnpm @littleblacky/lb-vue-ui build && vitepress dev .",
+    "build": "pnpm @littleblacky/lb-vue-ui build && vitepress build ."
   },
   "keywords": [],
   "author": "",
