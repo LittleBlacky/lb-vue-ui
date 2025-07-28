@@ -1,18 +1,18 @@
 const fs = require("fs");
 const path = require("path");
-const {program} = require("commander");
+const { program } = require("commander");
 
-const packagesPath = path.join(__dirname, '../',"packages");
+const packagesPath = path.join(__dirname, "../", "packages");
 const componentsPath = path.join(packagesPath, "components");
 
 /**
  * 删除组件所在文件夹
- * @param {string} component 
+ * @param {string} component
  */
 function removeComponentDir(component) {
   const componentPath = path.join(componentsPath, component);
   if (fs.existsSync(componentPath)) {
-    fs.rmSync(componentPath, {recursive: true});
+    fs.rmSync(componentPath, { recursive: true });
   }
 }
 
@@ -47,7 +47,12 @@ function removeThemeChalkUse(component) {
  * @param {string} component 组件名称
  */
 function removeComponentScss(component) {
-  const scssPath = path.join(packagesPath, "theme-chalk", "src", `${component}.scss`);
+  const scssPath = path.join(
+    packagesPath,
+    "theme-chalk",
+    "src",
+    `${component}.scss`
+  );
   if (fs.existsSync(scssPath)) {
     fs.unlinkSync(scssPath);
   }
@@ -61,11 +66,9 @@ function removeComponent(component) {
   removeComponentScss(component);
 }
 
-program
-  .option("-n, --name <component>", "组件名称")
-  .action((options) => {
-    const component = options.name;
-    removeComponent(component);
-  });
+program.option("-n, --name <component>", "组件名称").action((options) => {
+  const component = options.name;
+  removeComponent(component);
+});
 
 program.parse(process.argv);

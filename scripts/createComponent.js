@@ -63,7 +63,7 @@ function createComponentVue(component) {
     componentsPath,
     component,
     "src",
-    `${component}.vue`,
+    `${component}.vue`
   );
   const upperComponent = nameModify(component);
   const componentVueContent = `<template>
