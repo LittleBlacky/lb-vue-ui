@@ -34,9 +34,9 @@
   "license": "ISC",
   "dependencies": {
     "@lb-vue-ui/components": "workspace:*",
-    "@littleblacky/lb-vue-ui": "workspace:*",
     "@lb-vue-ui/theme-chalk": "workspace:*",
     "@lb-vue-ui/utils": "workspace:*",
+    "@littleblacky/lb-vue-ui": "workspace:*",
     "@popperjs/core": "^2.11.8",
     "@types/mockjs": "^1.0.10",
     "@vicons/ionicons5": "^0.13.0",
@@ -46,6 +46,9 @@
     "lodash-unified": "^1.0.3",
     "mockjs": "^1.1.0",
     "typescript": "^5.8.3"
+  },
+  "lint-staged": {
+    "*.{js,ts,vue}": "prettier --write"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",
@@ -72,6 +75,7 @@
     "husky": "^9.1.7",
     "jiti": "^2.4.2",
     "jsdom": "^26.0.0",
+    "lint-staged": "^16.1.2",
     "lodash": "^4.17.21",
     "npm-run-all2": "^7.0.2",
     "prettier": "3.5.3",
