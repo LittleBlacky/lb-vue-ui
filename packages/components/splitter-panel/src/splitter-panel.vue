@@ -25,7 +25,7 @@ import {
   onUnmounted,
   shallowReactive,
 } from "vue";
-import { createNamespace } from "@lb-vue-ui/utils/createNamespace";
+import {createNamespace} from "@lb-vue-ui/utils/createNamespace";
 import {
   LbSplitterContextKey,
   type LbSplitterContext,
@@ -84,46 +84,53 @@ const classes = computed(() => [bem.b()]);
 
 const styles = computed(() => {
   const style: Record<string, string> = {};
-  sizeModel.value = Math.max(
-    props.minSize,
-    Math.min(props.maxSize, sizeModel.value as number)
-  );
   const size = sizeModel.value ?? 0;
   style.flexBasis = `${size}px`;
   style.flexGrow = "0";
   style.flexShrink = "0";
-  if (splitter) {
-    if (props.minSize) {
-      style.minWidth =
-        splitter?.props.direction === "horizontal" ? `${props.minSize}px` : "0";
-      style.minHeight =
-        splitter?.props.direction === "vertical" ? `${props.minSize}px` : "0";
-    }
-    if (props.maxSize) {
-      style.maxWidth =
-        splitter?.props.direction === "horizontal"
-          ? `${props.maxSize}px`
-          : "unset";
-      style.maxHeight =
-        splitter?.props.direction === "vertical"
-          ? `${props.maxSize}px`
-          : "unset";
-    }
-  }
   return style;
 });
 
 const startCollapse = computed(() => {
-  if (!sizeModel.value) return;
-  return sizeModel.value > 0 && props.resizeabel && splitter?.isDragging;
+  if (!splitter?.isDragging) return false;
+  const nextPanel = splitter?.panelInstances.value[panelInstance.index + 1];
+  if (!nextPanel) return false;
+  if (!nextPanel.props.resizeabel || !props.resizeabel) return false;
+  if (
+    nextPanel.sizeRef.value === undefined ||
+    nextPanel.sizeRef.value >= nextPanel.props.maxSize
+  )
+    return false;
+  if (sizeModel.value === undefined || sizeModel.value <= props.minSize)
+    return false;
+  return true;
 });
 
 const endCollapse = computed(() => {
-  const nextIndex = panelInstance.index + 1;
-  const nextInstance = splitter?.panelInstances.value[nextIndex];
-  const nextSize = splitter?.panelInstances.value[nextIndex].sizeRef.value;
-  if (!nextInstance || !nextSize) return false;
-  return nextSize > 0 && nextInstance.props.resizeabel && splitter?.isDragging;
+  if (!splitter?.isDragging) return false;
+  const nextPanel = splitter?.panelInstances.value[panelInstance.index + 1];
+  if (!nextPanel) return false;
+  if (!nextPanel.props.resizeabel || !props.resizeabel) return false;
+  if (
+    nextPanel.sizeRef.value === undefined ||
+    nextPanel.sizeRef.value <= nextPanel.props.minSize
+  ) {
+    return false;
+  }
+  if (sizeModel.value === undefined || sizeModel.value >= props.maxSize) {
+    console.log(
+      "curPanel false",
+      nextPanel.sizeRef.value,
+      nextPanel.props.minSize,
+      nextPanel.props.maxSize,
+      sizeModel.value,
+      props.maxSize,
+      props.minSize
+    );
+    return false;
+  }
+  console.log(true);
+  return true;
 });
 
 watch(sizeModel, (newVal) => {
@@ -145,31 +152,13 @@ const onMoving = (distance: number) => {
   let curNewSize = curSize + distance;
   let nextNewSize = totalSize - curNewSize;
 
-  // 计算当前面板和相邻面板的合法调整范围
-  const effectiveMin = Math.max(curMinSize, totalSize - nextMaxSize);
-  const effectiveMax = Math.min(curMaxSize, totalSize - nextMinSize);
-
-  // 检查是否存在有效范围
-  if (effectiveMin > effectiveMax) {
-    throw new Error(
-      "[lb-splitter-panel]: 无法同时满足两个面板的min/max约束，请检查尺寸配置。"
-    );
-  }
-
-  // 在当前面板的范围内调整尺寸
-  const adjustedSize = Math.max(
-    effectiveMin,
-    Math.min(effectiveMax, curNewSize)
-  );
-
-  // 当且仅当实际调整幅度超过系统容差时更新尺寸
-  const tolerance = 1; // 容差值，避免无意义的微调
-  if (Math.abs(adjustedSize - curNewSize) > tolerance) {
-    curNewSize = adjustedSize;
+  if (curNewSize < curMinSize || curNewSize > curMaxSize) {
+    curNewSize = Math.max(curMinSize, Math.min(curMaxSize, curNewSize));
     nextNewSize = totalSize - curNewSize;
+  } else if (nextNewSize < nextMinSize || nextNewSize > nextMaxSize) {
+    nextNewSize = Math.max(nextMinSize, Math.min(nextMaxSize, nextNewSize));
+    curNewSize = totalSize - nextNewSize;
   }
-
-  if (curNewSize + nextNewSize !== totalSize) return;
   sizeModel.value = curNewSize;
   nextInstance.sizeRef.value = nextNewSize;
 };
@@ -178,11 +167,11 @@ const onCollapse = (index: number, pos: string) => {
   if (!splitter?.isDragging || !panelInstance) return;
   const {
     sizeRef: curSize,
-    props: { minSize: curMinSize = 0, maxSize: curMaxSize = Infinity },
+    props: {minSize: curMinSize = 0, maxSize: curMaxSize = Infinity},
   } = splitter.panelInstances.value[index];
   const {
     sizeRef: nextSize,
-    props: { minSize: nextMinSize = 0, maxSize: nextMaxSize = Infinity },
+    props: {minSize: nextMinSize = 0, maxSize: nextMaxSize = Infinity},
   } = splitter.panelInstances.value[index + 1];
   if (curSize.value === undefined || nextSize.value === undefined) return;
   if (pos === "end") {
@@ -220,7 +209,7 @@ const onCollapse = (index: number, pos: string) => {
 
 const hasBar = computed(() => {
   if (!splitter || !panelInstance) return false;
-  const { index } = panelInstance;
+  const {index} = panelInstance;
   return index !== -1 && index < splitter?.panelInstances.value.length - 1;
 });
 
