@@ -14,3 +14,5 @@ export * from "./splitter";
 export * from "./splitter-bar";
 export * from "./splitter-panel";
 export * from "./virtual-list";
+export * from "./form";
+export * from "./form-item";
