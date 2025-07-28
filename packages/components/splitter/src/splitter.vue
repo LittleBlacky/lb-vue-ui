@@ -104,6 +104,7 @@ const onResize = () => {
     props.direction === "horizontal"
       ? (splitterRef.value?.offsetWidth ?? 0)
       : (splitterRef.value?.offsetHeight ?? 0);
+  splitterSize.value -= (panelInstances.value.length - 1) * 3;
 };
 
 onMounted(() => {

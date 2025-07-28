@@ -1,8 +1,8 @@
-@use 'common/vars.scss' as *;
-@use 'mixins/mixins.scss' as mix;
+@use "common/vars.scss" as *;
+@use "mixins/mixins.scss" as mix;
 
 @include mix.b(splitter-bar) {
-  --lb-splitter-bar-gutter-width: 5px;
+  --lb-splitter-bar-gutter-width: 3px;
   --lb-splitter-bar-gutter-height: 100%;
   --lb-splitter-bar-collapse-capacity: 0;
   --lb-splitter-bar-collapse-rotate: 0deg;
@@ -91,3 +91,4 @@
     --lb-splitter-bar-collapse-capacity-end-top: var(--lb-gap-extra-small);
   }
 }
+
