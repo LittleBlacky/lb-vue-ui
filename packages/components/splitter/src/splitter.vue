@@ -14,14 +14,14 @@ import {
   type ShallowReactive,
   watch,
 } from "vue";
-import { createNamespace } from "@lb-vue-ui/utils/createNamespace";
+import {createNamespace} from "@lb-vue-ui/utils/createNamespace";
 import {
   type LbSplitterProps,
   type LbSplitterEmits,
   LbSplitterContextKey,
 } from "../index";
-import { type LbSplitterPanelInstance } from "../../splitter-panel/src/types";
-import { withDefaults, defineEmits } from "vue";
+import {type LbSplitterPanelInstance} from "../../splitter-panel/src/types";
+import {withDefaults, defineEmits} from "vue";
 
 defineOptions({
   name: "LbSplitter",
