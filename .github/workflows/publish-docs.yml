@@ -45,8 +45,6 @@ jobs:
         uses: actions/configure-pages@v4
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
-      - name: Build with Components
-        run: pnpm build:core
       - name: Build with VitePress
         run: pnpm build:docs
       - name: Upload artifact
