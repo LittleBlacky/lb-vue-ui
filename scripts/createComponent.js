@@ -1,15 +1,18 @@
 const fs = require("fs");
 const path = require("path");
-const {program} = require("commander");
+const { program } = require("commander");
 
 const packagesPath = path.join(__dirname, "../", "packages");
 const componentsPath = path.join(packagesPath, "components");
 const sassPath = path.join(packagesPath, "theme-chalk", "src");
 
 function nameModify(name) {
-  return name.split('-').forEach(item => {
-    item = item.charAt(0).toUpperCase() + item.slice(1);
-  })
+  return name
+    .split("-")
+    .map((item) => {
+      return item.charAt(0).toUpperCase() + item.slice(1);
+    })
+    .join("");
 }
 
 /**
@@ -36,7 +39,7 @@ function createThemeChalkFile(component) {
 function createComponentDirectory(component) {
   const componentPath = path.join(componentsPath, component);
   if (!fs.existsSync(componentPath)) {
-    fs.mkdirSync(componentPath, {recursive: true});
+    fs.mkdirSync(componentPath, { recursive: true });
   }
 }
 
@@ -47,7 +50,7 @@ function createComponentDirectory(component) {
 function createSrcDirectory(component) {
   const srcPath = path.join(componentsPath, component, "src");
   if (!fs.existsSync(srcPath)) {
-    fs.mkdirSync(srcPath, {recursive: true});
+    fs.mkdirSync(srcPath, { recursive: true });
   }
 }
 
@@ -60,7 +63,7 @@ function createComponentVue(component) {
     componentsPath,
     component,
     "src",
-    `${component}.vue`
+    `${component}.vue`,
   );
   const upperComponent = nameModify(component);
   const componentVueContent = `<template>
@@ -119,7 +122,7 @@ function createTypesFile(component) {
 function createStyleDirectory(component) {
   const stylePath = path.join(componentsPath, component, "style");
   if (!fs.existsSync(stylePath)) {
-    fs.mkdirSync(stylePath, {recursive: true});
+    fs.mkdirSync(stylePath, { recursive: true });
   }
 }
 
@@ -151,7 +154,7 @@ export * from "./src/types";
 
 declare module "vue" {
   export interface GlobalComponents {
-    Lb${component}: typeof Lb${component};
+    Lb${upperComponent}: typeof Lb${upperComponent};
   }
 };
 `;
