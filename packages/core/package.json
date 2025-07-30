@@ -25,6 +25,10 @@
       "import": "./dist/theme-chalk/index.css",
       "require": "./dist/theme-chalk/index.css"
     },
+    "./style/": {
+      "import": "./dist/theme-chalk/",
+      "require": "./dist/theme-chalk/"
+    },
     "./resolver": {
       "import": "./dist/es/utils/resolver.js",
       "require": "./dist/lib/utils/resolver.cjs",
@@ -61,4 +65,3 @@
   "author": "littleblacky",
   "license": "ISC"
 }
-

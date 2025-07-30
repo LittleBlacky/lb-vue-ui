@@ -1,11 +1,18 @@
 {
   "name": "@lb-vue-ui/theme-chalk",
   "version": "0.0.0",
-  "private": true,
-  "main": "dist/index.css",
+  "main": "./src/index.scss",
+  "style": "./src/index.scss",
+  "module": "./src/index.scss",
   "files": [
-    "dist"
+    "src"
   ],
+  "exports": {
+    ".": {
+      "import": "./index.scss",
+      "require": "./index.scss"
+    }
+  },
   "scripts": {
     "build": "sass src:../core/dist/theme-chalk --style compressed --no-source-map"
   },
