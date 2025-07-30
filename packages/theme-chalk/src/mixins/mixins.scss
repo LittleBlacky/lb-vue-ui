@@ -1,37 +1,47 @@
-@use 'config.scss' as *;
-
+@use "config.scss" as *;
+@use "sass:meta" as meta;
 // .lb-button
 @mixin b($block) {
-    $B: $namespace + '-' + $block;
-    .#{$B} {
-        @content;
-    }
+  $B: $namespace + "-" + $block;
+  .#{$B} {
+    @content;
+  }
 }
 
 // .lb-button.is-xxx
 @mixin when($state) {
-    @at-root {
-        &.#{$state-prefix + $state} {
-            @content;
-        }
+  @at-root {
+    &.#{$state-prefix + $state} {
+      @content;
     }
+  }
 }
 
 // &--primary => .lb-button--primary
 @mixin m($modifier) {
-    @at-root {
-        #{&+$modifier-separator+$modifier} {
-            @content;
-        }
+  @at-root {
+    #{& + $modifier-separator + $modifier} {
+      @content;
     }
+  }
 }
 
 // &__header => .lb-button__header
-@mixin e($element) {
-    @at-root {
-        #{&+$element-separator+$element} {
-            @content;
-        }
-    }
-}
+@mixin e($elements) {
+  // 确保 $elements 始终是列表
+  $list: if(meta.type-of($elements) == "list", $elements, ($elements));
 
+  @each $element in $list {
+    // 校验参数类型
+    @if meta.type-of($element) != "string" {
+      @error "Element name must be a string, got `#{inspect($element)}`.";
+    }
+
+    @at-root {
+      // 拼接选择器：.block + "__" + "element"
+      #{&}#{$element-separator}#{$element} {
+        @content;
+      }
+    }
+  }
+}

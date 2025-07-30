@@ -1,5 +1,6 @@
 @use "mixins/mixins.scss" as mix;
 @use "common/vars" as *;
+@use "mixins/config.scss" as config;
 
 @include mix.b(input) {
   --lb-input-width: var(--lb-width-container-base);
@@ -36,7 +37,21 @@
     --lb-input-border-color: var(--lb-input-color-primary);
   }
 
-  @include mix.e(prepend) {
+  button.#{config.$namespace}-button,
+  select.#{config.$namespace}-select {
+    border: none;
+    background-color: transparent;
+    color: var(--lb-input-text-color-regular);
+    &:focus,
+    &:hover {
+      background-color: transparent;
+      color: var(--lb-input-text-color-regular);
+    }
+  }
+
+  @include mix.e((prepend, append)) {
+    background-color: var(--lb-fill-color-blank);
+    font-size: var(--lb-input-font-size);
     display: inline-flex;
     align-items: center;
     overflow: hidden;
@@ -44,23 +59,16 @@
     overflow: hidden;
     padding: var(--lb-input-padding);
     border: 1px solid var(--lb-input-prepend-border-color);
-    border-right: none;
+  }
+
+  @include mix.e(prepend) {
     border-radius: var(--lb-border-radius-base) 0 0 var(--lb-border-radius-base);
-    background-color: var(--lb-fill-color-blank);
-    font-size: var(--lb-input-font-size);
+    border-right: none;
   }
 
   @include mix.e(append) {
-    display: inline-flex;
-    height: 100%;
-    align-items: center;
-    padding: var(--lb-input-padding);
-    overflow: hidden;
-    border: 1px solid var(--lb-input-prepend-border-color);
-    border-left: none;
     border-radius: 0 var(--lb-border-radius-base) var(--lb-border-radius-base) 0;
-    background-color: var(--lb-fill-color-blank);
-    font-size: var(--lb-input-font-size);
+    border-left: none;
   }
 
   @include mix.e(wrapper) {
