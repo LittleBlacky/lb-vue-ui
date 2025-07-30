@@ -6,8 +6,8 @@
     <div
       :class="{
         [bem.e('wrapper')]: true,
-        [bem.em('wrapper', 'prepend')]: slots.prepend,
-        [bem.em('wrapper', 'append')]: slots.append,
+        [bem.em('wrapper', 'prepend')]: slots.prepend && !isTextarea,
+        [bem.em('wrapper', 'append')]: slots.append && !isTextarea,
       }"
     >
       <slot name="prefix"></slot>
