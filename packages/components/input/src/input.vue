@@ -10,7 +10,9 @@
         [bem.em('wrapper', 'append')]: slots.append && !isTextarea,
       }"
     >
-      <slot name="prefix"></slot>
+      <span :class="bem.e('prefix')" v-if="!isTextarea">
+        <slot name="prefix"></slot>
+      </span>
       <component
         :is="tag"
         v-bind="{ ...$attrs }"

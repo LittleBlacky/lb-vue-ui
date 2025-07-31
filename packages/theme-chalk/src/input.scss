@@ -107,7 +107,7 @@
     }
   }
 
-  @include mix.e(suffix) {
+  @include mix.e((prefix, suffix)) {
     display: inline-flex;
     align-items: center;
     gap: var(--lb-input-gap);
