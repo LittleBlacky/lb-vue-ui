@@ -13,8 +13,8 @@
       <slot name="prefix"></slot>
       <component
         :is="tag"
+        v-bind="{ ...$attrs }"
         ref="inputRef"
-        v-bind="{ ...$attrs, style: undefined }"
         :type="showPassword ? (passwordVisible ? 'text' : 'password') : type"
         :placeholder="placeholder"
         :disabled="disabled"
@@ -116,6 +116,7 @@ import { createNamespace } from "@lb-vue-ui/utils/createNamespace";
 
 defineOptions({
   name: "LbInput",
+  inheritAttrs: false,
 });
 
 const slots = useSlots();

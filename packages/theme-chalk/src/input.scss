@@ -4,6 +4,7 @@
 
 @include mix.b(input) {
   --lb-input-width: var(--lb-width-container-base);
+  --lb-input-height: var(--lb-height-base);
   --lb-input-text-color-placeholder: var(--lb-text-color-placeholder, #a8a8a8);
   --lb-input-text-color-regular: var(--lb-text-color-regular, #333);
   --lb-input-border-color: var(--lb-border-color, #dcdfe6);
@@ -19,11 +20,10 @@
   --lb-input-gap: var(--lb-gap-small, 8px);
   --lb-input-count-color: var(--lb-input-text-color-placeholder);
   --lb-input-count-font-size: var(--lb-font-size-small);
-  --lb-input-count-position-right: 6px;
-  --lb-input-count-position-bottom: 10px;
+  --lb-input-count-position-right: 10px;
+  --lb-input-count-position-bottom: 6px;
   --lb-input-prepend-bg-color: var(--lb-color-info-light-8);
   --lb-input-prepend-border-color: var(--lb-border-color, #dcdfe6);
-  --lb-input-height: var(--lb-height-small);
 }
 
 @include mix.b(input) {
@@ -31,8 +31,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 0;
+  width: var(--lb-input-width);
   background-color: var(--lb-input-bg-color);
-  height: var(--lb-input-height);
   transition: border-color var(--lb-input-transition-duration)
     cubic-bezier(0.645, 0.045, 0.355, 1);
   &:focus-within {
@@ -74,8 +74,9 @@
   @include mix.e(wrapper) {
     position: relative;
     padding: var(--lb-input-padding);
-    display: flex;
+    display: inline-flex;
     align-items: center;
+    width: 100%;
     background-color: var(--lb-input-bg-color);
     border: 1px solid var(--lb-input-border-color);
     border-color: var(--lb-input-border-color);
@@ -94,10 +95,11 @@
   @include mix.e(inner) {
     flex-grow: 1;
     min-height: 100%;
-    width: var(--lb-input-width);
+    width: 100%;
     border: none;
     outline: none;
     resize: vertical;
+    line-height: var(--lb-input-font-size);
     background-color: var(--lb-input-bg-color);
     font-size: var(--lb-input-font-size);
     &::placeholder {
@@ -123,17 +125,18 @@
   @include mix.m(large) {
     --lb-input-padding: 8px 12px;
     --lb-input-font-size: var(--lb-input-font-size-large);
+    --lb-input-count-position-bottom: 10px;
   }
 
   @include mix.m(small) {
     --lb-input-padding: 4px 8px;
     --lb-input-font-size: var(--lb-input-font-size-small);
+    --lb-input-count-position-bottom: 6px;
   }
 
   @include mix.e(count) {
     position: absolute;
     background-color: var(--lb-input-bg-color);
-    line-height: var(--lb-input-count-font-size);
     right: var(--lb-input-count-position-right);
     bottom: var(--lb-input-count-position-bottom);
     color: var(--lb-input-count-color);
@@ -143,7 +146,7 @@
   @include mix.when(textarea) {
     --lb-input-padding: 6px;
     --lb-input-count-position-right: 20px;
-    --lb-input-count-position-bottom: 6px;
+    --lb-input-count-position-bottom: 4px;
   }
 
   @include mix.when(disabled) {
