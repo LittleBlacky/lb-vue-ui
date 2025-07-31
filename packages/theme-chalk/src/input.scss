@@ -23,7 +23,8 @@
   --lb-input-count-color: var(--lb-input-text-color-placeholder);
   --lb-input-count-font-size: var(--lb-input-font-size);
   --lb-input-count-position-right: 10px;
-  --lb-input-count-position-bottom: 6px;
+  --lb-input-count-position-bottom: 50%;
+  --lb-input-count-transform: translateY(50%);
   --lb-input-prepend-bg-color: var(--lb-color-info-light-8);
   --lb-input-prepend-border-color: var(--lb-border-color, #dcdfe6);
 }
@@ -124,13 +125,17 @@
   @include mix.m(large) {
     --lb-input-padding: 8px 12px;
     --lb-input-font-size: var(--lb-input-font-size-large);
-    --lb-input-count-position-bottom: 8px;
+    @include mix.when(textarea) {
+      --lb-input-count-position-bottom: 4px;
+    }
   }
 
   @include mix.m(small) {
     --lb-input-padding: 4px 8px;
     --lb-input-font-size: var(--lb-input-font-size-small);
-    --lb-input-count-position-bottom: 4px;
+    @include mix.when(textarea) {
+      --lb-input-count-position-bottom: 2px;
+    }
   }
 
   @include mix.e(count) {
@@ -138,6 +143,7 @@
     background-color: var(--lb-input-bg-color);
     right: var(--lb-input-count-position-right);
     bottom: var(--lb-input-count-position-bottom);
+    transform: var(--lb-input-count-transform);
     color: var(--lb-input-count-color);
     font-size: var(--lb-input-count-font-size);
     padding-left: var(--lb-input-gap);
@@ -146,6 +152,7 @@
   @include mix.when(textarea) {
     --lb-input-count-position-right: 20px;
     --lb-input-count-position-bottom: 3px;
+    --lb-input-count-transform: translateY(0%);
   }
 
   @include mix.when(disabled) {
