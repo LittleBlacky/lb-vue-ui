@@ -9,6 +9,7 @@
   --lb-input-border-color: var(--lb-border-color, #dcdfe6);
   --lb-input-border-radius-base: var(--lb-border-radius-base, 4px);
   --lb-input-color-primary: var(--lb-color-primary, #409eff);
+  --lb-input-bg-color: var(--lb-fill-color-blank);
   --lb-input-disabled-bg-color: var(--lb-disabled-bg-color, #f5f7fa);
   --lb-input-disabled-border-color: var(--lb-disabled-border-color, #e4e7ed);
   --lb-input-disabled-text-color: var(--lb-disabled-text-color, #c0c4cc);
@@ -137,6 +138,7 @@
 
   @include mix.e(count) {
     position: absolute;
+    background-color: var(--lb-input-bg-color);
     line-height: var(--lb-input-count-font-size);
     right: var(--lb-input-count-position-right);
     bottom: var(--lb-input-count-position-bottom);
