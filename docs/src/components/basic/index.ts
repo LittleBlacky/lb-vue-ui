@@ -5,23 +5,23 @@ export default {
   collapsed: false,
   items: [
     {
-      text: "Icon 图标",
+      text: "✅Icon 图标",
       link: "/icon/icon",
     },
     {
-      text: "Button 按钮",
+      text: "✅Button 按钮",
       link: "/button/button",
     },
     {
-      text: "Container 布局容器",
+      text: "✅Container 布局容器",
       link: "/container/container",
     },
     {
-      text: "Layout 布局",
+      text: "✅Layout 布局",
       link: "/layout/layout",
     },
     {
-      text: "Splitter 分隔面板",
+      text: "✅Splitter 分隔面板",
       link: "/splitter/splitter",
     },
   ].map((item) => {
@@ -31,4 +31,3 @@ export default {
     };
   }),
 };
-
