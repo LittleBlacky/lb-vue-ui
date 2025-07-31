@@ -15,11 +15,13 @@
   --lb-input-disabled-border-color: var(--lb-disabled-border-color, #e4e7ed);
   --lb-input-disabled-text-color: var(--lb-disabled-text-color, #c0c4cc);
   --lb-input-font-size: var(--lb-font-size-base);
+  --lb-input-font-size-small: var(--lb-font-size-small);
+  --lb-input-font-size-large: var(--lb-font-size-large);
   --lb-input-transition-duration: var(--lb-transition-duration-fast, 0.2s);
   --lb-input-padding: 6px 10px;
   --lb-input-gap: var(--lb-gap-small, 8px);
   --lb-input-count-color: var(--lb-input-text-color-placeholder);
-  --lb-input-count-font-size: var(--lb-font-size-small);
+  --lb-input-count-font-size: var(--lb-input-font-size);
   --lb-input-count-position-right: 10px;
   --lb-input-count-position-bottom: 6px;
   --lb-input-prepend-bg-color: var(--lb-color-info-light-8);
@@ -31,7 +33,6 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 0;
-  width: var(--lb-input-width);
   background-color: var(--lb-input-bg-color);
   transition: border-color var(--lb-input-transition-duration)
     cubic-bezier(0.645, 0.045, 0.355, 1);
@@ -125,13 +126,13 @@
   @include mix.m(large) {
     --lb-input-padding: 8px 12px;
     --lb-input-font-size: var(--lb-input-font-size-large);
-    --lb-input-count-position-bottom: 10px;
+    --lb-input-count-position-bottom: 8px;
   }
 
   @include mix.m(small) {
     --lb-input-padding: 4px 8px;
     --lb-input-font-size: var(--lb-input-font-size-small);
-    --lb-input-count-position-bottom: 6px;
+    --lb-input-count-position-bottom: 4px;
   }
 
   @include mix.e(count) {
@@ -141,12 +142,12 @@
     bottom: var(--lb-input-count-position-bottom);
     color: var(--lb-input-count-color);
     font-size: var(--lb-input-count-font-size);
+    padding-left: var(--lb-input-gap);
   }
 
   @include mix.when(textarea) {
-    --lb-input-padding: 6px;
     --lb-input-count-position-right: 20px;
-    --lb-input-count-position-bottom: 4px;
+    --lb-input-count-position-bottom: 3px;
   }
 
   @include mix.when(disabled) {

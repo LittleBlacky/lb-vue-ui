@@ -26,7 +26,6 @@
         @blur="handleBlur"
         :class="bem.e('inner')"
         :rows="rows"
-        :cols="cols"
         :maxlength="maxlength"
         :minlength="minlength"
       />

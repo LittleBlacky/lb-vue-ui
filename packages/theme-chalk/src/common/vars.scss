@@ -105,6 +105,9 @@ $colors: (
     "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
     "Microsoft YaHei", "\5fae\8f6f\96c5\9ed1", Arial, sans-serif;
   --lb-font-weight-primary: 700;
+  --lb-font-weight-secondary: 600;
+  --lb-font-weight-normal: 400;
+  --lb-font-weight-light: 300;
 
   /*disabled*/
   --lb-disabled-bg-color: var(--lb-fill-color-light);
