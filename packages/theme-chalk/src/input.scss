@@ -77,7 +77,6 @@
     padding: var(--lb-input-padding);
     display: inline-flex;
     align-items: center;
-    width: 100%;
     background-color: var(--lb-input-bg-color);
     border: 1px solid var(--lb-input-border-color);
     border-color: var(--lb-input-border-color);
@@ -96,7 +95,6 @@
   @include mix.e(inner) {
     flex-grow: 1;
     min-height: 100%;
-    width: 100%;
     border: none;
     outline: none;
     resize: vertical;
