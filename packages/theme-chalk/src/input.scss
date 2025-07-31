@@ -94,7 +94,7 @@
 
   @include mix.e(inner) {
     flex-grow: 1;
-    min-height: 100%;
+    height: auto;
     border: none;
     outline: none;
     resize: vertical;
