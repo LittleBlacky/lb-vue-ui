@@ -10,11 +10,13 @@
         [bem.em('wrapper', 'append')]: slots.append && !isTextarea,
       }"
     >
-      <slot name="prefix"></slot>
+      <span :class="bem.e('prefix')" v-if="!isTextarea">
+        <slot name="prefix"></slot>
+      </span>
       <component
         :is="tag"
+        v-bind="{ ...$attrs }"
         ref="inputRef"
-        v-bind="{ ...$attrs, style: undefined }"
         :type="showPassword ? (passwordVisible ? 'text' : 'password') : type"
         :placeholder="placeholder"
         :disabled="disabled"
@@ -25,8 +27,7 @@
         @focus="handleFocus"
         @blur="handleBlur"
         :class="bem.e('inner')"
-        :rows="rows"
-        :cols="cols"
+        :rows="autosize?.minRows || rows"
         :maxlength="maxlength"
         :minlength="minlength"
       />
@@ -111,11 +112,12 @@
 
 <script setup lang="ts">
 import { computed, ref, nextTick, useSlots } from "vue";
-import type { LbInputProps, LbInputEmits } from "./types";
+import type { LbInputProps, LbInputEmits, LbInputAutoSize } from "./types";
 import { createNamespace } from "@lb-vue-ui/utils/createNamespace";
 
 defineOptions({
   name: "LbInput",
+  inheritAttrs: false,
 });
 
 const slots = useSlots();
@@ -148,29 +150,34 @@ const tag = computed(() => {
   return "input";
 });
 
-const calcTextareaHeight = (el: string | Element) => {
-  if (typeof el === "string") {
-    el = document.querySelector(el) as Element;
-  }
-  const attrs = [
-    "box-sizing",
-    "padding-top",
-    "padding-bottom",
-    "border-top",
-    "border-bottom",
-  ];
-  let heightOffset = 0;
-  const style = window.getComputedStyle(el);
-  const [boxSizing, paddingTop, paddingBottom, borderTop, borderBottom] =
-    attrs.map((item) => style.getPropertyValue(item));
-  if (boxSizing === "content-box") {
-    heightOffset = -parseFloat(paddingTop) - parseFloat(paddingBottom);
-  } else {
-    heightOffset = parseFloat(borderTop) + parseFloat(borderBottom);
-  }
-  let height = el.scrollHeight + heightOffset;
-  el.style.height = height + "px";
-};
+function autoResize(
+  textarea: HTMLTextAreaElement | null,
+  autoResize: LbInputAutoSize
+) {
+  if (!textarea) return;
+
+  const { minRows = 1, maxRows = Infinity } = autoResize;
+
+  // 重置高度以重新计算
+  textarea.style.height = "auto";
+
+  // 获取计算样式
+  const computedStyle = window.getComputedStyle(textarea);
+  const lineHeight = parseInt(computedStyle.lineHeight) || 20;
+  const paddingTop = parseInt(computedStyle.paddingTop) || 0;
+  const paddingBottom = parseInt(computedStyle.paddingBottom) || 0;
+
+  // 计算高度
+  const minHeight = minRows * lineHeight + paddingTop + paddingBottom;
+  const maxHeight = maxRows * lineHeight + paddingTop + paddingBottom;
+  const scrollHeight = textarea.scrollHeight;
+
+  // 应用计算后的高度
+  textarea.style.height = `${Math.max(minHeight, Math.min(maxHeight, scrollHeight))}px`;
+
+  // 防止高度抖动
+  textarea.style.overflowY = scrollHeight > maxHeight ? "scroll" : "hidden";
+}
 
 const classes = computed(() => {
   return [
@@ -186,10 +193,12 @@ const currentLength = computed(() => {
 });
 
 const handleInput = (event: Event) => {
+  if (isTextarea.value) {
+    nextTick(() => {
+      autoResize(inputRef.value, props.autosize);
+    });
+  }
   emit("update:modelValue", (event.target as HTMLInputElement).value);
-  nextTick(() => {
-    calcTextareaHeight(inputRef.value);
-  });
 };
 
 const handleChange = (event: Event) => {

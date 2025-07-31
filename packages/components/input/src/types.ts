@@ -15,10 +15,9 @@ export interface LbInputProps {
   autosize?: boolean | LbInputAutoSize;
   suffixIcon?: string;
   size?: "large" | "default" | "small";
-  rows?: number;
-  cols?: number;
-  maxlength?: number;
-  minlength?: number;
+  rows?: number | string;
+  maxlength?: number | string;
+  minlength?: number | string;
   showWordLimit?: boolean;
 }
 
