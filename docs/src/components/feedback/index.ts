@@ -29,7 +29,7 @@ export default {
       link: "/messagebox/messagebox",
     },
     {
-      text: "PopperOver 弹出层",
+      text: "Popperover 弹出层",
       link: "/popperover/popperover",
     },
   ].map((item) => {
