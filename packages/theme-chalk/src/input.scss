@@ -31,6 +31,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 0;
+  background-color: var(--lb-input-bg-color);
   height: var(--lb-input-height);
   transition: border-color var(--lb-input-transition-duration)
     cubic-bezier(0.645, 0.045, 0.355, 1);
@@ -56,8 +57,6 @@
     display: inline-flex;
     align-items: center;
     overflow: hidden;
-    height: 100%;
-    overflow: hidden;
     padding: var(--lb-input-padding);
     border: 1px solid var(--lb-input-prepend-border-color);
   }
@@ -77,6 +76,7 @@
     padding: var(--lb-input-padding);
     display: flex;
     align-items: center;
+    background-color: var(--lb-input-bg-color);
     border: 1px solid var(--lb-input-border-color);
     border-color: var(--lb-input-border-color);
     border-radius: var(--lb-input-border-radius-base);
@@ -98,16 +98,10 @@
     border: none;
     outline: none;
     resize: vertical;
+    background-color: var(--lb-input-bg-color);
     font-size: var(--lb-input-font-size);
     &::placeholder {
       color: var(--lb-input-text-color-placeholder);
-    }
-
-    &[disabled] {
-      background-color: var(--lb-input-disabled-bg-color);
-      border-color: var(--lb-input-disabled-border-color);
-      color: var(--lb-input-disabled-text-color);
-      cursor: not-allowed;
     }
   }
 
@@ -142,7 +136,6 @@
     line-height: var(--lb-input-count-font-size);
     right: var(--lb-input-count-position-right);
     bottom: var(--lb-input-count-position-bottom);
-    background-color: white;
     color: var(--lb-input-count-color);
     font-size: var(--lb-input-count-font-size);
   }
@@ -151,5 +144,12 @@
     --lb-input-padding: 6px;
     --lb-input-count-position-right: 20px;
     --lb-input-count-position-bottom: 6px;
+  }
+
+  @include mix.when(disabled) {
+    --lb-input-bg-color: var(--lb-input-disabled-bg-color);
+    border-color: var(--lb-input-disabled-border-color);
+    color: var(--lb-input-disabled-text-color);
+    cursor: not-allowed;
   }
 }

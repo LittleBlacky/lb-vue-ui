@@ -173,7 +173,12 @@ const calcTextareaHeight = (el: string | Element) => {
 };
 
 const classes = computed(() => {
-  return [bem.b(), bem.m(props.size), bem.is("textarea", isTextarea.value)];
+  return [
+    bem.b(),
+    bem.m(props.size),
+    bem.is("textarea", isTextarea.value),
+    bem.is("disabled", props.disabled),
+  ];
 });
 
 const currentLength = computed(() => {
