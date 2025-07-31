@@ -30,8 +30,6 @@
 
 @include mix.b(input) {
   display: inline-flex;
-  justify-content: space-between;
-  align-items: center;
   padding: 0 0;
   background-color: var(--lb-input-bg-color);
   transition: border-color var(--lb-input-transition-duration)
@@ -45,6 +43,8 @@
     border: none;
     background-color: transparent;
     color: var(--lb-input-text-color-regular);
+    padding: 0;
+
     &:focus,
     &:hover {
       background-color: transparent;
@@ -53,12 +53,12 @@
   }
 
   @include mix.e((prepend, append)) {
-    background-color: var(--lb-fill-color-blank);
-    font-size: var(--lb-input-font-size);
     display: inline-flex;
     align-items: center;
-    overflow: hidden;
     padding: var(--lb-input-padding);
+    box-sizing: border-box;
+    background-color: var(--lb-fill-color-blank);
+    font-size: var(--lb-input-font-size);
     border: 1px solid var(--lb-input-prepend-border-color);
   }
 
