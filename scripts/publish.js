@@ -16,7 +16,7 @@ const CONFIG = {
   ],
   registry: "https://registry.npmjs.org/",
   gitRemote: "origin",
-  defaultBranch: "main",
+  defaultBranch: "master",
 };
 
 // 创建readline接口
@@ -518,10 +518,7 @@ async function preview(version) {
 }
 
 // 命令行配置
-program
-  .name("publish-enhanced")
-  .description("lb-vue-ui 增强版发布脚本")
-  .version("1.0.0");
+program.name("publish").description("lb-vue-ui 发布脚本").version("1.0.0");
 
 program
   .command("release")
