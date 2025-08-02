@@ -1,4 +1,4 @@
-@use "config.scss" as *;
+@use "config" as config;
 @use "sass:meta" as meta;
 // .lb-button
 @mixin b($block) {
@@ -42,6 +42,16 @@
       #{&}#{$element-separator}#{$element} {
         @content;
       }
+    }
+  }
+}
+
+@mixin generate-vars($map) {
+  @each $key, $value in $map {
+    @if type-of($value) == "map" {
+      @include generate-vars("#{$prefix}-#{$key}", $value);
+    } @else {
+      --#{config.$namespace}-#{$key}: #{$value};
     }
   }
 }
