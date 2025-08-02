@@ -5,7 +5,7 @@ export default {
   collapsed: false,
   items: [
     {
-      text: "Card 卡片",
+      text: "✅Card 卡片",
       link: "/card/card",
     },
     {

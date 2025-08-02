@@ -1,4 +1,4 @@
-@use "config" as config;
+@use "config" as *;
 @use "sass:meta" as meta;
 // .lb-button
 @mixin b($block) {

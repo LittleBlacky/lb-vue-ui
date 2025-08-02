@@ -2,5 +2,167 @@
 @use 'mixins/mixins.scss' as mix;
 
 @include mix.b(card) {
+  position: relative;
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
 
-};
+  // 边框样式
+  @include mix.m(bordered) {
+    border: 1px solid #e4e7ed;
+  }
+
+  // 阴影效果
+  @include mix.m(shadow-always) {
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  @include mix.m(shadow-hover) {
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12), 0 0 6px 0 rgba(0, 0, 0, 0.04);
+    
+    &:hover {
+      box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  @include mix.m(shadow-never) {
+    box-shadow: none;
+  }
+
+  // 可点击状态
+  @include mix.m(clickable) {
+    cursor: pointer;
+    
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
+
+  // 禁用状态
+  @include mix.m(disabled) {
+    opacity: 0.6;
+    cursor: not-allowed;
+    
+    &:hover {
+      transform: none;
+    }
+  }
+
+  // 加载状态
+  @include mix.m(loading) {
+    pointer-events: none;
+  }
+
+  // 头部样式
+  @include mix.e(header) {
+    padding: 16px 20px;
+    border-bottom: 1px solid #f0f0f0;
+    background-color: #fafafa;
+    font-size: 16px;
+    font-weight: 500;
+    color: #303133;
+    transition: background-color 0.3s ease;
+
+    @include mix.m(clickable) {
+      cursor: pointer;
+      
+      &:hover {
+        background-color: #f5f5f5;
+      }
+    }
+
+    .card-header-content {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .card-title {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 500;
+      color: #303133;
+      line-height: 1.4;
+    }
+
+    .card-subtitle {
+      margin: 0;
+      font-size: 14px;
+      color: #909399;
+      line-height: 1.4;
+    }
+  }
+
+  // 内容区域样式
+  @include mix.e(body) {
+    padding: 20px;
+    color: #606266;
+    line-height: 1.6;
+  }
+
+  // 底部样式
+  @include mix.e(footer) {
+    padding: 16px 20px;
+    border-top: 1px solid #f0f0f0;
+    background-color: #fafafa;
+  }
+
+  // 加载遮罩
+  .card-loading-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+  }
+
+  .card-loading-spinner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .loading-svg {
+    width: 32px;
+    height: 32px;
+    animation: card-loading-rotate 1s linear infinite;
+  }
+
+  .loading-circle {
+    stroke: #409eff;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-dasharray: 80, 200;
+    stroke-dashoffset: 0;
+    animation: card-loading-dash 1.5s ease-in-out infinite;
+  }
+}
+
+// 加载动画
+@keyframes card-loading-rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes card-loading-dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 200;
+    stroke-dashoffset: -35px;
+  }
+  100% {
+    stroke-dasharray: 90, 200;
+    stroke-dashoffset: -125px;
+  }
+}
