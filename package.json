@@ -22,6 +22,7 @@
     "build:core": "pnpm core build",
     "new:component": "node scripts/createComponent.js",
     "del:component": "node scripts/removeComponent.js",
+    "publish": "node scripts/publish.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "clear": "rimraf -g ./node_modules ./packages/**/node_modules ./packages/**/dist",
     "prepare": "husky"
