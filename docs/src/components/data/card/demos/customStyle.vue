@@ -1,0 +1,12 @@
+<template>
+  <lb-card
+    header="自定义样式"
+    :width="300"
+    :height="200"
+    :radius="16"
+    backgroundColor="#f8f9fa"
+    headerBackgroundColor="#e9ecef"
+  >
+    <p>自定义宽度、高度、圆角和背景色，满足不同的设计需求。</p>
+  </lb-card>
+</template>
