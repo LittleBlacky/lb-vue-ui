@@ -119,7 +119,9 @@
         </div>
       </div>
       <template #footer>
-        <div style="text-align: right">
+        <div
+          style="text-align: right; display: flex; justify-content: flex-end"
+        >
           <lb-button size="small" style="margin-right: 8px">重置</lb-button>
           <lb-button size="small" type="primary">保存</lb-button>
         </div>
