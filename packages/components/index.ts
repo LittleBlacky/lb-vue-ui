@@ -17,3 +17,4 @@ export * from "./form";
 export * from "./form-item";
 export * from "./input";
 export * from "./card";
+export * from "./loading";
