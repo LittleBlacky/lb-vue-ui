@@ -1,13 +1,9 @@
-import Basic from './basic'
-import Data from './data'
-import Form from './form'
-
+import Basic from "./basic";
+import Data from "./data";
+import FeedBack from "./feedback";
+import Form from "./form";
 
 export default {
-  text: '组件',
-  items: [
-    Basic,
-    Form,
-    Data
-  ],
-}
+  text: "组件",
+  items: [Basic, Data, FeedBack, Form],
+};
