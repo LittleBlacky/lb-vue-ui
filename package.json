@@ -35,6 +35,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@floating-ui/dom": "^1.7.3",
     "@lb-vue-ui/components": "workspace:*",
     "@lb-vue-ui/theme-chalk": "workspace:*",
     "@lb-vue-ui/utils": "workspace:*",
