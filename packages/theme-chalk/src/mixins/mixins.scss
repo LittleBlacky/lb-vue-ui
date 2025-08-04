@@ -61,12 +61,18 @@
  *   )
  * )
  */
-@mixin generate-vars($map) {
+@mixin generate-css-vars($map, $prefix: "") {
   @each $key, $value in $map {
-    @if type-of($value) == "map" {
-      @include generate-vars("#{$prefix}-#{$key}", $value);
+    $var-name: "";
+    @if $prefix == "" {
+      $var-name: "--#{$namespace}-#{$key}";
     } @else {
-      --#{config.$namespace}-#{$key}: #{$value};
+      $var-name: "#{$prefix}-#{$key}";
+    }
+    @if meta.type-of($value) == map {
+      @include generate-css-vars($value, $var-name);
+    } @else {
+      #{$var-name}: #{$value};
     }
   }
 }
