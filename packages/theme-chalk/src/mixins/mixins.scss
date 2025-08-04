@@ -46,6 +46,21 @@
   }
 }
 
+/**
+ * 生成 CSS 变量
+ * @param {Map} $map
+ * @example
+ * $map: (
+ *   color: red,
+ *   size: 12px,
+ *   padding: (
+ *     top: 10px,
+ *     right: 20px,
+ *     bottom: 10px,
+ *     left: 20px
+ *   )
+ * )
+ */
 @mixin generate-vars($map) {
   @each $key, $value in $map {
     @if type-of($value) == "map" {
