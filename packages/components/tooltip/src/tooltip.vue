@@ -49,8 +49,8 @@ import {
   type UnwrapRef,
   watch,
 } from "vue";
-import { useDebounce } from "../../hooks/useDebounce.ts";
-import useClickOutside from "@/hooks/useClickOutside.ts";
+import { useDebounce } from "../../../hooks/useDebounce.ts";
+import useClickOutside from "../../../hooks/useClickOutside.ts";
 defineOptions({
   name: "LbToolTip",
 });
