@@ -1,4 +1,4 @@
-export default function useDebounce() {
+export function useDebounce() {
   let timerId: ReturnType<typeof setTimeout> | null = null;
   const registDebounced = function <T extends (...args: any[]) => any>(
     fn: T,
