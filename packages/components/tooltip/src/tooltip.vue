@@ -1,0 +1,236 @@
+<template>
+  <div ref="toollipRef" class="lb-tooltip">
+    <div ref="triggerRef" class="lb-tooltip__trigger">
+      <slot></slot>
+    </div>
+    <Transition :name="transition">
+      <div
+        v-show="!disabled && visible"
+        ref="popperRef"
+        class="lb-tooltip__popper"
+        :class="{
+          [`${popperClass}`]: popperClass,
+        }"
+      >
+        <slot name="content">
+          <div class="lb-tooltip__content">{{ content }}</div>
+        </slot>
+        <div ref="arrowRef" data-popper-arrow class="lb-tooltip__arrow"></div>
+      </div>
+    </Transition>
+  </div>
+</template>
+<script setup lang="ts">
+import type {
+  LbToolTipInstance,
+  LbToolTipOuterEvents,
+  LbToolTipProps,
+  LbToolTipTriggerOptions,
+  LbToolTipVisibleModel,
+} from "./types.ts";
+import {
+  computePosition,
+  autoUpdate,
+  flip,
+  shift,
+  offset,
+  arrow,
+  type ReferenceElement,
+  type FloatingElement,
+} from "@floating-ui/dom";
+import {
+  computed,
+  onBeforeUnmount,
+  onMounted,
+  type Ref,
+  ref,
+  toRef,
+  unref,
+  type UnwrapRef,
+  watch,
+} from "vue";
+import { useDebounce } from "../../../hooks/useDebounce.ts";
+import useClickOutside from "../../../hooks/useClickOutside.ts";
+defineOptions({
+  name: "LbToolTip",
+});
+const props = withDefaults(defineProps<LbToolTipProps>(), {
+  showAfter: 300,
+  hideAfter: 300,
+  content: "",
+  placement: "top",
+  trigger: "hover",
+  disabled: false,
+  strategy: "absolute",
+  transition: "lb-fade",
+  offset: 9,
+});
+const toollipRef = ref<HTMLElement>();
+const popperRef = ref<FloatingElement>();
+const triggerRef = ref<ReferenceElement>();
+const arrowRef = ref<HTMLElement>();
+const referenceRef = ref<ReferenceElement>();
+let cleanPopper: () => void = () => {};
+useClickOutside(referenceRef as Ref<HTMLElement>, () => {
+  hide();
+});
+const visible = defineModel<LbToolTipVisibleModel>("visible", {
+  default: false,
+});
+
+const { registDebounced } = useDebounce();
+
+const showRef = toRef(props, "showAfter");
+const hideRef = toRef(props, "hideAfter");
+
+const show = () => {
+  if (visible.value) return;
+  registDebounced(() => {
+    visible.value = true;
+  }, unref(showRef));
+};
+
+const hide = () => {
+  if (!visible) return;
+  registDebounced(() => {
+    visible.value = false;
+  }, unref(hideRef));
+};
+
+const updatePosition = () => {
+  cleanPopper = autoUpdate(
+    referenceRef.value as ReferenceElement,
+    popperRef.value as FloatingElement,
+    () => {
+      if (referenceRef.value && popperRef.value)
+        computePosition(referenceRef.value, popperRef.value, {
+          placement: props.placement,
+          strategy: props.strategy,
+          middleware: [
+            offset(props.offset),
+            flip(),
+            shift({ padding: 5 }),
+            arrow({ element: arrowRef.value as Element }),
+          ],
+        }).then(({ x, y, placement, middlewareData }) => {
+          if (popperRef.value)
+            Object.assign(popperRef.value.style, {
+              left: `${x}px`,
+              top: `${y}px`,
+            });
+          const { x: arrowX, y: arrowY } = middlewareData.arrow as {
+            x: number;
+            y: number;
+          };
+          const staticSide: string = {
+            top: "bottom",
+            right: "left",
+            bottom: "top",
+            left: "right",
+          }[placement?.split("-")[0]] as string;
+          if (arrowRef.value)
+            Object.assign(arrowRef.value.style, {
+              left: arrowX != null ? `${arrowX}px` : "",
+              top: arrowY != null ? `${arrowY}px` : "",
+              right: "",
+              bottom: "",
+              [staticSide]: "-4px",
+            });
+        });
+    }
+  );
+};
+
+const triggerEvents = {
+  hover: {
+    mouseenter: show,
+    mouseleave: hide,
+  },
+  click: {
+    click: () => {
+      if (visible.value) hide();
+      else show();
+    },
+  },
+  focus: {
+    focusin: show,
+    focusout: hide,
+  },
+};
+
+const events: LbToolTipOuterEvents | Ref<null> = computed(() => {
+  if (props.virtualRef) return null;
+  const { trigger } = props;
+  return triggerEvents[trigger];
+});
+
+const cleanEventListener = (
+  targetElement: HTMLElement,
+  events: UnwrapRef<LbToolTipOuterEvents> | null
+) => {
+  if (!targetElement || !events) return;
+  Object.entries(events).forEach((item) => {
+    const [event, callback] = item;
+    targetElement.removeEventListener(event, callback);
+  });
+};
+
+const setEventListener = (
+  targetElement: HTMLElement,
+  events: UnwrapRef<LbToolTipOuterEvents> | null
+) => {
+  if (!targetElement || !events) return;
+  Object.entries(events).forEach((item) => {
+    const [event, callback] = item;
+    targetElement.addEventListener(event, callback);
+  });
+};
+
+onMounted(() => {
+  watch(
+    (): [HTMLElement | undefined, LbToolTipTriggerOptions] => [
+      props.virtualRef,
+      props.trigger,
+    ],
+    (oldValue) => {
+      const [oldVirtualRef, oldTrigger] = oldValue;
+      // 当原来的不属于虚拟触发时，即普通模式下，需要清空事件监听
+      if (oldTrigger && !oldVirtualRef) {
+        const oldEvents = triggerEvents[oldTrigger];
+        cleanEventListener(referenceRef.value as HTMLElement, oldEvents);
+      }
+      referenceRef.value = props.virtualRef || triggerRef.value;
+      setEventListener(referenceRef.value as HTMLElement, events.value);
+      updatePosition();
+    },
+    {
+      immediate: true,
+    }
+  );
+  watch(
+    visible,
+    (value, oldValue) => {
+      if (oldValue && !value) {
+        cleanPopper();
+      } else {
+        updatePosition();
+      }
+    },
+    {
+      immediate: true,
+    }
+  );
+});
+
+onBeforeUnmount(() => {
+  cleanEventListener(referenceRef.value as HTMLElement, events.value);
+  cleanPopper();
+});
+defineExpose<LbToolTipInstance>({
+  popperRef: popperRef as Ref<HTMLElement>,
+  show: show,
+  hide: hide,
+  updatePosition: updatePosition,
+});
+</script>
+<style></style>

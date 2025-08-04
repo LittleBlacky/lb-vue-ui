@@ -60,10 +60,19 @@ function removeComponentScss(component) {
 
 function removeComponent(component) {
   console.log(`开始删除组件: ${component}`);
-  removeComponentDir(component);
-  removeComponentExport(component);
-  removeThemeChalkUse(component);
-  removeComponentScss(component);
+  try {
+    removeComponentDir(component);
+    console.log(`删除组件: ${component} 完成`);
+    removeComponentExport(component);
+    console.log(`删除组件: ${component} 导出 完成`);
+    removeThemeChalkUse(component);
+    console.log(`删除组件: ${component} 导入 完成`);
+    removeComponentScss(component);
+    console.log(`删除组件: ${component} scss 完成`);
+  } catch (error) {
+    console.log(`删除组件: ${component} 失败`);
+    console.log(error);
+  }
 }
 
 program.option("-n, --name <component>", "组件名称").action((options) => {

@@ -1,11 +1,23 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { LbInput, LbButton, LbCard } from '../../packages/components/index'
+import { LbInput, LbButton, LbCard, LbLoading } from '../../packages/components/index'
+import { LoadingService } from '../../packages/components'
 import '../../packages/theme-chalk/src/index.scss'
 const value = ref()
 
 const handleCardClick = () => {
   console.log('卡片被点击了！')
+}
+
+const openLoading = () => {
+  const loading = LoadingService({
+    text: '加载中...',
+    background: 'rgba(0, 0, 0, 0.7)',
+    fullscreen: true,
+  })
+  setTimeout(() => {
+    loading.close()
+  }, 2000)
 }
 </script>
 
@@ -41,9 +53,12 @@ const handleCardClick = () => {
     </lb-card>
 
     <!-- 加载状态卡片 -->
-    <lb-card header="加载状态" loading>
+    <lb-card header="加载状态" v-loading="true" text="加载中...">
       <p>这个卡片正在加载中...</p>
     </lb-card>
+
+    <h2>Loading 服务测试</h2>
+    <lb-button @click="openLoading">打开 Loading</lb-button>
 
     <h2>Input 组件测试</h2>
     <lb-input

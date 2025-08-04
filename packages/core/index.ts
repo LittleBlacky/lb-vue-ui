@@ -1,13 +1,19 @@
-import {type App} from "vue";
+import { type App } from "vue";
 import * as components from "../components";
 
-export default {
+const LbUI = {
   name: "LbUI",
-  ...components,
   install: (app: App) => {
-    Object.entries(components).forEach(([key, value]) => {
-      app.component(key as string, value);
+    Object.values(components).forEach((component) => {
+      if (component.install) {
+        app.use(component);
+      } else {
+        app.component(component.name, component);
+      }
     });
   },
 };
+
+export default LbUI;
+
 export * from "../components";

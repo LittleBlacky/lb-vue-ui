@@ -197,16 +197,31 @@ function exportThemeChalk(component) {
 
 function createComponent(component) {
   console.log(`开始创建组件: ${component}`);
-  createComponentDirectory(component);
-  createSrcDirectory(component);
-  createComponentVue(component);
-  createTypesFile(component);
-  createStyleDirectory(component);
-  createStyleFile(component);
-  createIndexEntry(component);
-  createThemeChalkFile(component);
-  exportComponent(component);
-  exportThemeChalk(component);
+  try {
+    createComponentDirectory(component);
+    console.log("创建组件目录成功");
+    createSrcDirectory(component);
+    console.log("创建src目录成功");
+    createComponentVue(component);
+    console.log("创建组件vue文件成功");
+    createTypesFile(component);
+    console.log("创建组件类型定义文件成功");
+    createStyleDirectory(component);
+    console.log("创建style目录成功");
+    createStyleFile(component);
+    console.log("创建组件style文件成功");
+    createIndexEntry(component);
+    console.log("创建组件入口文件成功");
+    createThemeChalkFile(component);
+    console.log("创建组件样式文件成功");
+    exportComponent(component);
+    console.log("导出组件成功");
+    exportThemeChalk(component);
+    console.log("导出组件样式成功");
+  } catch (error) {
+    console.log(`创建${component}组件失败`);
+    console.error(error);
+  }
 }
 
 program.option("-n, --name <component>", "组件名称").action((options) => {
