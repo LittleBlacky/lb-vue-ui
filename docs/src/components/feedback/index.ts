@@ -32,6 +32,10 @@ export default {
       text: "Popperover 弹出层",
       link: "/popperover/popperover",
     },
+    {
+      text: "ToolTip 文字提示",
+      link: "/tooltip/tooltip",
+    },
   ].map((item) => {
     return {
       ...item,
