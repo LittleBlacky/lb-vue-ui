@@ -43,7 +43,6 @@
     "@lb-vue-ui/utils": "workspace:*",
     "@lb-vue-ui/hooks": "workspace:*",
     "@littleblacky/lb-vue-ui": "workspace:*",
-    "@popperjs/core": "^2.11.8",
     "@types/mockjs": "^1.0.10",
     "@vicons/ionicons5": "^0.13.0",
     "async-validator": "^4.2.5",
