@@ -20,6 +20,7 @@ export interface LbToolTipProps {
   appendTo?: ReferenceElement;
   trigger?: LbToolTipTriggerOptions;
   transition?: string;
+  visible?: boolean;
   placement?:
     | "top"
     | "top-start"

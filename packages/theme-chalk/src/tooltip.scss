@@ -1,5 +1,58 @@
 @use "common/vars" as *;
 @use "mixins/mixins.scss" as mix;
+@use "mixins/function.scss" as fn;
 
 @include mix.b(tooltip) {
+  @include mix.generate-css-vars(
+    (
+      tooltip: (
+        transition: (
+          duration: fn.getCssVar(transition, duration),
+          timing-function: fn.getCssVar(
+              transition,
+              timing-function,
+              fast-to-slow
+            ),
+        ),
+        text: (
+          color: fn.getCssVar(text, color, primary),
+          size: fn.getCssVar(font, size, small),
+        ),
+        bg: (
+          color: fn.getCssVar(bg, color),
+        ),
+        arrow: (
+          color: fn.getCssVar(bg, color),
+        ),
+      ),
+    )
+  );
+}
+
+@include mix.b(tooltip) {
+  @include mix.e(trigger) {
+    width: max-content;
+  }
+  @include mix.e(popper) {
+    transition: all fn.getCssVar(tooltip, transition, duration)
+      fn.getCssVar(tooltip, transition, timing-function, fast-to-slow);
+    width: max-content;
+    padding: 5px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: fn.getCssVar(tooltip, bg, color);
+    border-radius: fn.getCssVar(border-radius, base);
+    font-weight: fn.getCssVar(font-weight, primary);
+    font-size: fn.getCssVar(font-size, small);
+    color: fn.getCssVar(tooltip, text-color);
+  }
+  @include mix.e(arrow) {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: fn.getCssVar(tooltip, bg, color);
+    transform: rotate(45deg);
+    z-index: 2000;
+  }
 }
