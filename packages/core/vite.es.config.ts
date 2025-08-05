@@ -33,7 +33,7 @@ export default defineConfig({
       external: [
         "vue",
         "@vicons/ionicons5",
-        "@popperjs/core",
+        "@floating-ui/dom",
         "async-validator",
         /@lb-vue-ui\/theme-chalk\/.*/,
       ],
