@@ -51,7 +51,7 @@ import {
 } from "vue";
 import { useDebounce, useClickOutside } from "@lb-vue-ui/hooks";
 defineOptions({
-  name: "LbToolTip",
+  name: "LbTooltip",
 });
 const props = withDefaults(defineProps<LbToolTipProps>(), {
   showAfter: 300,
