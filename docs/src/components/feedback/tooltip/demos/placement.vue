@@ -1,6 +1,6 @@
 <template>
   <div class="tooltip-placement-demo">
-    <div class="row">
+    <div class="row row_top">
       <lb-tooltip content="top-start" placement="top-start">
         <lb-button>top-start</lb-button>
       </lb-tooltip>
@@ -35,7 +35,7 @@
         <lb-button>right-end</lb-button>
       </lb-tooltip>
     </div>
-    <div class="row">
+    <div class="row row_bottom">
       <lb-tooltip content="bottom-start" placement="bottom-start">
         <lb-button>bottom-start</lb-button>
       </lb-tooltip>
@@ -54,13 +54,20 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 .row {
   display: flex;
-  justify-content: center;
+  width: 100%;
+  justify-content: space-between;
   margin-bottom: 10px;
 }
 .lb-button {
   margin: 0 5px;
+  width: 100px;
+}
+.row_top,
+.row_bottom {
+  justify-content: center;
 }
 </style>
