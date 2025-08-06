@@ -1,5 +1,5 @@
 import SplitterPanel from "./src/splitter-panel.vue";
-import { withInstall } from "@lb-vue-ui/utils/install";
+import { withInstall } from "@lb-vue-ui/utils";
 
 export const LbSplitterPanel = withInstall(SplitterPanel);
 

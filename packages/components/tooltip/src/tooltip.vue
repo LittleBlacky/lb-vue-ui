@@ -50,7 +50,7 @@ import {
   watch,
 } from "vue";
 import { useDebounce, useClickOutside } from "@lb-vue-ui/hooks";
-import { createNamespace } from "@lb-vue-ui/utils/createNamespace";
+import { createNamespace } from "@lb-vue-ui/utils";
 defineOptions({
   name: "LbTooltip",
 });

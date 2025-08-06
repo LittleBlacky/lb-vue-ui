@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts" setup>
-import { createNamespace } from "@lb-vue-ui/utils/createNamespace";
+import { createNamespace } from "@lb-vue-ui/utils";
 import { inject } from "vue";
 import type { LbSkeletonItemProps } from "./types";
 import type { LbSkeletonContext } from "../../skeleton/src/types";

@@ -1,5 +1,5 @@
 import VirtualList from "./src/virtual-list.vue";
-import { withInstall } from "@lb-vue-ui/utils/install";
+import { withInstall } from "@lb-vue-ui/utils";
 
 export const LbVirtualList = withInstall(VirtualList);
 

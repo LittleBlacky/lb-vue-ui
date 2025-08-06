@@ -113,7 +113,7 @@
 <script setup lang="ts">
 import { computed, ref, nextTick, useSlots } from "vue";
 import type { LbInputProps, LbInputEmits, LbInputAutoSize } from "./types";
-import { createNamespace } from "@lb-vue-ui/utils/createNamespace";
+import { createNamespace } from "@lb-vue-ui/utils";
 
 defineOptions({
   name: "LbInput",

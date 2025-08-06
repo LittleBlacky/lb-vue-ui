@@ -5,25 +5,23 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
-import type { LbFooterProps } from './types';
-import { createNamespace } from '@lb-vue-ui/utils/createNamespace';
+import { computed } from "vue";
+import type { LbFooterProps } from "./types";
+import { createNamespace } from "@lb-vue-ui/utils";
 
 defineOptions({
-  name: 'LbFooter',
+  name: "LbFooter",
 });
 
 const props = withDefaults(defineProps<LbFooterProps>(), {
-  height: '60px',
+  height: "60px",
 });
 
-const bem = createNamespace('footer');
+const bem = createNamespace("footer");
 
 const footerClass = computed(() => {
-    return [
-        bem.b(),
-    ]
-})
+  return [bem.b()];
+});
 
 const footerStyle = computed(() => {
   return {

@@ -5,19 +5,16 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
-import { createNamespace } from '@lb-vue-ui/utils/createNamespace';
+import { computed } from "vue";
+import { createNamespace } from "@lb-vue-ui/utils";
 
 defineOptions({
-  name: 'LbMain',
+  name: "LbMain",
 });
 
-const bem = createNamespace('main');
+const bem = createNamespace("main");
 
 const mainClass = computed(() => {
-  return [
-    bem.b()
-  ]
-})
-
+  return [bem.b()];
+});
 </script>

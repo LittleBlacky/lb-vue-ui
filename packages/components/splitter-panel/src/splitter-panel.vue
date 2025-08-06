@@ -25,7 +25,7 @@ import {
   onUnmounted,
   shallowReactive,
 } from "vue";
-import {createNamespace} from "@lb-vue-ui/utils/createNamespace";
+import { createNamespace } from "@lb-vue-ui/utils";
 import {
   LbSplitterContextKey,
   type LbSplitterContext,
@@ -167,11 +167,11 @@ const onCollapse = (index: number, pos: string) => {
   if (!splitter?.isDragging || !panelInstance) return;
   const {
     sizeRef: curSize,
-    props: {minSize: curMinSize = 0, maxSize: curMaxSize = Infinity},
+    props: { minSize: curMinSize = 0, maxSize: curMaxSize = Infinity },
   } = splitter.panelInstances.value[index];
   const {
     sizeRef: nextSize,
-    props: {minSize: nextMinSize = 0, maxSize: nextMaxSize = Infinity},
+    props: { minSize: nextMinSize = 0, maxSize: nextMaxSize = Infinity },
   } = splitter.panelInstances.value[index + 1];
   if (curSize.value === undefined || nextSize.value === undefined) return;
   if (pos === "end") {
@@ -209,7 +209,7 @@ const onCollapse = (index: number, pos: string) => {
 
 const hasBar = computed(() => {
   if (!splitter || !panelInstance) return false;
-  const {index} = panelInstance;
+  const { index } = panelInstance;
   return index !== -1 && index < splitter?.panelInstances.value.length - 1;
 });
 

@@ -1,5 +1,5 @@
 import Main from "./src/main.vue";
-import { withInstall } from "@lb-vue-ui/utils/install";
+import { withInstall } from "@lb-vue-ui/utils";
 
 export const LbMain = withInstall(Main);
 
