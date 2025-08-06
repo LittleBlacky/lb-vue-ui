@@ -141,7 +141,7 @@ const updatePosition = () => {
               top: arrowY != null ? `${arrowY}px` : "",
               right: "",
               bottom: "",
-              [staticSide]: `${-arrowRef.value.offsetWidth / 2}px`,
+              [staticSide]: `${-arrowRef.value.offsetWidth / 2 + 0.5}px`,
             });
         });
     }

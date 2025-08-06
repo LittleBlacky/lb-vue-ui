@@ -64,6 +64,8 @@
     background-color: inherit;
     border-top: fn.getCssVar(tooltip, border, primary);
     border-left: fn.getCssVar(tooltip, border, primary);
+    -webkit-clip-path: polygon(0 0, 0 100%, 100% 0);
+    clip-path: polygon(0 0, 0 100%, 100% 0);
     @include mix.m(bottom) {
       transform: rotate(45deg);
     }
