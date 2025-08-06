@@ -1,5 +1,5 @@
 import SkeletonItem from "./src/skeleton-item.vue";
-import { withInstall } from "@lb-vue-ui/utils/install";
+import { withInstall } from "@lb-vue-ui/utils";
 
 export const LbSkeletonItem = withInstall(SkeletonItem);
 

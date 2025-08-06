@@ -4,7 +4,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import type { LbFormItemProps } from "./types";
-import { createNamespace } from "@lb-vue-ui/utils/createNamespace";
+import { createNamespace } from "@lb-vue-ui/utils";
 
 const bem = createNamespace("form-item");
 

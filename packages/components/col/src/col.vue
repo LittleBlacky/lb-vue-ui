@@ -7,7 +7,7 @@
 <script lang="ts" setup>
 import { computed, inject } from "vue";
 import type { LbColProps } from "./types";
-import { createNamespace } from "@lb-vue-ui/utils/createNamespace";
+import { createNamespace } from "@lb-vue-ui/utils";
 
 defineOptions({
   name: "LbCol",

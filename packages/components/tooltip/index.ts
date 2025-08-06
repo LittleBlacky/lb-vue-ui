@@ -1,5 +1,5 @@
 import Tooltip from "./src/tooltip.vue";
-import { withInstall } from "@lb-vue-ui/utils/install";
+import { withInstall } from "@lb-vue-ui/utils";
 
 export const LbTooltip = withInstall(Tooltip);
 

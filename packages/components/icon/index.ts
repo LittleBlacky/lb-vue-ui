@@ -1,5 +1,5 @@
 import Icon from "./src/icon.vue";
-import { withInstall } from "@lb-vue-ui/utils/install";
+import { withInstall } from "@lb-vue-ui/utils";
 
 export const LbIcon = withInstall(Icon);
 

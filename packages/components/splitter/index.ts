@@ -1,5 +1,5 @@
 import Splitter from "./src/splitter.vue";
-import { withInstall } from "@lb-vue-ui/utils/install";
+import { withInstall } from "@lb-vue-ui/utils";
 
 export const LbSplitter = withInstall(Splitter);
 

@@ -1,5 +1,5 @@
 import Input from "./src/input.vue";
-import { withInstall } from "@lb-vue-ui/utils/install";
+import { withInstall } from "@lb-vue-ui/utils";
 
 export const LbInput = withInstall(Input);
 

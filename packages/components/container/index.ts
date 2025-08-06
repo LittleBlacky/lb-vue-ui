@@ -1,5 +1,5 @@
 import Container from "./src/container.vue";
-import { withInstall } from "@lb-vue-ui/utils/install";
+import { withInstall } from "@lb-vue-ui/utils";
 
 export const LbContainer = withInstall(Container);
 

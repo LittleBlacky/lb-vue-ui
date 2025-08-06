@@ -8,7 +8,7 @@
 <script lang="ts" setup>
 import type { LbIconProps } from "./types";
 import { computed } from "vue";
-import { createNamespace } from "@lb-vue-ui/utils/createNamespace";
+import { createNamespace } from "@lb-vue-ui/utils";
 
 defineOptions({
   name: "LbIcon",

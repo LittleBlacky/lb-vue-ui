@@ -1,21 +1,25 @@
 <template>
-  <div ref="toollipRef" class="lb-tooltip">
-    <div ref="triggerRef" class="lb-tooltip__trigger">
+  <div ref="toollipRef" :class="[bem.b()]">
+    <div ref="triggerRef" :class="[bem.e('trigger')]">
       <slot></slot>
     </div>
     <Transition :name="transition">
       <div
-        v-show="!disabled && visible"
+        v-show="!disabled && visibleRef"
         ref="popperRef"
-        class="lb-tooltip__popper"
         :class="{
           [`${popperClass}`]: popperClass,
+          [bem.e('popper')]: true,
         }"
       >
         <slot name="content">
-          <div class="lb-tooltip__content">{{ content }}</div>
+          <div :class="[bem.e('content')]">{{ content }}</div>
         </slot>
-        <div ref="arrowRef" data-popper-arrow class="lb-tooltip__arrow"></div>
+        <div
+          ref="arrowRef"
+          data-popper-arrow
+          :class="[bem.e('arrow'), bem.em('arrow', placementRef.split('-')[0])]"
+        ></div>
       </div>
     </Transition>
   </div>
@@ -26,7 +30,6 @@ import type {
   LbToolTipOuterEvents,
   LbToolTipProps,
   LbToolTipTriggerOptions,
-  LbToolTipVisibleModel,
 } from "./types.ts";
 import {
   computePosition,
@@ -50,9 +53,11 @@ import {
   watch,
 } from "vue";
 import { useDebounce, useClickOutside } from "@lb-vue-ui/hooks";
+import { createNamespace } from "@lb-vue-ui/utils";
 defineOptions({
-  name: "LbToolTip",
+  name: "LbTooltip",
 });
+const bem = createNamespace("tooltip");
 const props = withDefaults(defineProps<LbToolTipProps>(), {
   showAfter: 300,
   hideAfter: 300,
@@ -63,19 +68,20 @@ const props = withDefaults(defineProps<LbToolTipProps>(), {
   strategy: "absolute",
   transition: "lb-fade",
   offset: 9,
+  visible: false,
 });
 const toollipRef = ref<HTMLElement>();
 const popperRef = ref<FloatingElement>();
 const triggerRef = ref<ReferenceElement>();
 const arrowRef = ref<HTMLElement>();
+const placementRef = ref<string>(props.placement);
 const referenceRef = ref<ReferenceElement>();
 let cleanPopper: () => void = () => {};
 useClickOutside(referenceRef as Ref<HTMLElement>, () => {
   hide();
 });
-const visible = defineModel<LbToolTipVisibleModel>("visible", {
-  default: false,
-});
+const visibleRef = ref(props.visible);
+const emits = defineEmits(["update:visible"]);
 
 const { registDebounced } = useDebounce();
 
@@ -83,16 +89,16 @@ const showRef = toRef(props, "showAfter");
 const hideRef = toRef(props, "hideAfter");
 
 const show = () => {
-  if (visible.value) return;
+  if (visibleRef.value) return;
   registDebounced(() => {
-    visible.value = true;
+    visibleRef.value = true;
   }, unref(showRef));
 };
 
 const hide = () => {
-  if (!visible) return;
+  if (!visibleRef.value) return;
   registDebounced(() => {
-    visible.value = false;
+    visibleRef.value = false;
   }, unref(hideRef));
 };
 
@@ -112,6 +118,8 @@ const updatePosition = () => {
             arrow({ element: arrowRef.value as Element }),
           ],
         }).then(({ x, y, placement, middlewareData }) => {
+          placementRef.value = placement;
+          console.log(placementRef.value);
           if (popperRef.value)
             Object.assign(popperRef.value.style, {
               left: `${x}px`,
@@ -133,7 +141,7 @@ const updatePosition = () => {
               top: arrowY != null ? `${arrowY}px` : "",
               right: "",
               bottom: "",
-              [staticSide]: "-4px",
+              [staticSide]: `${-arrowRef.value.offsetWidth / 2 + 0.5}px`,
             });
         });
     }
@@ -147,7 +155,7 @@ const triggerEvents = {
   },
   click: {
     click: () => {
-      if (visible.value) hide();
+      if (visibleRef.value) hide();
       else show();
     },
   },
@@ -207,17 +215,16 @@ onMounted(() => {
     }
   );
   watch(
-    visible,
-    (value, oldValue) => {
-      if (oldValue && !value) {
-        cleanPopper();
-      } else {
+    visibleRef,
+    (val) => {
+      if (val) {
         updatePosition();
+      } else {
+        cleanPopper();
       }
+      emits("update:visible", val);
     },
-    {
-      immediate: true,
-    }
+    { immediate: true }
   );
 });
 

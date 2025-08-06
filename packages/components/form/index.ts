@@ -1,5 +1,5 @@
 import Form from "./src/form.vue";
-import { withInstall } from "@lb-vue-ui/utils/install";
+import { withInstall } from "@lb-vue-ui/utils";
 
 export const LbForm = withInstall(Form);
 

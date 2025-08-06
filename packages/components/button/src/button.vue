@@ -41,9 +41,9 @@
   </button>
 </template>
 <script setup lang="ts">
-import {computed} from "vue";
-import type {LbButtonProps} from "./types";
-import {createNamespace} from "@lb-vue-ui/utils/createNamespace";
+import { computed } from "vue";
+import type { LbButtonProps } from "./types";
+import { createNamespace } from "@lb-vue-ui/utils";
 import LbIcon from "../../icon/src/icon.vue";
 
 const bem = createNamespace("button");
@@ -78,4 +78,3 @@ const buttonClass = computed(() => {
   ];
 });
 </script>
-

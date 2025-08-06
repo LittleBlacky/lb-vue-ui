@@ -21,7 +21,7 @@
 
 <script lang="ts" setup>
 import { computed, provide } from "vue";
-import { createNamespace } from "@lb-vue-ui/utils/createNamespace";
+import { createNamespace } from "@lb-vue-ui/utils";
 import type { LbSkeletonProps } from "./types";
 import LbSkeletonItem from "../../skeleton-item/src/skeleton-item.vue";
 

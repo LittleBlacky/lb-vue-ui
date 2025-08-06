@@ -7,7 +7,7 @@
 <script lang="ts" setup>
 import { computed, useSlots, type Component } from "vue";
 import type { LbContainerProps } from "./types";
-import { createNamespace } from "@lb-vue-ui/utils/createNamespace";
+import { createNamespace } from "@lb-vue-ui/utils";
 
 defineOptions({
   name: "LbContainer",

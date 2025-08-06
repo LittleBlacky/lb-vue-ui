@@ -7,7 +7,7 @@
 <script lang="ts" setup>
 import { computed } from "vue";
 import type { LbHeaderProps } from "./types";
-import { createNamespace } from "@lb-vue-ui/utils/createNamespace";
+import { createNamespace } from "@lb-vue-ui/utils";
 
 defineOptions({
   name: "LbHeader",

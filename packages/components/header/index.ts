@@ -1,5 +1,5 @@
 import Header from "./src/header.vue";
-import { withInstall } from "@lb-vue-ui/utils/install";
+import { withInstall } from "@lb-vue-ui/utils";
 
 export const LbHeader = withInstall(Header);
 

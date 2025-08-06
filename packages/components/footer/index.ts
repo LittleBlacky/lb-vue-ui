@@ -1,5 +1,5 @@
 import Footer from "./src/footer.vue";
-import { withInstall } from "@lb-vue-ui/utils/install";
+import { withInstall } from "@lb-vue-ui/utils";
 
 export const LbFooter = withInstall(Footer);
 

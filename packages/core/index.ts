@@ -5,11 +5,7 @@ const LbUI = {
   name: "LbUI",
   install: (app: App) => {
     Object.values(components).forEach((component) => {
-      if (component.install) {
-        app.use(component);
-      } else {
-        app.component(component.name, component);
-      }
+      app.component(component.name, component);
     });
   },
 };
