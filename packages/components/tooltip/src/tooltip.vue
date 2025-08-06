@@ -15,7 +15,11 @@
         <slot name="content">
           <div :class="[bem.e('content')]">{{ content }}</div>
         </slot>
-        <div ref="arrowRef" data-popper-arrow :class="[bem.e('arrow')]"></div>
+        <div
+          ref="arrowRef"
+          data-popper-arrow
+          :class="[bem.e('arrow'), bem.em('arrow', placementRef.split('-')[0])]"
+        ></div>
       </div>
     </Transition>
   </div>
@@ -26,7 +30,6 @@ import type {
   LbToolTipOuterEvents,
   LbToolTipProps,
   LbToolTipTriggerOptions,
-  LbToolTipVisibleModel,
 } from "./types.ts";
 import {
   computePosition,
@@ -71,6 +74,7 @@ const toollipRef = ref<HTMLElement>();
 const popperRef = ref<FloatingElement>();
 const triggerRef = ref<ReferenceElement>();
 const arrowRef = ref<HTMLElement>();
+const placementRef = ref<string>(props.placement);
 const referenceRef = ref<ReferenceElement>();
 let cleanPopper: () => void = () => {};
 useClickOutside(referenceRef as Ref<HTMLElement>, () => {
@@ -78,10 +82,6 @@ useClickOutside(referenceRef as Ref<HTMLElement>, () => {
 });
 const visibleRef = ref(props.visible);
 const emits = defineEmits(["update:visible"]);
-
-// const visible = defineModel<LbToolTipVisibleModel>("visible", {
-//   default: false,
-// });
 
 const { registDebounced } = useDebounce();
 
@@ -118,6 +118,8 @@ const updatePosition = () => {
             arrow({ element: arrowRef.value as Element }),
           ],
         }).then(({ x, y, placement, middlewareData }) => {
+          placementRef.value = placement;
+          console.log(placementRef.value);
           if (popperRef.value)
             Object.assign(popperRef.value.style, {
               left: `${x}px`,
@@ -139,7 +141,7 @@ const updatePosition = () => {
               top: arrowY != null ? `${arrowY}px` : "",
               right: "",
               bottom: "",
-              [staticSide]: "-4px",
+              [staticSide]: `${-arrowRef.value.offsetWidth / 2}px`,
             });
         });
     }

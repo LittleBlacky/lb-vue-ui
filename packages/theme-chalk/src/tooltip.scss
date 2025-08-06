@@ -21,8 +21,17 @@
         bg: (
           color: fn.getCssVar(bg, color),
         ),
+        border: (
+          primary: fn.getCssVar(border),
+        ),
         arrow: (
           color: fn.getCssVar(bg, color),
+          border: (
+            left: none,
+            right: none,
+            top: none,
+            bottom: none,
+          ),
         ),
       ),
     )
@@ -41,6 +50,7 @@
     position: absolute;
     top: 0;
     left: 0;
+    border: fn.getCssVar(tooltip, border, primary);
     background-color: fn.getCssVar(tooltip, bg, color);
     border-radius: fn.getCssVar(border-radius, base);
     font-weight: fn.getCssVar(font-weight, primary);
@@ -51,8 +61,20 @@
     position: absolute;
     width: 10px;
     height: 10px;
-    background-color: fn.getCssVar(tooltip, bg, color);
-    transform: rotate(45deg);
-    z-index: 2000;
+    background-color: inherit;
+    border-top: fn.getCssVar(tooltip, border, primary);
+    border-left: fn.getCssVar(tooltip, border, primary);
+    @include mix.m(bottom) {
+      transform: rotate(45deg);
+    }
+    @include mix.m(right) {
+      transform: rotate(-45deg);
+    }
+    @include mix.m(top) {
+      transform: rotate(225deg);
+    }
+    @include mix.m(left) {
+      transform: rotate(135deg);
+    }
   }
 }
