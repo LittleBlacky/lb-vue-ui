@@ -8,12 +8,7 @@ const readline = require("readline");
 
 // 配置
 const CONFIG = {
-  packages: [
-    // "@lb-vue-ui/components",
-    // "@lb-vue-ui/theme-chalk",
-    // "@lb-vue-ui/utils",
-    "@littleblacky/lb-vue-ui",
-  ],
+  packagePath: path.join("packages", "core"),
   registry: "https://registry.npmjs.org/",
   gitRemote: "origin",
   defaultBranch: "master",
@@ -406,7 +401,7 @@ async function publish(version, tag = "latest", skipChecks = false) {
 
   // 如果没有指定版本，进行交互式选择
   if (!version) {
-    const currentVersion = getCurrentVersion(".");
+    const currentVersion = getCurrentVersion(CONFIG.packagePath);
     version = await selectVersion(currentVersion);
   }
 
@@ -432,18 +427,9 @@ async function publish(version, tag = "latest", skipChecks = false) {
 
   // 更新所有包的版本
   console.log("\n📝 更新版本号...");
-  CONFIG.packages.forEach((pkg) => {
-    let packagePath;
-    if (pkg.startsWith("@lb-vue-ui/")) {
-      packagePath = path.join("packages", pkg.replace("@lb-vue-ui/", ""));
-    } else if (pkg.startsWith("@littleblacky/")) {
-      packagePath = path.join("packages", "core");
-    }
-
-    if (fs.existsSync(packagePath)) {
-      updateVersion(packagePath, version);
-    }
-  });
+  if (fs.existsSync(CONFIG.packagePath)) {
+    updateVersion(CONFIG.packagePath, version);
+  }
 
   // 发布所有包
   console.log("\n📦 发布包...");

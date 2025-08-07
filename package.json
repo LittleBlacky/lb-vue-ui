@@ -1,6 +1,6 @@
 {
   "name": "lb-vue-ui",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "",
   "main": "index.js",
   "private": true,
@@ -22,7 +22,7 @@
     "del:component": "node scripts/removeComponent.js",
     "new:hook": "node scripts/hooks//createHook.js",
     "del:hook": "node scripts/hooks/removeHook.js",
-    "publish:npm": "pnpm core publish:npm",
+    "publish:npm": "node scripts/publish.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "clear": "rimraf -g ./node_modules ./packages/**/node_modules ./packages/**/dist",
     "prepare": "husky"
