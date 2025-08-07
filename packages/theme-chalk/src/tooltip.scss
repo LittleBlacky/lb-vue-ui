@@ -25,6 +25,7 @@
           primary: fn.getCssVar(border),
         ),
         arrow: (
+          width: 8px,
           color: fn.getCssVar(bg, color),
           border: (
             left: none,
@@ -33,6 +34,7 @@
             bottom: none,
           ),
         ),
+        padding: fn.getCssVar(tooltip, arrow, width)
       ),
     )
   );
@@ -46,7 +48,7 @@
     transition: all fn.getCssVar(tooltip, transition, duration)
       fn.getCssVar(tooltip, transition, timing-function, fast-to-slow);
     width: max-content;
-    padding: 5px;
+    padding: fn.getCssVar(tooltip, padding);
     position: absolute;
     top: 0;
     left: 0;
@@ -59,8 +61,8 @@
   }
   @include mix.e(arrow) {
     position: absolute;
-    width: 10px;
-    height: 10px;
+    width: fn.getCssVar(tooltip, arrow, width);
+    height: fn.getCssVar(tooltip, arrow, width);
     background-color: inherit;
     border-top: fn.getCssVar(tooltip, border, primary);
     border-left: fn.getCssVar(tooltip, border, primary);

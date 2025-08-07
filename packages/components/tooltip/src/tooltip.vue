@@ -134,14 +134,15 @@ const updatePosition = () => {
             bottom: "top",
             left: "right",
           }[placement?.split("-")[0]] as string;
-          if (arrowRef.value)
+          if (arrowRef.value) {
             Object.assign(arrowRef.value.style, {
               left: arrowX != null ? `${arrowX}px` : "",
               top: arrowY != null ? `${arrowY}px` : "",
               right: "",
               bottom: "",
-              [staticSide]: `${-arrowRef.value.offsetWidth / 2 + 0.5}px`,
+              [staticSide]: `${-arrowRef.value.offsetWidth / 2}px`,
             });
+          }
         });
     }
   );
