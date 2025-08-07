@@ -12,6 +12,16 @@
 
 <preview path="./demos/trigger.vue"></preview>
 
+## 虚拟触发
+
+当我们想要给好几个元素添加 tooltip，为了减少 DOM 元素，可以使用虚拟触发。<br />
+
+::: tip 注意 
+虚拟触发属于受控组件，需要手动控制显示/隐藏，点击空白处无法隐藏。
+::: 
+
+<preview path="./demos/virtual-triggering.vue"></preview>
+
 ## Tooltip Props
 
 | Attribute | Description | Type | Accepted Values | Default |
