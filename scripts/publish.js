@@ -9,6 +9,7 @@ const readline = require("readline");
 // 配置
 const CONFIG = {
   packagePath: path.join("packages", "core"),
+  packageName: "@littleblacky/lb-vue-ui",
   registry: "https://registry.npmjs.org/",
   gitRemote: "origin",
   defaultBranch: "master",
@@ -263,10 +264,6 @@ function commitVersionUpdate(version) {
 function showReleaseInfo(version) {
   console.log("\n🎉 发布完成！");
   console.log(`📦 版本: v${version}`);
-  console.log(`📋 包列表:`);
-  CONFIG.packages.forEach((pkg) => {
-    console.log(`   - ${pkg}@${version}`);
-  });
   console.log(`🔗 npm地址: ${CONFIG.registry}`);
   console.log(`🏷️  Git标签: v${version}`);
 }
@@ -320,14 +317,16 @@ async function checkPackageConflicts(version) {
   console.log("\n🔍 检查包是否已存在...");
   let hasConflict = false;
 
-  for (const pkg of CONFIG.packages) {
-    try {
-      execCommand(`npm view ${pkg}@${version}`, process.cwd(), true);
-      console.log(`   ❌ ${pkg}@${version} 已存在`);
-      hasConflict = true;
-    } catch (error) {
-      console.log(`   ✅ ${pkg}@${version} 可以发布`);
-    }
+  try {
+    execCommand(
+      `npm view ${CONFIG.packageName}@${version}`,
+      process.cwd(),
+      true
+    );
+    console.log(`   ❌ ${CONFIG.packageName}@${version} 已存在`);
+    hasConflict = true;
+  } catch (error) {
+    console.log(`   ✅ ${CONFIG.packageName}@${version} 可以发布`);
   }
 
   if (hasConflict) {
@@ -415,7 +414,6 @@ async function publish(version, tag = "latest", skipChecks = false) {
   console.log(`\n📋 发布信息:`);
   console.log(`   版本: ${version}`);
   console.log(`   标签: ${tag}`);
-  console.log(`   包数量: ${CONFIG.packages.length}`);
 
   // 确认发布
   const confirm = await askConfirm("确认发布？");
@@ -431,22 +429,12 @@ async function publish(version, tag = "latest", skipChecks = false) {
     updateVersion(CONFIG.packagePath, version);
   }
 
-  // 发布所有包
+  // 发布包
   console.log("\n📦 发布包...");
   let publishSuccess = true;
-  for (const pkg of CONFIG.packages) {
-    let packagePath;
-    if (pkg.startsWith("@lb-vue-ui/")) {
-      packagePath = path.join("packages", pkg.replace("@lb-vue-ui/", ""));
-    } else if (pkg.startsWith("@littleblacky/")) {
-      packagePath = path.join("packages", "core");
-    }
-
-    if (fs.existsSync(packagePath)) {
-      if (!publishPackage(packagePath, tag)) {
-        publishSuccess = false;
-        break;
-      }
+  if (fs.existsSync(CONFIG.packagePath)) {
+    if (!publishPackage(CONFIG.packagePath, tag)) {
+      publishSuccess = false;
     }
   }
 
@@ -491,10 +479,6 @@ async function preview(version) {
 
   console.log(`📋 发布预览:`);
   console.log(`   版本: ${version}`);
-  console.log(`   包列表:`);
-  CONFIG.packages.forEach((pkg) => {
-    console.log(`   - ${pkg}@${version}`);
-  });
   console.log(`🔗 npm地址: ${CONFIG.registry}`);
 
   // 检查包是否已存在
