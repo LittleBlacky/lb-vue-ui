@@ -78,6 +78,7 @@ const placementRef = ref<string>(props.placement);
 const referenceRef = ref<ReferenceElement>();
 let cleanPopper: () => void = () => {};
 useClickOutside(referenceRef as Ref<HTMLElement>, () => {
+  if (props.virtualTriggering) return;
   hide();
 });
 const emits = defineEmits(["update:visible"]);
