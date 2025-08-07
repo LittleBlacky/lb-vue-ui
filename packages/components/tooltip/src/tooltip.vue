@@ -119,7 +119,6 @@ const updatePosition = () => {
           ],
         }).then(({ x, y, placement, middlewareData }) => {
           placementRef.value = placement;
-          console.log(placementRef.value);
           if (popperRef.value)
             Object.assign(popperRef.value.style, {
               left: `${x}px`,
