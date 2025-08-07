@@ -95,9 +95,13 @@ watch(
   }
 );
 
-watch(visibleRef, () => {
-  emits("update:visible", visibleRef.value);
-});
+watch(
+  visibleRef,
+  (newVal) => {
+    if (newVal !== props.visible) emits("update:visible", visibleRef.value);
+  },
+  { flush: "post" }
+);
 
 const show = () => {
   registDebounced(() => {
