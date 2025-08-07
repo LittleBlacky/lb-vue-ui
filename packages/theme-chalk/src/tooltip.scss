@@ -1,6 +1,7 @@
 @use "common/vars" as *;
 @use "mixins/mixins.scss" as mix;
 @use "mixins/function.scss" as fn;
+@use "animation/fade.scss" as *;
 
 @include mix.b(tooltip) {
   @include mix.generate-css-vars(
