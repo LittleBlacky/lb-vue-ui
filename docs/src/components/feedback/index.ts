@@ -33,7 +33,7 @@ export default {
       link: "/popperover/popperover",
     },
     {
-      text: "ToolTip 文字提示",
+      text: "✅ToolTip 文字提示",
       link: "/tooltip/tooltip",
     },
   ].map((item) => {
