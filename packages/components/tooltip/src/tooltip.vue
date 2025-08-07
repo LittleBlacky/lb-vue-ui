@@ -5,7 +5,7 @@
     </div>
     <Transition :name="transition">
       <div
-        v-show="!disabled && visibleRef"
+        v-show="!disabled && visible"
         ref="popperRef"
         :class="{
           [`${popperClass}`]: popperClass,
