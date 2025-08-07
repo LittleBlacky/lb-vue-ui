@@ -5,7 +5,7 @@
     </div>
     <Transition :name="transition">
       <div
-        v-show="!disabled && visible"
+        v-show="!disabled && visibleRef"
         ref="popperRef"
         :class="{
           [`${popperClass}`]: popperClass,
@@ -86,15 +86,28 @@ const { registDebounced } = useDebounce();
 const showRef = toRef(props, "showAfter");
 const hideRef = toRef(props, "hideAfter");
 
+const visibleRef = ref(false);
+
+watch(
+  () => props.visible,
+  () => {
+    visibleRef.value = props.visible;
+  }
+);
+
+watch(visibleRef, () => {
+  emits("update:visible", visibleRef.value);
+});
+
 const show = () => {
   registDebounced(() => {
-    emits("update:visible", true);
+    visibleRef.value = true;
   }, unref(showRef));
 };
 
 const hide = () => {
   registDebounced(() => {
-    emits("update:visible", false);
+    visibleRef.value = false;
   }, unref(hideRef));
 };
 
@@ -151,7 +164,7 @@ const triggerEvents = {
   },
   click: {
     click: () => {
-      if (props.visible) hide();
+      if (visibleRef.value) hide();
       else show();
     },
   },
