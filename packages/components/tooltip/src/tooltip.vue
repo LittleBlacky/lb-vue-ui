@@ -105,7 +105,6 @@ const updatePosition = () => {
     referenceRef.value as ReferenceElement,
     popperRef.value as FloatingElement,
     () => {
-      console.log(referenceRef.value);
       if (referenceRef.value && popperRef.value)
         computePosition(referenceRef.value, popperRef.value, {
           placement: props.placement,
@@ -165,7 +164,7 @@ const triggerEvents = {
 };
 
 const events: LbToolTipOuterEvents | Ref<null> = computed(() => {
-  if (props.virtualRef) return null;
+  // if (props.virtualRef) return null;
   const { trigger } = props;
   return triggerEvents[trigger];
 });

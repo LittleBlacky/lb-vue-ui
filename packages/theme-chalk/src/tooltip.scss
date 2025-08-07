@@ -41,7 +41,7 @@
   }
   @include mix.e(popper) {
     transition: all fn.getCssVar(tooltip, transition, duration)
-      fn.getCssVar(tooltip, transition, timing-function, fast-to-slow);
+      fn.getCssVar(tooltip, transition, timing-function);
     width: max-content;
     padding: fn.getCssVar(tooltip, padding);
     position: absolute;
