@@ -73,7 +73,7 @@ function createComponentVue(component) {
 <script setup lang="ts">
 import {computed} from "vue";
 import type {Lb${upperComponent}Props} from "./types";
-import {createNamespace} from "@lb-vue-ui/utils/createNamespace";
+import {createNamespace} from "@lb-vue-ui/utils";
 
 const bem = createNamespace("${component}");
 
@@ -144,7 +144,7 @@ function createIndexEntry(component) {
   const indexPath = path.join(componentsPath, component, "index.ts");
   const upperComponent = nameModify(component);
   const indexContent = `import ${upperComponent} from "./src/${component}.vue";
-import { withInstall } from "@lb-vue-ui/utils/install";
+import { withInstall } from "@lb-vue-ui/utils";
 
 export const Lb${upperComponent} = withInstall(${upperComponent});
 
