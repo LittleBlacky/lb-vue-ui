@@ -89,14 +89,12 @@ const showRef = toRef(props, "showAfter");
 const hideRef = toRef(props, "hideAfter");
 
 const show = () => {
-  if (visibleRef.value) return;
   registDebounced(() => {
     visibleRef.value = true;
   }, unref(showRef));
 };
 
 const hide = () => {
-  if (!visibleRef.value) return;
   registDebounced(() => {
     visibleRef.value = false;
   }, unref(hideRef));
