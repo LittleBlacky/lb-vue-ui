@@ -1,5 +1,5 @@
 import type { ComputedRef, Ref } from "vue";
-import type { FloatingElement, ReferenceElement } from "@floating-ui/dom";
+import type { FloatingElement } from "@floating-ui/dom";
 
 export type LbToolTipTriggerOptions = "hover" | "click" | "focus";
 export type LbToolTipTriggerEvents =
@@ -17,7 +17,6 @@ export interface LbToolTipProps {
   showAfter?: number;
   hideAfter?: number;
   strategy?: "absolute" | "fixed";
-  appendTo?: ReferenceElement;
   trigger?: LbToolTipTriggerOptions;
   transition?: string;
   visible?: boolean;

@@ -30,7 +30,6 @@
 | showAfter | 延迟显示，单位毫秒 | `number` | — | `300` |
 | hideAfter | 延迟隐藏，单位毫秒 | `number` | — | `300` |
 | strategy | 定位策略 | `'absolute' \| 'fixed'` | `absolute` / `fixed` | `absolute` |
-| appendTo | 附加到指定元素 | `HTMLElement` | — | `undefined` |
 | trigger | 触发方式 | `'hover' \| 'click' \| 'focus'` | `hover` / `click` / `focus` | `hover` |
 | transition | 动画名称 | `string` | — | `lb-fade` |
 | placement | 出现位置 | `'top' \| 'top-start' \| 'top-end' \| 'right' \| 'right-start' \| 'right-end' \| 'bottom' \| 'bottom-start' \| 'bottom-end' \| 'left' \| 'left-start' \| 'left-end'` | — | `top` |
