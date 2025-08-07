@@ -1,6 +1,6 @@
 {
   "name": "@littleblacky/lb-vue-ui",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "littleblacky's components library",
   "main": "dist/lb-vue-ui.umd.js",
   "module": "dist/es/core/index.js",
