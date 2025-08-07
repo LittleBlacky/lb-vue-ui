@@ -107,6 +107,7 @@ const updatePosition = () => {
     referenceRef.value as ReferenceElement,
     popperRef.value as FloatingElement,
     () => {
+      console.log(referenceRef.value);
       if (referenceRef.value && popperRef.value)
         computePosition(referenceRef.value, popperRef.value, {
           placement: props.placement,

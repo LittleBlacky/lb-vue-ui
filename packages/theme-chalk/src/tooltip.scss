@@ -27,14 +27,8 @@
         arrow: (
           width: 8px,
           color: fn.getCssVar(bg, color),
-          border: (
-            left: none,
-            right: none,
-            top: none,
-            bottom: none,
-          ),
         ),
-        padding: fn.getCssVar(tooltip, arrow, width)
+        padding: fn.getCssVar(tooltip, arrow, width),
       ),
     )
   );
