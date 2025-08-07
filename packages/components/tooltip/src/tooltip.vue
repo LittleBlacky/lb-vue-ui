@@ -80,9 +80,7 @@ let cleanPopper: () => void = () => {};
 useClickOutside(referenceRef as Ref<HTMLElement>, () => {
   hide();
 });
-const visibleRef = ref(props.visible);
 const emits = defineEmits(["update:visible"]);
-
 const { registDebounced } = useDebounce();
 
 const showRef = toRef(props, "showAfter");
@@ -90,13 +88,13 @@ const hideRef = toRef(props, "hideAfter");
 
 const show = () => {
   registDebounced(() => {
-    visibleRef.value = true;
+    emits("update:visible", true);
   }, unref(showRef));
 };
 
 const hide = () => {
   registDebounced(() => {
-    visibleRef.value = false;
+    emits("update:visible", false);
   }, unref(hideRef));
 };
 
@@ -153,7 +151,7 @@ const triggerEvents = {
   },
   click: {
     click: () => {
-      if (visibleRef.value) hide();
+      if (props.visible) hide();
       else show();
     },
   },
@@ -164,7 +162,7 @@ const triggerEvents = {
 };
 
 const events: LbToolTipOuterEvents | Ref<null> = computed(() => {
-  // if (props.virtualRef) return null;
+  if (props.virtualRef) return null;
   const { trigger } = props;
   return triggerEvents[trigger];
 });
@@ -211,18 +209,6 @@ onMounted(() => {
     {
       immediate: true,
     }
-  );
-  watch(
-    visibleRef,
-    (val) => {
-      if (val) {
-        updatePosition();
-      } else {
-        cleanPopper();
-      }
-      emits("update:visible", val);
-    },
-    { immediate: true }
   );
 });
 
