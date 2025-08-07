@@ -22,7 +22,7 @@
     "del:component": "node scripts/removeComponent.js",
     "new:hook": "node scripts/hooks//createHook.js",
     "del:hook": "node scripts/hooks/removeHook.js",
-    "publish:npm": "node scripts/publish.js",
+    "publish:npm": "pnpm core publish:npm",
     "test": "echo \"Error: no test specified\" && exit 1",
     "clear": "rimraf -g ./node_modules ./packages/**/node_modules ./packages/**/dist",
     "prepare": "husky"
