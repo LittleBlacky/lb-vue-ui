@@ -58,7 +58,7 @@
     background: transparent;
     padding-left: 0;
     padding-right: 0;
-
+    box-shadow: none;
     &:hover,
     &:focus {
       color: var(--lb-text-color-regular);
@@ -71,7 +71,7 @@
     background: transparent;
     padding-left: 0;
     padding-right: 0;
-
+    box-shadow: none;
     &:hover,
     &:focus {
       color: var(--lb-text-color-regular);
@@ -119,16 +119,7 @@
         background: transparent;
         padding-left: 0;
         padding-right: 0;
-
-      }
-
-      @include mix.when(text) {
-        border-color: transparent;
-        color: var(--lb-color-#{$type});
-        background: transparent;
-        padding-left: 0;
-        padding-right: 0;
-
+        box-shadow: none;
         &:hover,
         &:focus {
           color: var(--lb-color-#{$type}-light-4);
@@ -139,7 +130,7 @@
         border-color: transparent;
         color: var(--lb-color-#{$type});
         background: transparent;
-
+        box-shadow: none;
         &:hover,
         &:focus {
           color: var(--lb-color-#{$type}-light-4);
