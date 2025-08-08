@@ -20,13 +20,11 @@
   box-sizing: border-box;
   outline: none;
   margin: 0;
-  // opacity: 0.4;
   transition: var(--lb-transition-duration);
   font-weight: var(--lb-font-weight-primary);
   padding: var(--lb-gap-small) var(--lb-gap-base);
   font-size: var(--lb-font-size-base);
   border-radius: var(--lb-border-radius-base);
-  box-shadow: 0 2px #00000004;
 
   &:hover {
     color: var(--lb-color-primary);
@@ -37,7 +35,8 @@
 
   /*点击*/
   &:active {
-    background-color: var(--lb-color-primary-light-6);
+    background-color: var(--lb-color-primary-light-8);
+    box-shadow: 0px 0px 4px 3px var(--lb-color-primary-light-8);
   }
 
   @include mix.when(disabled) {
@@ -94,6 +93,7 @@
       &:active {
         background: var(--lb-color-#{$type}-light-4);
         border-color: var(--lb-color-#{$type}-light-4);
+        box-shadow: 0px 0px 4px 3px var(--lb-color-#{$type}-light-8);
       }
 
       @include mix.when(plain) {
