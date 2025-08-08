@@ -1,7 +1,7 @@
-@use 'common/vars' as v;
-@use 'sass:map';
-@use 'sass:color';
-@use 'mixins/mixins.scss' as mix;
+@use "common/vars" as v;
+@use "sass:map";
+@use "sass:color";
+@use "mixins/mixins.scss" as mix;
 
 @include mix.b(button) {
   display: flex;
@@ -20,18 +20,24 @@
   box-sizing: border-box;
   outline: none;
   margin: 0;
+  // opacity: 0.4;
   transition: var(--lb-transition-duration);
   font-weight: var(--lb-font-weight-primary);
   padding: var(--lb-gap-small) var(--lb-gap-base);
   font-size: var(--lb-font-size-base);
   border-radius: var(--lb-border-radius-base);
+  box-shadow: 0 2px #00000004;
 
-  &:hover,
-  &:focus {
+  &:hover {
     color: var(--lb-color-primary);
     border-color: var(--lb-color-primary);
     background-color: var(--lb-color-primary-light-8);
     outline: none;
+  }
+
+  /*点击*/
+  &:active {
+    background-color: var(--lb-color-primary-light-6);
   }
 
   @include mix.when(disabled) {
@@ -41,10 +47,8 @@
 
   @include mix.when(plain) {
     background-color: transparent;
-    border-color: var(--lb-color-primary);
     color: var(--lb-text-color-regular);
-    &:hover,
-    &focus {
+    &:hover {
       color: var(--lb-color-primary);
     }
   }
@@ -81,24 +85,41 @@
       background-color: var(--lb-color-#{$type});
       border-color: var(--lb-color-#{$type});
 
-      &:hover,
-      &:focus {
+      &:hover {
         background: var(--lb-color-#{$type}-light-2);
         border-color: var(--lb-color-#{$type}-light-2);
         color: var(--lb-color-white);
       }
 
-      @include mix.when(plain) {
-        color: var(--lb-color-#{$type});
-        background-color: var(--lb-color-#{$type}-light-6);
+      &:active {
+        background: var(--lb-color-#{$type}-light-4);
         border-color: var(--lb-color-#{$type}-light-4);
+      }
 
-        &:hover,
-        &:focus {
+      @include mix.when(plain) {
+        background-color: var(--lb-color-#{$type}-light-8);
+        border-color: var(--lb-color-#{$type});
+        color: var(--lb-color-#{$type});
+
+        &:hover {
           background-color: var(--lb-color-#{$type});
           border-color: var(--lb-color-#{$type});
           color: var(--lb-color-white);
         }
+
+        &:active {
+          background: var(--lb-color-#{$type}-light-4);
+          border-color: var(--lb-color-#{$type}-light-4);
+        }
+      }
+
+      @include mix.when(text) {
+        border-color: transparent;
+        color: var(--lb-color-#{$type});
+        background: transparent;
+        padding-left: 0;
+        padding-right: 0;
+
       }
 
       @include mix.when(text) {
