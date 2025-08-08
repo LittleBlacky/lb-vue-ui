@@ -33,7 +33,6 @@
     outline: none;
   }
 
-  /*点击*/
   &:active {
     background-color: var(--lb-color-primary-light-8);
     box-shadow: 0px 0px 4px 3px var(--lb-color-primary-light-8);
@@ -42,6 +41,14 @@
   @include mix.when(disabled) {
     cursor: not-allowed;
     opacity: 0.6;
+    box-shadow: none;
+    &:hover,
+    &:active {
+      background: var(--lb-bg-color);
+      border-color: var(--lb-border-color);
+      color: var(--lb-text-color-regular);
+      box-shadow: none;
+    }
   }
 
   @include mix.when(plain) {
@@ -49,6 +56,12 @@
     color: var(--lb-text-color-regular);
     &:hover {
       color: var(--lb-color-primary);
+    }
+    @include mix.when(disabled) {
+      &:hover,
+      &:active {
+        background-color: var(--lb-text-color-regular);
+      }
     }
   }
 
@@ -59,9 +72,14 @@
     padding-left: 0;
     padding-right: 0;
     box-shadow: none;
-    &:hover,
-    &:focus {
+    &:hover {
       color: var(--lb-text-color-regular);
+    }
+    @include mix.when(disabled) {
+      &:hover,
+      &:active {
+        color: var(--lb-text-color-primary);
+      }
     }
   }
 
@@ -72,9 +90,14 @@
     padding-left: 0;
     padding-right: 0;
     box-shadow: none;
-    &:hover,
-    &:focus {
+    &:hover {
       color: var(--lb-text-color-regular);
+    }
+    @include mix.when(disabled) {
+      &:hover,
+      &:active {
+        color: var(--lb-text-color-primary);
+      }
     }
   }
 
@@ -96,6 +119,15 @@
         box-shadow: 0px 0px 4px 3px var(--lb-color-#{$type}-light-8);
       }
 
+      @include mix.when(disabled) {
+        &:hover,
+        &:active {
+          background-color: var(--lb-color-#{$type});
+          border-color: var(--lb-color-#{$type});
+          color: var(--lb-color-white);
+        }
+      }
+
       @include mix.when(plain) {
         background-color: var(--lb-color-#{$type}-light-8);
         border-color: var(--lb-color-#{$type});
@@ -111,6 +143,15 @@
           background: var(--lb-color-#{$type}-light-4);
           border-color: var(--lb-color-#{$type}-light-4);
         }
+
+        @include mix.when(disabled) {
+          &:hover,
+          &:active {
+            background-color: var(--lb-color-#{$type}-light-8);
+            border-color: var(--lb-color-#{$type});
+            color: var(--lb-color-#{$type});
+          }
+        }
       }
 
       @include mix.when(text) {
@@ -124,6 +165,15 @@
         &:focus {
           color: var(--lb-color-#{$type}-light-4);
         }
+        @include mix.when(disabled) {
+          &:hover,
+          &:active,
+          &:focus {
+            color: var(--lb-color-#{$type});
+            background-color: transparent;
+            border-color: transparent;
+          }
+        }
       }
 
       @include mix.when(link) {
@@ -134,6 +184,15 @@
         &:hover,
         &:focus {
           color: var(--lb-color-#{$type}-light-4);
+        }
+        @include mix.when(disabled) {
+          &:hover,
+          &:active,
+          &:focus {
+            color: var(--lb-color-#{$type});
+            background-color: transparent;
+            border-color: transparent;
+          }
         }
       }
     }

@@ -66,7 +66,6 @@ const props = withDefaults(defineProps<LbButtonProps>(), {
 const buttonClass = computed(() => {
   return [
     bem.b(),
-    bem.is("disabled", props.disabled),
     bem.is("round", props.round),
     bem.is("circle", props.circle),
     bem.is("loading", props.loading),
@@ -75,6 +74,7 @@ const buttonClass = computed(() => {
     bem.is("link", props.link),
     bem.m(props.type),
     bem.m(props.size),
+    bem.is("disabled", props.disabled),
   ];
 });
 </script>
