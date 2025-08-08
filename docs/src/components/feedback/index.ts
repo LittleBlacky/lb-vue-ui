@@ -29,10 +29,6 @@ export default {
       link: "/messagebox/messagebox",
     },
     {
-      text: "Popperover 弹出层",
-      link: "/popperover/popperover",
-    },
-    {
       text: "✅ToolTip 文字提示",
       link: "/tooltip/tooltip",
     },

@@ -1,5 +1,7 @@
 # Tooltip
 
+用于展示鼠标悬停或点击时的提示信息。
+
 ## 基础用法
 
 <preview path="./demos/basic.vue"></preview>
@@ -11,6 +13,9 @@
 ## 不同触发方式
 
 <preview path="./demos/trigger.vue"></preview>
+
+## 自定义内容
+<preview path="./demos/custom-content.vue"></preview>
 
 ## 虚拟触发
 

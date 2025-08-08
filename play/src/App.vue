@@ -1,109 +1,132 @@
-<script setup lang="ts">
-import { ref } from 'vue'
-import { LbInput, LbButton, LbCard, LbLoading } from '../../packages/components/index'
-import { LoadingService } from '../../packages/components'
-import '../../packages/theme-chalk/src/index.scss'
-const value = ref()
-
-const handleCardClick = () => {
-  console.log('卡片被点击了！')
-}
-
-const openLoading = () => {
-  const loading = LoadingService({
-    text: '加载中...',
-    background: 'rgba(0, 0, 0, 0.7)',
-    fullscreen: true,
-  })
-  setTimeout(() => {
-    loading.close()
-  }, 2000)
-}
-</script>
-
 <template>
-  <div style="display: flex; flex-direction: column; gap: 20px; padding: 20px">
-    <h2>Card 组件测试</h2>
-
-    <!-- 基础卡片 -->
-    <lb-card header="基础卡片">
-      <p>这是一个基础的卡片组件测试。</p>
-    </lb-card>
-
-    <!-- 可点击卡片 -->
-    <lb-card
-      header="可点击卡片"
-      subtitle="点击试试"
-      clickable
-      shadow="hover"
-      @click="handleCardClick"
+  <div class="virtual-triggering-demo">
+    <lb-button
+      v-for="i in 2"
+      :key="i"
+      type="primary"
+      class="virtual-trigger"
+      @mousemove="(e) => (virtualRef = e.currentTarget)"
+      @click="visible = !visible"
     >
-      <p>这是一个可点击的卡片，鼠标悬停时会有阴影效果。</p>
-    </lb-card>
-
-    <!-- 带底部的卡片 -->
-    <lb-card header="带底部的卡片">
-      <p>这个卡片有底部操作区域。</p>
-      <template #footer>
-        <div style="text-align: right">
-          <lb-button size="small">取消</lb-button>
-          <lb-button size="small" type="primary" style="margin-left: 8px">确定</lb-button>
-        </div>
-      </template>
-    </lb-card>
-
-    <!-- 加载状态卡片 -->
-    <lb-card header="加载状态" v-loading="true" text="加载中...">
-      <p>这个卡片正在加载中...</p>
-    </lb-card>
-
-    <h2>Loading 服务测试</h2>
-    <lb-button @click="openLoading">打开 Loading</lb-button>
-
-    <h2>Input 组件测试</h2>
-    <lb-input
-      type="textarea"
-      v-model="value"
-      size="large"
-      :autosize="{ minRows: 2 }"
-      show-word-limit
-      maxlength="100"
+      virtual trigger {{ i }}
+    </lb-button>
+    <lb-button
+      v-for="i in 2"
+      :key="i"
+      type="warning"
+      class="virtual-trigger"
+      @mousemove="(e) => (virtualRef = e.currentTarget)"
+      @click="visible = !visible"
     >
-      <template #prepend>
-        <lb-button>hahaha</lb-button>
-      </template>
-      <template #append>
-        <span>.com</span>
-      </template>
-    </lb-input>
-    <lb-input
-      type="textarea"
-      v-model="value"
-      rows="8"
-      show-word-limit
-      maxlength="100"
-      :autosize="{ maxRows: 5 }"
+      virtual trigger {{ i }}
+    </lb-button>
+    <lb-button
+      v-for="i in 2"
+      :key="i"
+      class="virtual-trigger"
+      @mousemove="(e) => (virtualRef = e.currentTarget)"
+      @click="visible = !visible"
     >
-    </lb-input>
-    <lb-input type="textarea" v-model="value" rows="8" size="small" show-word-limit maxlength="100">
-      <template #prepend>
-        <lb-button>hahaha</lb-button>
-      </template>
-      <template #append>
-        <span>.com</span>
-      </template>
-    </lb-input>
-    <lb-input v-model="value" size="small" maxlength="100" show-word-limit></lb-input>
-    <lb-input v-model="value" maxlength="100" show-word-limit>
-      <template #prepend>
-        <lb-button>hahaha</lb-button>
-      </template>
-      <template #append>
-        <span>.com</span>
-      </template>
-    </lb-input>
-    <lb-input v-model="value" maxlength="100" show-word-limit></lb-input>
+      virtual trigger {{ i }}
+    </lb-button>
+    <lb-button
+      v-for="i in 2"
+      :key="i"
+      type="info"
+      class="virtual-trigger"
+      @mousemove="(e) => (virtualRef = e.currentTarget)"
+      @click="visible = !visible"
+    >
+      virtual trigger {{ i }}
+    </lb-button>
+    <lb-button
+      v-for="i in 2"
+      :key="i"
+      type="danger"
+      class="virtual-trigger"
+      @mousemove="(e) => (virtualRef = e.currentTarget)"
+      @click="visible = !visible"
+    >
+      virtual trigger {{ i }}
+    </lb-button>
+    <lb-button
+      v-for="i in 2"
+      :key="i"
+      plain
+      type="primary"
+      class="virtual-trigger"
+      @mousemove="(e) => (virtualRef = e.currentTarget)"
+      @click="visible = !visible"
+    >
+      virtual trigger {{ i }}
+    </lb-button>
+    <lb-button
+      v-for="i in 2"
+      :key="i"
+      plain
+      type="warning"
+      class="virtual-trigger"
+      @mousemove="(e) => (virtualRef = e.currentTarget)"
+      @click="visible = !visible"
+    >
+      virtual trigger {{ i }}
+    </lb-button>
+    <lb-button
+      v-for="i in 2"
+      :key="i"
+      plain
+      type="info"
+      class="virtual-trigger"
+      @mousemove="(e) => (virtualRef = e.currentTarget)"
+      @click="visible = !visible"
+    >
+      virtual trigger {{ i }}
+    </lb-button>
+    <lb-button
+      v-for="i in 2"
+      :key="i"
+      plain
+      type="danger"
+      class="virtual-trigger"
+      @mousemove="(e) => (virtualRef = e.currentTarget)"
+      @click="visible = !visible"
+    >
+      virtual trigger {{ i }}
+    </lb-button>
+    <lb-button
+      v-for="i in 2"
+      :key="i"
+      plain
+      class="virtual-trigger"
+      @mousemove="(e) => (virtualRef = e.currentTarget)"
+      @click="visible = !visible"
+    >
+      virtual trigger {{ i }}
+    </lb-button>
+    <lb-tooltip
+      content="Hello Virtual Trigger"
+      virtualTriggering
+      v-model:visible="visible"
+      :virtualRef="virtualRef"
+    >
+      <template #content> </template>
+    </lb-tooltip>
   </div>
 </template>
 
-<style lang="scss"></style>
+<script setup lang="ts">
+import { ref } from 'vue'
+const visible = ref(false)
+const virtualRef = ref<HTMLElement | undefined>()
+</script>
+
+<style scoped>
+.virtual-triggering-demo {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  height: 100px;
+}
+</style>

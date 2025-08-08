@@ -11,6 +11,7 @@ declare module 'vue' {
     LbButton: typeof import('@littleblacky/lb-vue-ui')['LbButton']
     LbIcon: typeof import('@littleblacky/lb-vue-ui')['LbIcon']
     LbInput: typeof import('@littleblacky/lb-vue-ui')['LbInput']
+    LbTooltip: typeof import('@littleblacky/lb-vue-ui')['LbTooltip']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
