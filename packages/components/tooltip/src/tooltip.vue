@@ -77,7 +77,7 @@ const arrowRef = ref<HTMLElement>();
 const placementRef = ref<string>(props.placement);
 const referenceRef = ref<ReferenceElement>();
 let cleanPopper: () => void = () => {};
-useClickOutside(referenceRef as Ref<HTMLElement>, () => {
+useClickOutside(toollipRef as Ref<HTMLElement>, () => {
   if (props.virtualTriggering) return;
   hide();
 });
@@ -218,10 +218,11 @@ onMounted(() => {
       // 当原来的不属于虚拟触发时，即普通模式下，需要清空事件监听
       if (oldTrigger && !oldVirtualRef) {
         const oldEvents = triggerEvents[oldTrigger];
-        cleanEventListener(referenceRef.value as HTMLElement, oldEvents);
+        cleanEventListener(toollipRef.value as HTMLElement, oldEvents);
       }
       referenceRef.value = props.virtualRef || triggerRef.value;
-      setEventListener(referenceRef.value as HTMLElement, events.value);
+      if (!props.virtualTriggering && !props.virtualRef)
+        setEventListener(toollipRef.value as HTMLElement, events.value);
       updatePosition();
     },
     {
@@ -231,7 +232,7 @@ onMounted(() => {
 });
 
 onBeforeUnmount(() => {
-  cleanEventListener(referenceRef.value as HTMLElement, events.value);
+  cleanEventListener(toollipRef.value as HTMLElement, events.value);
   cleanPopper();
 });
 defineExpose<LbToolTipInstance>({
