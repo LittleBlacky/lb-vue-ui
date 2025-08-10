@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const { program } = require("commander");
 
-const packagesPath = path.join(__dirname, "../", "packages");
+const packagesPath = path.join(__dirname, "../../", "packages");
 const componentsPath = path.join(packagesPath, "components");
 const sassPath = path.join(packagesPath, "theme-chalk", "src");
 
