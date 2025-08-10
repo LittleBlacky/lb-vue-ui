@@ -1,27 +1,19 @@
 <template>
-  <div class="virtual-triggering-demo">
-    <lb-button
-      v-for="i in 2"
-      :key="i"
-      class="virtual-trigger"
-      @mousemove="(e) => (virtualRef = e.currentTarget)"
-      @click="visible = !visible"
-    >
-      Click me {{ i }}
-    </lb-button>
-    <lb-tooltip
-      content="Hello Virtual Trigger"
-      virtualTriggering
-      :visible="visible"
-      :virtualRef="virtualRef"
-    ></lb-tooltip>
-  </div>
+  <lb-radio-group v-model="radioValue" name="radioGroup1">
+    <lb-radio value="1">1</lb-radio>
+    <lb-radio value="2">2</lb-radio>
+  </lb-radio-group>
+  <lb-radio-group v-model="radioValue2" name="radioGroup2">
+    <lb-radio value="1">1</lb-radio>
+    <lb-radio value="2">2</lb-radio>
+  </lb-radio-group>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
-const visible = ref(false)
-const virtualRef = ref<HTMLElement | undefined>()
+
+const radioValue = ref('2')
+const radioValue2 = ref('2')
 </script>
 
 <style scoped>

@@ -25,7 +25,7 @@ export default {
       link: "/input/input",
     },
     {
-      text: "Radio 单选框",
+      text: "✅Radio 单选框",
       link: "/radio/radio",
     },
     {
