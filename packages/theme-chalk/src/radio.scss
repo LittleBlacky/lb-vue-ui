@@ -1,6 +1,167 @@
-@use 'common/vars' as *;
-@use 'mixins/mixins.scss' as mix;
+@use "sass:map";
+@use "sass:color";
+@use "common/vars" as *;
+@use "mixins/mixins.scss" as mix;
+@use "mixins/function.scss" as fn;
 
 @include mix.b(radio) {
+  @include mix.generate-css-vars(
+    (
+      radio: (
+        border: (
+          width: fn.getCssVar(border, width),
+          style: fn.getCssVar(border, style),
+          color: fn.getCssVar(border, color),
+          radius: fn.getCssVar(border, radius, circle),
+        ),
+        text: (
+          color: fn.getCssVar(text, color, regular),
+          size: fn.getCssVar(font, size, base),
+        ),
+        bg: (
+          color: fn.getCssVar(bg, color),
+        ),
+        disabled: (
+          text: (
+            color: fn.getCssVar(text, color, disabled),
+          ),
+          border: (
+            color: fn.getCssVar(border, color, light),
+          ),
+          bg: (
+            color: fn.getCssVar(fill, color, light),
+          ),
+        ),
+        inner: (
+          size: 0.875rem,
+          dot: (
+            size: 0.25rem,
+          ),
+        ),
+      ),
+    )
+  );
+}
 
-};
+@include mix.b(radio) {
+  display: inline-flex;
+  align-items: center;
+  outline: none;
+  font-size: fn.getCssVar(radio, text, size);
+  color: fn.getCssVar(radio, text, color);
+
+  @include mix.e(original) {
+    opacity: 0;
+    outline: none;
+    position: absolute;
+    z-index: -1;
+    &:checked {
+      + .lb-radio__label {
+        .lb-radio__inner {
+          background-color: fn.getCssVar(color, primary);
+          border-color: fn.getCssVar(color, primary);
+          &::after {
+            transform: translate(-50%, -50%) scale(1);
+          }
+        }
+        .lb-radio__text {
+          color: fn.getCssVar(color, primary);
+        }
+      }
+    }
+    &:focus {
+      + .lb-radio__label {
+        .lb-radio__inner {
+          box-shadow: 0 0 0 2px rgba(fn.getCssVar(color, primary), 0.2);
+        }
+      }
+    }
+  }
+
+  @include mix.e(label) {
+    display: inline-flex;
+    align-items: center;
+    padding-left: 0.5rem;
+    position: relative;
+  }
+
+  @include mix.e(inner) {
+    display: inline-block;
+    width: fn.getCssVar(radio, inner, size);
+    height: fn.getCssVar(radio, inner, size);
+    border: fn.getCssVar(radio, border, width)
+      fn.getCssVar(radio, border, style) fn.getCssVar(radio, border, color);
+    border-radius: fn.getCssVar(radio, border, radius);
+    background-color: fn.getCssVar(radio, bg, color);
+    position: relative;
+    transition: all var(--lb-transition-duration);
+
+    &::after {
+      content: "";
+      width: fn.getCssVar(radio, inner, dot, size);
+      height: fn.getCssVar(radio, inner, dot, size);
+      border-radius: fn.getCssVar(radio, border, radius);
+      background-color: fn.getCssVar(color, white);
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      transition: all var(--lb-transition-duration);
+    }
+  }
+
+  @include mix.e(text) {
+    padding-left: 0.25rem;
+  }
+
+  @include mix.when(disabled) {
+    cursor: not-allowed;
+    opacity: 0.6;
+    .lb-radio__inner {
+      background-color: fn.getCssVar(radio, disabled, bg, color);
+      border-color: fn.getCssVar(radio, disabled, border, color);
+      &::after {
+        background-color: fn.getCssVar(radio, disabled, text, color);
+      }
+    }
+    .lb-radio__text {
+      color: fn.getCssVar(radio, disabled, text, color);
+    }
+  }
+
+  @each $size in (small, base, large) {
+    @include mix.m(#{$size}) {
+      @if $size == small {
+        font-size: fn.getCssVar(font, size, small);
+        .lb-radio__inner {
+          width: 0.75rem;
+          height: 0.75rem;
+          &::after {
+            width: 0.2rem;
+            height: 0.2rem;
+          }
+        }
+      } @else if $size == base {
+        font-size: fn.getCssVar(font, size, base);
+        .lb-radio__inner {
+          width: 0.875rem;
+          height: 0.875rem;
+          &::after {
+            width: 0.25rem;
+            height: 0.25rem;
+          }
+        }
+      } @else if $size == large {
+        font-size: fn.getCssVar(font, size, large);
+        .lb-radio__inner {
+          width: 1rem;
+          height: 1rem;
+          &::after {
+            width: 0.3rem;
+            height: 0.3rem;
+          }
+        }
+      }
+    }
+  }
+}

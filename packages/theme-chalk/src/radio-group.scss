@@ -1,6 +1,27 @@
 @use 'common/vars' as *;
+@use 'common/vars' as *;
 @use 'mixins/mixins.scss' as mix;
 
 @include mix.b(radio-group) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
+  &--small {
+    .lb-radio {
+      height: var(--lb-radio-size-small);
+    }
+  }
+
+  &--base {
+    .lb-radio {
+      height: var(--lb-radio-size-base);
+    }
+  }
+
+  &--large {
+    .lb-radio {
+      height: var(--lb-radio-size-large);
+    }
+  }
 };

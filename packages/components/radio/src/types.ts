@@ -1,7 +1,13 @@
 export interface LbRadioProps {
-  // 定义组件的属性
-  // 例如: text?: string;
+  modelValue?: string | number | boolean | null;
+  label?: string | number | boolean;
+  value?: string | number | boolean;
+  disabled?: boolean;
+  name?: string;
+  size?: "small" | "base" | "large";
 }
+
 export interface LbRadioEmits {
-  // (e: 'click', event: MouseEvent): void;
+  (e: "change", value: string | number | boolean): void;
+  (e: "update:modelValue", value: string | number | boolean | null): void;
 }

@@ -20,3 +20,4 @@ export * from "./card";
 // export * from "./loading";
 export * from "./tooltip";
 export * from "./radio";
+export * from "./radio-group";
