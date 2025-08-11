@@ -3,7 +3,7 @@
 @use "mixins/function.scss" as fn;
 @use "animation/fade.scss" as *;
 
-@include mix.b(tooltip) {
+:root {
   @include mix.generate-css-vars(
     (
       tooltip: (
@@ -37,12 +37,12 @@
 
 @include mix.b(tooltip) {
   @include mix.e(trigger) {
-    width: max-content;
+    width: fit-content;
   }
   @include mix.e(popper) {
     transition: all fn.getCssVar(tooltip, transition, duration)
       fn.getCssVar(tooltip, transition, timing-function);
-    width: max-content;
+    width: fit-content;
     padding: fn.getCssVar(tooltip, padding);
     position: absolute;
     top: 0;

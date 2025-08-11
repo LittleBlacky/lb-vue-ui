@@ -3,25 +3,30 @@
     <div ref="triggerRef" :class="[bem.e('trigger')]">
       <slot></slot>
     </div>
-    <Transition :name="transition">
-      <div
-        v-show="!disabled && visibleRef"
-        ref="popperRef"
-        :class="{
-          [`${popperClass}`]: popperClass,
-          [bem.e('popper')]: true,
-        }"
-      >
-        <slot name="content">
-          <div :class="[bem.e('content')]">{{ content }}</div>
-        </slot>
+    <Teleport :to="appendTo">
+      <Transition :name="transition">
         <div
-          ref="arrowRef"
-          data-popper-arrow
-          :class="[bem.e('arrow'), bem.em('arrow', placementRef.split('-')[0])]"
-        ></div>
-      </div>
-    </Transition>
+          v-show="!disabled && visibleRef"
+          ref="popperRef"
+          :class="{
+            [`${popperClass}`]: popperClass,
+            [bem.e('popper')]: true,
+          }"
+        >
+          <slot name="content">
+            <div :class="[bem.e('content')]">{{ content }}</div>
+          </slot>
+          <div
+            ref="arrowRef"
+            data-popper-arrow
+            :class="[
+              bem.e('arrow'),
+              bem.em('arrow', placementRef.split('-')[0]),
+            ]"
+          ></div>
+        </div>
+      </Transition>
+    </Teleport>
   </div>
 </template>
 <script setup lang="ts">
@@ -69,6 +74,15 @@ const props = withDefaults(defineProps<LbToolTipProps>(), {
   transition: "lb-fade",
   offset: 9,
   visible: false,
+});
+const appendTo = computed(() => {
+  if (props.appendTo) {
+    if (typeof props.appendTo === "string") {
+      return document.querySelector(props.appendTo);
+    }
+    return props.appendTo;
+  }
+  return document.body;
 });
 const toollipRef = ref<HTMLElement>();
 const popperRef = ref<FloatingElement>();

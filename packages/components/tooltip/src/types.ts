@@ -38,6 +38,7 @@ export interface LbToolTipProps {
   popperClass?: string;
   virtualTriggering?: boolean;
   virtualRef?: HTMLElement;
+  appendTo?: HTMLElement | string | false;
 }
 export type LbToolTipVisibleModel = boolean;
 export interface LbToolTipInstance {
