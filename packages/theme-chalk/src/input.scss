@@ -27,6 +27,8 @@
   --lb-input-count-transform: translateY(50%);
   --lb-input-prepend-bg-color: var(--lb-color-info-light-8);
   --lb-input-prepend-border-color: var(--lb-border-color, #dcdfe6);
+  --lb-input-text-cursor: text;
+  --lb-input-other-cursor: default;
 }
 
 @include mix.b(input) {
@@ -56,6 +58,7 @@
   @include mix.e((prepend, append)) {
     display: inline-flex;
     align-items: center;
+    curosr: var(--lb-input-other-cursor);
     padding: var(--lb-input-padding);
     box-sizing: border-box;
     background-color: var(--lb-fill-color-blank);
@@ -78,6 +81,7 @@
     padding: var(--lb-input-padding);
     display: inline-flex;
     align-items: center;
+    curosr: var(--lb-input-other-cursor);
     background-color: var(--lb-input-bg-color);
     border: 1px solid var(--lb-input-border-color);
     border-color: var(--lb-input-border-color);
@@ -94,6 +98,7 @@
   }
 
   @include mix.e(inner) {
+    cursor: var(--lb-input-text-cursor);
     flex-grow: 1;
     height: auto;
     border: none;
@@ -110,13 +115,14 @@
   @include mix.e((prefix, suffix)) {
     display: inline-flex;
     align-items: center;
+    curosr: var(--lb-input-other-cursor);
     gap: var(--lb-input-gap);
     justify-content: center;
     color: var(--lb-input-text-color-placeholder);
   }
 
   @include mix.e(icon) {
-    cursor: pointer;
+    curosr: var(--lb-input-other-cursor);
     &:hover {
       color: var(--lb-input-text-color-regular);
     }
@@ -140,6 +146,7 @@
 
   @include mix.e(count) {
     position: absolute;
+    curosr: var(--lb-input-other-cursor);
     background-color: var(--lb-input-bg-color);
     right: var(--lb-input-count-position-right);
     bottom: var(--lb-input-count-position-bottom);
@@ -156,6 +163,8 @@
   }
 
   @include mix.when(disabled) {
+    --lb-input-other-cursor: not-allowed;
+    --lb-input-text-cursor: not-allowed;
     --lb-input-bg-color: var(--lb-input-disabled-bg-color);
     border-color: var(--lb-input-disabled-border-color);
     color: var(--lb-input-disabled-text-color);
