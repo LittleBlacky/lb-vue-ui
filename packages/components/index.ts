@@ -22,3 +22,4 @@ export * from "./tooltip";
 export * from "./radio";
 export * from "./radio-group";
 export * from "./select";
+export * from "./option";
