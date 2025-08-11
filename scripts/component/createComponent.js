@@ -24,6 +24,7 @@ function createThemeChalkFile(component) {
   // 组件sass默认内容
   const sassContent = `@use 'common/vars' as *;
 @use 'mixins/mixins.scss' as mix;
+@use "mixins/function.scss" as fn;
 
 @include mix.b(${component}) {
 
