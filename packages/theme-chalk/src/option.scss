@@ -1,7 +1,0 @@
-@use 'common/vars' as *;
-@use 'mixins/mixins.scss' as mix;
-@use 'mixins/function.scss' as fn;
-
-@include mix.b(option) {
-
-};
