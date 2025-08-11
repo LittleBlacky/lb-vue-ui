@@ -1,0 +1,6 @@
+@use 'common/vars' as *;
+@use 'mixins/mixins.scss' as mix;
+
+@include mix.b(select) {
+
+};
