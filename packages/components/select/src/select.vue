@@ -28,7 +28,11 @@
             <template v-if="options">
               <lb-select-option
                 v-for="item in options"
-                :key="item.value"
+                :key="
+                  valueKey
+                    ? (item.value as Record<string, any>)[valueKey]
+                    : item.value
+                "
                 :label="item.label"
                 :value="item.value"
               >
@@ -43,7 +47,7 @@
 <script setup lang="ts">
 import { ref, provide, computed } from "vue";
 import { createNamespace } from "@lb-vue-ui/utils";
-import type { LbSelectProps, LbSelectEmits } from "./types";
+import type { LbSelectProps, LbSelectEmits, LbSelectValue } from "./types";
 import { LbTooltip, LbInput, LbSelectSymbol } from "@lb-vue-ui/components";
 defineOptions({
   name: "LbSelect",
@@ -59,6 +63,7 @@ const props = withDefaults(defineProps<LbSelectProps>(), {
   offset: 9,
   multiple: false,
   visible: false,
+  valueKey: "",
   size: "base",
 });
 

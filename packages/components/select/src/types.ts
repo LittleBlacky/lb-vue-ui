@@ -13,9 +13,10 @@ export interface LbSelectProps {
   disabled?: boolean;
   placement?: Placement;
   offset?: number;
+  valueKey?: string | number;
   multiple?: boolean;
   visible?: boolean;
-  options?: Array<{ label: string; value: string }>;
+  options?: Array<{ label: string | number; value: LbSelectValue }>;
   clearable?: boolean;
   filterable?: boolean;
   loading?: boolean;
@@ -35,6 +36,7 @@ export const LbSelectSymbol = Symbol("LbSelect");
 export interface LbSelectInject {
   inputRef: LbSelectModelValue;
   multiple: boolean;
+  valueKey: string | number;
   modelValue: WritableComputedRef<LbSelectModelValue>;
   disabled: boolean;
   toggleVisible: () => void;

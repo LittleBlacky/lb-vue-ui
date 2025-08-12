@@ -35,38 +35,43 @@ const selectContext = inject<LbSelectInject>(LbSelectSymbol);
 
 const itemSelected = computed(() => {
   if (!selectContext) return false;
-  if (selectContext.multiple) {
-    if (!Array.isArray(selectContext.modelValue.value)) {
-      selectContext.modelValue.value = [selectContext.modelValue.value];
-    }
-    return selectContext?.modelValue?.value?.includes(props.value);
+
+  const { modelValue, multiple, valueKey } = selectContext;
+  const currentValue = modelValue.value;
+
+  if (multiple) {
+    const values = Array.isArray(currentValue) ? currentValue : [currentValue];
+    return values.some((v: LbSelectValue) => {
+      return typeof v === "object" && v !== null && valueKey in v
+        ? (v as Record<string, any>)[valueKey] === props.value
+        : v === props.value;
+    });
   }
-  return selectContext?.modelValue.value === props.value;
+
+  return currentValue === props.value;
 });
 
 const handleClick = () => {
   if (!selectContext) return;
-  if (selectContext.multiple) {
-    if (!Array.isArray(selectContext.modelValue.value)) {
-      selectContext.modelValue.value = [selectContext.modelValue.value];
-    }
-    const index = (selectContext.modelValue.value as LbSelectValue[]).indexOf(
-      props.value
-    );
-    if (index === -1 && !itemSelected.value) {
-      selectContext.modelValue.value = [
-        ...(selectContext.modelValue.value as LbSelectValue[]),
-        props.value,
-      ];
-    } else {
-      selectContext.modelValue.value = (
-        selectContext.modelValue.value as LbSelectValue[]
-      ).filter((v: LbSelectValue) => v !== props.value);
-    }
+
+  const { modelValue, multiple, valueKey, inputRef, toggleVisible } =
+    selectContext;
+  const currentValue = modelValue.value;
+
+  if (multiple) {
+    const values = Array.isArray(currentValue) ? currentValue : [currentValue];
+    const index = values.indexOf(props.value);
+
+    modelValue.value =
+      index === -1 && !itemSelected.value
+        ? [...values, props.value]
+        : values.filter((v) => v !== props.value);
   } else {
-    selectContext.inputRef.value = props.label;
-    selectContext.modelValue.value = props.value;
-    selectContext.toggleVisible();
+    if (props.value && typeof props.value === "object") {
+      inputRef.value = valueKey ? props.value[valueKey] : props.value;
+    }
+    modelValue.value = props.value;
+    toggleVisible();
   }
 };
 
