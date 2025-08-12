@@ -1,0 +1,47 @@
+@use "common/vars" as *;
+@use "mixins/mixins.scss" as mix;
+@use "mixins/function.scss" as fn;
+
+:root {
+  @include mix.generate-css-vars(
+    (
+      select: (
+        option: (
+          text: (
+            color: fn.getCssVar(text, color, regular),
+            size: fn.getCssVar(font, size, base),
+          ),
+          bg: (
+            color: fn.getCssVar(bg, color),
+          ),
+          padding: 8px,
+          hover: (
+            bg: fn.getCssVar(color, info, light, 8),
+            text: (
+              color: fn.getCssVar(color, primary),
+            ),
+          ),
+        ),
+      ),
+    )
+  );
+}
+
+@include mix.b(select) {
+  @include mix.e(option) {
+    list-style-type: none;
+    user-select: none;
+    width: 100%;
+    padding: 0px var(--lb-select-option-padding);
+    box-sizing: border-box;
+    background-color: fn.getCssVar(select, option, bg, color);
+    color: fn.getCssVar(select, option, text, color);
+    @include mix.when(selected) {
+      color: fn.getCssVar(select, option, hover, text, color);
+      font-weight: bold;
+    }
+    &:hover {
+      background-color: fn.getCssVar(select, option, hover, bg);
+    }
+  }
+}
