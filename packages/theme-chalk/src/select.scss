@@ -1,6 +1,28 @@
-@use 'common/vars' as *;
-@use 'mixins/mixins.scss' as mix;
+@use "common/vars" as *;
+@use "mixins/mixins.scss" as mix;
+@use "mixins/function.scss" as fn;
 
 @include mix.b(select) {
-
-};
+  width: fit-content;
+  @include mix.e(dropdown-wrapper) {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  @include mix.e(dropdown-menu) {
+    list-style-type: none;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+  @include mix.e(input) {
+    cursor: pointer;
+    @include mix.when(disabled) {
+      cursor: not-allowed;
+    }
+    @include mix.when(filterable) {
+      cursor: text;
+    }
+  }
+}

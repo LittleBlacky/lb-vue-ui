@@ -1,7 +1,41 @@
+import type { WritableComputedRef } from "vue";
+import type { Placement } from "@floating-ui/dom";
+
+export type LbSelectValue = string | object | number | null;
+
+export type LbSelectModelValue = LbSelectValue | LbSelectValue[];
+
 export interface LbSelectProps {
-  // 定义组件的属性
-  // 例如: text?: string;
+  modelValue?: LbSelectModelValue;
+  readonly?: boolean;
+  size?: "small" | "base" | "large";
+  placeholder?: string;
+  disabled?: boolean;
+  placement?: Placement;
+  offset?: number;
+  multiple?: boolean;
+  visible?: boolean;
+  options?: Array<{ label: string; value: string }>;
+  clearable?: boolean;
+  filterable?: boolean;
+  loading?: boolean;
+  popperClass?: string;
+  popperStyle?: Record<string, any>;
+  inputProps?: Record<string, any>;
 }
+
 export interface LbSelectEmits {
-  // (e: 'click', event: MouseEvent): void;
+  (e: "update:visible", value: boolean): void;
+  (e: "update:modelValue", value: LbSelectModelValue): void;
+  (e: "change", value: LbSelectModelValue): void;
+}
+
+export const LbSelectSymbol = Symbol("LbSelect");
+
+export interface LbSelectInject {
+  inputRef: LbSelectModelValue;
+  multiple: boolean;
+  modelValue: WritableComputedRef<LbSelectModelValue>;
+  disabled: boolean;
+  toggleVisible: () => void;
 }
