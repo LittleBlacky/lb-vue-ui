@@ -1,5 +1,9 @@
 <template>
-  <button :class="buttonClass" :disabled="disabled || loading">
+  <button
+    :class="buttonClass"
+    :disabled="disabled || loading"
+    v-ripple="{ color: `var(--lb-color-${type})` }"
+  >
     <template v-if="loading">
       <LbIcon spin>
         <svg
@@ -45,9 +49,9 @@ import { computed } from "vue";
 import type { LbButtonProps } from "./types";
 import { createNamespace } from "@lb-vue-ui/utils";
 import LbIcon from "../../icon/src/icon.vue";
-
+import { Ripple } from "@lb-vue-ui/directives";
 const bem = createNamespace("button");
-
+const vRipple = Ripple;
 defineOptions({
   name: "LbButton",
 });
