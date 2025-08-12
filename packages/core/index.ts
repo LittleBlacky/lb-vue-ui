@@ -13,3 +13,5 @@ const LbUI = {
 export default LbUI;
 
 export * from "../components";
+
+export * from "../directives";

@@ -42,6 +42,7 @@
     "@lb-vue-ui/theme-chalk": "workspace:*",
     "@lb-vue-ui/utils": "workspace:*",
     "@lb-vue-ui/hooks": "workspace:*",
+    "@lb-vue-ui/directives": "workspace:*",
     "@littleblacky/lb-vue-ui": "workspace:*",
     "@types/mockjs": "^1.0.10",
     "@vicons/ionicons5": "^0.13.0",

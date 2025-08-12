@@ -50,7 +50,8 @@
     "@lb-vue-ui/components": "workspace:*",
     "@lb-vue-ui/theme-chalk": "workspace:*",
     "@lb-vue-ui/utils": "workspace:*",
-    "@lb-vue-ui/hooks": "workspace:*"
+    "@lb-vue-ui/hooks": "workspace:*",
+    "@lb-vue-ui/directives": "workspace:*"
   },
   "devDependencies": {
     "vite": "^6.2.4",
