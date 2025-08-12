@@ -26,7 +26,7 @@
         @change="handleChange"
         @focus="handleFocus"
         @blur="handleBlur"
-        :class="bem.e('inner')"
+        :class="[bem.e('inner'), bem.is('disabled', disabled)]"
         :rows="autosize?.minRows || rows"
         :maxlength="maxlength"
         :minlength="minlength"
