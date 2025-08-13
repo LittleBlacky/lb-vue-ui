@@ -26,6 +26,7 @@
     "packages/core/index.ts",
     "packages/hooks/**/*.ts",
     "packages/utils/**/*.ts",
+    "packages/directives/**/*.ts",
     "packages/components/index.ts",
     "packages/components/**/*.ts",
     "packages/components/**/*.vue"
