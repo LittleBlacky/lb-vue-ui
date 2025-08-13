@@ -1,7 +1,7 @@
 @use "common/vars" as *;
 @use "mixins/mixins.scss" as mix;
 @use "mixins/function.scss" as fn;
-@use "animation/fade.scss" as *;
+@use "animation/transition.scss" as *;
 
 :root {
   @include mix.generate-css-vars(
