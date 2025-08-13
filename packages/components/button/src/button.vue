@@ -1,7 +1,7 @@
 <template>
   <button
     :class="buttonClass"
-    :disabled="disabled || loading"
+    :disabled="disabledRef"
     v-ripple="{ color: `var(--lb-color-${type})` }"
   >
     <template v-if="loading">
@@ -67,6 +67,8 @@ const props = withDefaults(defineProps<LbButtonProps>(), {
   link: false,
 });
 
+const disabledRef = computed(() => props.disabled || props.loading);
+
 const buttonClass = computed(() => {
   return [
     bem.b(),
@@ -78,7 +80,7 @@ const buttonClass = computed(() => {
     bem.is("link", props.link),
     bem.m(props.type),
     bem.m(props.size),
-    bem.is("disabled", props.disabled),
+    bem.is("disabled", disabledRef.value),
   ];
 });
 </script>
