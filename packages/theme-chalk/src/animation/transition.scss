@@ -1,0 +1,72 @@
+:root {
+  // 淡入淡出效果
+  .lb-fade-enter-active,
+  .lb-fade-leave-active {
+    transition: opacity var(--lb-transition-duration-slow) ease;
+  }
+  .lb-fade-enter-from,
+  .lb-fade-leave-to {
+    opacity: 0;
+  }
+
+  // 缩放入效果
+  // 顶部缩放
+  .lb-zoom-in-top-enter-acitve,
+  .lb-zoom-in-top-leave-active {
+    transition: all var(--lb-transition-duration-fast) ease;
+    transform-origin: top center;
+  }
+  .lb-zoom-in-top-enter-from,
+  .lb-zoom-in-top-leave-to {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+
+  // 底部缩放
+  .lb-zoom-in-bottom-enter-active,
+  .lb-zoom-in-bottom-leave-active {
+    transition: all var(--lb-transition-duration-fast) ease;
+    transform-origin: bottom center;
+  }
+  .lb-zoom-in-bottom-enter-from,
+  .lb-zoom-in-bottom-leave-to {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+
+  // 左侧缩放
+  .lb-zoom-in-left-enter-active,
+  .lb-zoom-in-left-leave-active {
+    transition: all var(--lb-transition-duration-fast) ease;
+    transform-origin: left center;
+  }
+  .lb-zoom-in-left-enter-from,
+  .lb-zoom-in-left-leave-to {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  // 右侧缩放
+  .lb-zoom-in-right-enter-active,
+  .lb-zoom-in-right-leave-active {
+    transition: all var(--lb-transition-duration-fast) ease;
+    transform-origin: right center;
+  }
+  .lb-zoom-in-right-enter-from,
+  .lb-zoom-in-right-leave-to {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  // 中心缩放
+  .lb-zoom-in-center-enter-active,
+  .lb-zoom-in-center-leave-active {
+    transition: all var(--lb-transition-duration-fast) ease;
+    transform-origin: center center;
+  }
+  .lb-zoom-in-center-enter-from,
+  .lb-zoom-in-center-leave-to {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+}
