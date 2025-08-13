@@ -2,7 +2,7 @@
   <button
     :class="buttonClass"
     :disabled="disabledRef"
-    v-ripple="{ color: `var(--lb-color-${type})` }"
+    v-ripple="{ color: `var(--lb-color-${type})`, disabled: text || link }"
   >
     <template v-if="loading">
       <LbIcon spin>

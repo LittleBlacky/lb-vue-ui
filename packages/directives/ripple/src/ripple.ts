@@ -3,8 +3,8 @@ import type { RippleBinding } from "./types";
 let styleAdded = false;
 
 const Ripple = {
+  name: "ripple",
   mounted(el: HTMLElement, binding: RippleBinding) {
-    // 确保样式只添加一次
     if (!styleAdded) {
       const style = document.createElement("style");
       style.textContent = `
@@ -36,8 +36,8 @@ const Ripple = {
     // 添加防抖
     let lastClickTime = 0;
     const RIPPLE_COOLDOWN = 300;
-
     el.addEventListener("click", (e) => {
+      if (binding?.value.disabled) return;
       const now = Date.now();
       if (now - lastClickTime < RIPPLE_COOLDOWN) return;
       lastClickTime = now;
@@ -51,10 +51,10 @@ const Ripple = {
       const y = e.clientY - rect.top;
 
       // 使用CSS变量和transform优化
-      ripple.style.setProperty("--ripple-color", binding.value?.color || "");
+      ripple.style.setProperty("--ripple-color", binding?.value.color || "");
       ripple.style.setProperty(
         "--ripple-duration",
-        `${binding.value?.duration || 600}ms`
+        `${binding?.value.duration || 600}ms`
       );
       ripple.style.width = `${size}px`;
       ripple.style.height = `${size}px`;
@@ -81,6 +81,9 @@ const Ripple = {
         ); // 使用{once: true}自动移除监听器
       });
     });
+  },
+  unmounted(el: HTMLElement) {
+    el.removeEventListener("click", () => {});
   },
 };
 
