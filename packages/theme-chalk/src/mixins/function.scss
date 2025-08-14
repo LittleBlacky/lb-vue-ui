@@ -1,14 +1,14 @@
-@use 'config';
-@use 'sass:meta';
-@use 'sass:string';
-
+@use "config";
+@use "sass:meta";
+@use "sass:string";
+@use "sass:map";
 // BEM support Func
-/**
+  /**
  * 检查选择器是否包含特殊的 BEM 修饰符、伪类或伪元素。
  * @param $selector 要检查的选择器。
  * @return 
 */
-@function selectorToString($selector) {
+  @function selectorToString($selector) {
   $selector: meta.inspect($selector); // 将选择器转换为字符串
   $selector: string.slice($selector, 2, -2); // 去除字符串首尾引号
   @return $selector;
@@ -29,7 +29,7 @@
 @function containWhenFlag($selector) {
   $selector: selectorToString($selector);
 
-  @if string.index($selector, '.' + config.$state-prefix) {
+  @if string.index($selector, "." + config.$state-prefix) {
     @return true;
   } @else {
     @return false;
@@ -40,7 +40,7 @@
 @function containPseudoClass($selector) {
   $selector: selectorToString($selector);
 
-  @if string.index($selector, ':') {
+  @if string.index($selector, ":") {
     @return true;
   } @else {
     @return false;
@@ -57,10 +57,10 @@
 // joinVarName(('button', 'text-color')) => '--f-button-text-color'
 // 将列表中的元素拼接成 CSS 变量名。
 @function joinVarName($list) {
-  $name: '--' + config.$namespace;
+  $name: "--" + config.$namespace;
   @each $item in $list {
-    @if $item != '' {
-      $name: $name + '-' + $item;
+    @if $item != "" {
+      $name: $name + "-" + $item;
     }
   }
   @return $name;
@@ -86,17 +86,29 @@
 
 // bem('block', 'element', 'modifier') => 'f-block__element--modifier'
 // 根据 BEM 命名规范生成类名。
-@function bem($block, $element: '', $modifier: '') {
+@function bem($block, $element: "", $modifier: "") {
   $name: config.$namespace + config.$common-separator + $block;
 
-  @if $element != '' {
+  @if $element != "" {
     $name: $name + config.$element-separator + $element;
   }
 
-  @if $modifier != '' {
+  @if $modifier != "" {
     $name: $name + config.$modifier-separator + $modifier;
   }
 
   // @debug $name;
   @return $name;
+}
+
+@function getMixColor($color, $type, $percent) {
+  $typeMap: (
+    light: white,
+    dark: black,
+  );
+  @return color-mix(
+    in oklab,
+    map.get($typeMap, $type) $percent,
+    var(--lb-tag-color)
+  );
 }
