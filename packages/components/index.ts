@@ -23,3 +23,4 @@ export * from "./radio";
 export * from "./radio-group";
 export * from "./select";
 export * from "./select-option";
+export * from "./tag";

@@ -1,0 +1,75 @@
+@use "common/vars" as *;
+@use "mixins/mixins.scss" as mix;
+@use "mixins/function.scss" as fn;
+@use "animation/transition.scss" as *;
+@use "icon.scss" as *;
+
+@include mix.b(tag) {
+  --lb-tag-height: #{fn.getCssVar(height, small)};
+  --lb-tag-color: var(--lb-color-primary);
+  --lb-tag-bg-color: var(--lb-color-primary-light-8);
+  --lb-tag-icon-color: var(--lb-tag-color);
+  --lb-tag-border-color: #{fn.getCssVar(border, color)};
+  --lb-tag-border: 1px solid var(--lb-tag-border-color);
+}
+
+@include mix.b(tag) {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2px 9px;
+  height: var(--lb-tag-height);
+  font-size: fn.getCssVar(font-size, small);
+  font-weight: bold;
+  border-radius: fn.getCssVar(border-radius, base);
+  box-sizing: border-box;
+
+  border: var(--lb-tag-border);
+  color: fn.getCssVar(tag, color);
+  background-color: fn.getCssVar(color, white);
+  @include mix.e(content) {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .lb-icon {
+    margin-left: 5px;
+    border-radius: 50%;
+    width: fn.getCssVar(font-size, small);
+    height: fn.getCssVar(font-size, small);
+    transition: all fn.getCssVar(transition, duration);
+    color: var(--lb-tag-icon-color);
+    &:hover {
+      --lb-tag-icon-color: #{fn.getMixColor(
+          fn.getCssVar(tag, color),
+          dark,
+          20%
+        )};
+    }
+  }
+
+  @each $key, $val in $colors {
+    @if $key != light and $key != dark {
+      @include mix.m($key) {
+        --lb-tag-color: #{fn.getCssVar(color, $key)};
+        background-color: fn.getCssVar(color, $key, light-8);
+      }
+    }
+  }
+
+  @include mix.m(medium) {
+    --lb-tag-height: 28px;
+    padding: 0 13px;
+  }
+
+  @include mix.m(small) {
+    height: 24px;
+    padding: 0 8px;
+  }
+
+  @include mix.when(hit) {
+    --lb-tag-border-color: #{fn.getCssVar(tag, color)};
+  }
+}
