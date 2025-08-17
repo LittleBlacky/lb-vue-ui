@@ -1,22 +1,28 @@
-import type { WritableComputedRef } from "vue";
+import type { WritableComputedRef, Ref } from "vue";
 import type { Placement } from "@floating-ui/dom";
 
-export type LbSelectValue = string | object | number | null;
+export type LbSelectValue = string | Record<string, any> | number | null;
 
 export type LbSelectModelValue = LbSelectValue | LbSelectValue[];
+
+export interface LbSelectOptionsProps {
+  label: string;
+  value: string;
+}
 
 export interface LbSelectProps {
   modelValue?: LbSelectModelValue;
   readonly?: boolean;
   size?: "small" | "base" | "large";
   placeholder?: string;
+  props?: LbSelectOptionsProps;
   disabled?: boolean;
   placement?: Placement;
   offset?: number;
   valueKey?: string | number;
   multiple?: boolean;
   visible?: boolean;
-  options?: Array<{ label: string | number; value: LbSelectValue }>;
+  options?: Array<{ [key: string]: any }>;
   clearable?: boolean;
   filterable?: boolean;
   loading?: boolean;
@@ -39,5 +45,7 @@ export interface LbSelectInject {
   valueKey: string | number;
   modelValue: WritableComputedRef<LbSelectModelValue>;
   disabled: boolean;
+  props: LbSelectOptionsProps;
+  selectOptions: Ref<Array<{ label: string | number; value: LbSelectValue }>>;
   toggleVisible: () => void;
 }

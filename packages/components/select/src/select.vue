@@ -14,14 +14,28 @@
       :popper-class="bem.e('dropdown-wrapper')"
       :append-to="appendTo"
     >
-      <lb-input
-        v-model="inputRef"
-        :readonly="readonly"
-        :size="props.size"
-        :disabled="disabled"
-        :class="[bem.e('input'), bem.is('filterable', props.filterable)]"
-      >
-      </lb-input>
+      <div :class="[bem.e('wrapper')]">
+        <template v-if="props.multiple">
+          <slot name="tag" :selectedLabels="modelLabel">
+            <lb-tag
+              v-for="(item, index) in modelLabel"
+              :class="bem.e('selected-item')"
+              :key="index"
+              type="info"
+              closable
+              @close="handleDelete(index)"
+            >
+              {{ item }}
+            </lb-tag>
+          </slot>
+        </template>
+        <input
+          v-model="inputRef"
+          :readonly="readonly"
+          :disabled="disabled"
+          :class="[bem.e('input')]"
+        />
+      </div>
       <template #content>
         <ul :class="[bem.e('dropdown-menu')]" :style="dropdownStyle">
           <slot>
@@ -33,8 +47,8 @@
                     ? (item.value as Record<string, any>)[valueKey]
                     : item.value
                 "
-                :label="item.label"
-                :value="item.value"
+                :label="item[props.props.label]"
+                :value="item[props.props.value]"
               >
               </lb-select-option>
             </template>
@@ -48,7 +62,14 @@
 import { ref, provide, computed } from "vue";
 import { createNamespace } from "@lb-vue-ui/utils";
 import type { LbSelectProps, LbSelectEmits, LbSelectValue } from "./types";
-import { LbTooltip, LbInput, LbSelectSymbol } from "@lb-vue-ui/components";
+import {
+  LbTooltip,
+  LbTag,
+  LbSelectSymbol,
+  LbSelectOption,
+  type LbSelectOptionItem,
+} from "@lb-vue-ui/components";
+
 defineOptions({
   name: "LbSelect",
 });
@@ -59,26 +80,49 @@ const props = withDefaults(defineProps<LbSelectProps>(), {
   modelValue: null,
   placeholder: "请选择",
   disabled: false,
+  props: () => ({
+    label: "label",
+    value: "value",
+  }),
   placement: "bottom-start",
   offset: 9,
   multiple: false,
   visible: false,
-  valueKey: "",
+  valueKey: "value",
   size: "base",
 });
 
 const appendTo = computed(() => document.body);
 
-const inputRef = ref<string | null>(null);
+const inputRef = ref<Omit<LbSelectValue, "object">>("");
 const readonly = computed(() => !props.filterable);
 const disabled = computed(() => props.disabled || props.loading);
 
 const modelValue = computed({
   get: () => props.modelValue,
   set: (value) => {
+    if (!props.multiple) {
+      inputRef.value = modelValue.value || "";
+    }
     emits("update:modelValue", value);
     emits("change", value);
   },
+});
+
+const modelLabel = computed(() => {
+  const curValue = Array.isArray(modelValue.value)
+    ? [...modelValue.value]
+    : [modelValue.value];
+  return curValue.map((v) => {
+    const item = selectOptions.value.find((item) => {
+      if (typeof item.value === "object" && props.valueKey) {
+        // @ts-ignore
+        return item.value[props.valueKey] === v[props.valueKey];
+      }
+      return item.value === v;
+    });
+    return item?.label || "";
+  });
 });
 
 const toggleVisible = () => {
@@ -99,10 +143,21 @@ const dropdownStyle = computed(() => {
   };
 });
 
+const handleDelete = (index: number) => {
+  if (Array.isArray(modelValue.value)) {
+    modelValue.value.splice(index, 1);
+  }
+};
+
+const selectOptions = ref<LbSelectOptionItem[]>([]);
+
 provide(LbSelectSymbol, {
   inputRef,
-  ...props,
+  valueKey: props.valueKey,
   modelValue,
+  props: props.props,
+  multiple: props.multiple,
+  selectOptions,
   toggleVisible,
 });
 </script>

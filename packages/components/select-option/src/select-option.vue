@@ -5,6 +5,7 @@
     @click.stop="handleClick"
     :aria-selected="itemSelected"
     role="option"
+    v-ripple="{ disabled: props.disabled }"
   >
     <slot>
       <span>{{ label }}</span>
@@ -12,7 +13,7 @@
   </li>
 </template>
 <script setup lang="ts">
-import { computed, inject } from "vue";
+import { computed, inject, onBeforeUnmount, onMounted } from "vue";
 import type { LbSelectOptionProps } from "./types";
 import { createNamespace } from "@lb-vue-ui/utils";
 import {
@@ -20,6 +21,8 @@ import {
   type LbSelectInject,
   type LbSelectValue,
 } from "@lb-vue-ui/components";
+import { Ripple } from "@lb-vue-ui/directives";
+const vRipple = Ripple;
 const bem = createNamespace("select__option");
 
 defineOptions({
@@ -29,48 +32,48 @@ defineOptions({
 const props = withDefaults(defineProps<LbSelectOptionProps>(), {
   label: "",
   value: "",
+  disabled: false,
 });
 
 const selectContext = inject<LbSelectInject>(LbSelectSymbol);
 
 const itemSelected = computed(() => {
   if (!selectContext) return false;
-
-  const { modelValue, multiple, valueKey } = selectContext;
-  const currentValue = modelValue.value;
-
-  if (multiple) {
-    const values = Array.isArray(currentValue) ? currentValue : [currentValue];
-    return values.some((v: LbSelectValue) => {
-      return typeof v === "object" && v !== null && valueKey in v
-        ? (v as Record<string, any>)[valueKey] === props.value
-        : v === props.value;
-    });
-  }
-
-  return currentValue === props.value;
+  const { valueKey, modelValue } = selectContext;
+  const values = Array.isArray(modelValue.value)
+    ? modelValue.value
+    : [modelValue.value];
+  return values.some((v: LbSelectValue) => {
+    if (typeof props.value === "object") {
+      return (v as Record<string, any>)[valueKey] === props.value[valueKey];
+    }
+    return v === props.value;
+  });
 });
 
 const handleClick = () => {
   if (!selectContext) return;
-
-  const { modelValue, multiple, valueKey, inputRef, toggleVisible } =
-    selectContext;
-  const currentValue = modelValue.value;
-
+  const { multiple, modelValue, toggleVisible } = selectContext;
   if (multiple) {
-    const values = Array.isArray(currentValue) ? currentValue : [currentValue];
-    const index = values.indexOf(props.value);
-
-    modelValue.value =
-      index === -1 && !itemSelected.value
-        ? [...values, props.value]
-        : values.filter((v) => v !== props.value);
-  } else {
-    if (props.value && typeof props.value === "object") {
-      inputRef.value = valueKey ? props.value[valueKey] : props.value;
+    const values = Array.isArray(modelValue.value)
+      ? modelValue.value
+      : [modelValue.value];
+    if (itemSelected.value) {
+      if (typeof props.value === "object") {
+        values.splice(values.indexOf(props.value[valueKey]), 1);
+      } else {
+        values.splice(values.indexOf(props.value), 1);
+      }
+    } else {
+      values.push(props.value);
     }
-    modelValue.value = props.value;
+    modelValue.value = values;
+  } else {
+    if (itemSelected.value) {
+      modelValue.value = null;
+    } else {
+      modelValue.value = props.value;
+    }
     toggleVisible();
   }
 };
@@ -81,5 +84,22 @@ const classes = computed(() => {
 
 const styles = computed(() => {
   return {};
+});
+
+onMounted(() => {
+  if (selectContext) {
+    const { selectOptions } = selectContext;
+    selectOptions.value.push({
+      label: props.label,
+      value: props.value,
+    });
+  }
+});
+
+onBeforeUnmount(() => {
+  if (selectContext) {
+    selectContext.selectOptions.value =
+      selectContext.selectOptions.value.filter((v) => v.value !== props.value);
+  }
 });
 </script>

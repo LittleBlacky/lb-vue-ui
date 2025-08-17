@@ -1,6 +1,42 @@
 @use "common/vars" as *;
 @use "mixins/mixins.scss" as mix;
 @use "mixins/function.scss" as fn;
+@use "tag.scss" as *;
+@use "icon.scss" as *;
+@use "select-option.scss" as *;
+@use "tooltip.scss" as *;
+@use "input.scss" as *;
+
+@include mix.b(select) {
+  --lb-select-width: var(--lb-width-container-base);
+  --lb-select-gap: var(--lb-gap-extra-small);
+  --lb-select-width: var(--lb-width-container-base);
+  --lb-select-height: var(--lb-height-base);
+  --lb-select-text-color-placeholder: var(--lb-text-color-placeholder, #a8a8a8);
+  --lb-select-text-color-regular: var(--lb-text-color-regular, #333);
+  --lb-select-border-color: var(--lb-border-color, #dcdfe6);
+  --lb-select-border-radius-base: var(--lb-border-radius-base, 4px);
+  --lb-select-color-primary: var(--lb-color-primary, #409eff);
+  --lb-select-bg-color: var(--lb-fill-color-blank);
+  --lb-select-disabled-bg-color: var(--lb-disabled-bg-color, #f5f7fa);
+  --lb-select-disabled-border-color: var(--lb-disabled-border-color, #e4e7ed);
+  --lb-select-disabled-text-color: var(--lb-disabled-text-color, #c0c4cc);
+  --lb-select-font-size: var(--lb-font-size-base);
+  --lb-select-font-size-small: var(--lb-font-size-small);
+  --lb-select-font-size-large: var(--lb-font-size-large);
+  --lb-select-transition-duration: var(--lb-transition-duration-fast, 0.2s);
+  --lb-select-padding: 6px 10px;
+  --lb-select-gap: var(--lb-gap-small, 8px);
+  --lb-select-count-color: var(--lb-select-text-color-placeholder);
+  --lb-select-count-font-size: var(--lb-select-font-size);
+  --lb-select-count-position-right: 10px;
+  --lb-select-count-position-bottom: 50%;
+  --lb-select-count-transform: translateY(50%);
+  --lb-select-prepend-bg-color: var(--lb-color-info-light-8);
+  --lb-select-prepend-border-color: var(--lb-border-color, #dcdfe6);
+  --lb-select-cursor: pointer;
+  --lb-select-other-cursor: default;
+}
 
 @include mix.b(select) {
   width: fit-content;
@@ -8,6 +44,7 @@
     padding-left: 0px;
     padding-right: 0px;
   }
+
   @include mix.e(dropdown-menu) {
     list-style-type: none;
     margin: 0;
@@ -15,13 +52,42 @@
     overflow: hidden;
     box-sizing: border-box;
   }
+
+  @include mix.e(wrapper) {
+    display: flex;
+    width: var(--lb-select-width);
+    border: 1px solid var(--lb-color-primary);
+    flex-wrap: wrap;
+    gap: var(--lb-select-gap);
+    position: relative;
+    padding: var(--lb-select-padding);
+    display: inline-flex;
+    align-items: center;
+    curosr: var(--lb-select-other-cursor);
+    background-color: var(--lb-select-bg-color);
+    border: 1px solid var(--lb-select-border-color);
+    border-color: var(--lb-select-border-color);
+    border-radius: var(--lb-select-border-radius-base);
+    gap: var(--lb-select-gap);
+  }
+
+  @include mix.e(selected-item) {
+    max-width: 100%;
+    flex-shrink: 0;
+  }
+
+  @include mix.when(filterable) {
+    --lb-select-input-cursor: text;
+  }
+
   @include mix.e(input) {
-    cursor: pointer;
-    @include mix.when(disabled) {
-      cursor: not-allowed;
-    }
-    @include mix.when(filterable) {
-      cursor: text;
+    flex-grow: 1;
+    min-width: 0px;
+    width: 0px;
+    border: none;
+    cursor: var(--lb-select-input-cursor);
+    &:focus {
+      outline: none;
     }
   }
 }

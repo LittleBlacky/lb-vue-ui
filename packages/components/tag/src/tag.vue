@@ -8,7 +8,7 @@
         v-if="closable"
         :class="bem.e('close')"
         name="close"
-        @click="handleClose"
+        @click.stop="handleClose"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
