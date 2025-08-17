@@ -30,7 +30,8 @@
           </slot>
         </template>
         <input
-          v-model="inputRef"
+          ref="inputRef"
+          v-model="inputModel"
           :readonly="readonly"
           :disabled="disabled"
           :class="[bem.e('input')]"
@@ -59,7 +60,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, provide, computed } from "vue";
+import { ref, provide, computed, onMounted } from "vue";
 import { createNamespace } from "@lb-vue-ui/utils";
 import type { LbSelectProps, LbSelectEmits, LbSelectValue } from "./types";
 import {
@@ -94,16 +95,14 @@ const props = withDefaults(defineProps<LbSelectProps>(), {
 
 const appendTo = computed(() => document.body);
 
-const inputRef = ref<Omit<LbSelectValue, "object">>("");
+const inputModel = ref<Omit<LbSelectValue, "object">>("");
+const inputRef = ref();
 const readonly = computed(() => !props.filterable);
 const disabled = computed(() => props.disabled || props.loading);
 
 const modelValue = computed({
   get: () => props.modelValue,
   set: (value) => {
-    if (!props.multiple) {
-      inputRef.value = modelValue.value || "";
-    }
     emits("update:modelValue", value);
     emits("change", value);
   },
@@ -113,7 +112,8 @@ const modelLabel = computed(() => {
   const curValue = Array.isArray(modelValue.value)
     ? [...modelValue.value]
     : [modelValue.value];
-  return curValue.map((v) => {
+
+  const curLabel = curValue.map((v) => {
     const item = selectOptions.value.find((item) => {
       if (typeof item.value === "object" && props.valueKey) {
         // @ts-ignore
@@ -123,6 +123,10 @@ const modelLabel = computed(() => {
     });
     return item?.label || "";
   });
+  if (!props.multiple) {
+    inputModel.value = curLabel[0] || "";
+  }
+  return curLabel;
 });
 
 const toggleVisible = () => {
@@ -152,13 +156,27 @@ const handleDelete = (index: number) => {
 const selectOptions = ref<LbSelectOptionItem[]>([]);
 
 provide(LbSelectSymbol, {
-  inputRef,
   valueKey: props.valueKey,
   modelValue,
   props: props.props,
   multiple: props.multiple,
   selectOptions,
   toggleVisible,
+});
+
+onMounted(() => {
+  inputRef.value.addEventListener("keydown", function (event: KeyboardEvent) {
+    if (!props.multiple) return;
+    if (event.key !== "Backspace" && event.key !== "Delete") return;
+    if (inputModel.value !== "") return;
+    Array.isArray(modelValue.value) &&
+      modelValue.value.length > 0 &&
+      modelValue.value.pop();
+  });
+});
+
+defineExpose({
+  inputRef,
 });
 </script>
 

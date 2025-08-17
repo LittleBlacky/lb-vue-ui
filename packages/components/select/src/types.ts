@@ -40,7 +40,6 @@ export interface LbSelectEmits {
 export const LbSelectSymbol = Symbol("LbSelect");
 
 export interface LbSelectInject {
-  inputRef: LbSelectModelValue;
   multiple: boolean;
   valueKey: string | number;
   modelValue: WritableComputedRef<LbSelectModelValue>;
