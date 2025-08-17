@@ -114,6 +114,7 @@
 import { computed, ref, nextTick, useSlots } from "vue";
 import type { LbInputProps, LbInputEmits, LbInputAutoSize } from "./types";
 import { createNamespace } from "@lb-vue-ui/utils";
+import { LbIcon } from "@lb-vue-ui/components";
 
 defineOptions({
   name: "LbInput",
