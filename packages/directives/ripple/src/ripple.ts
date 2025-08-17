@@ -12,7 +12,7 @@ const Ripple = {
           position: absolute;
           border-radius: 50%;
           background-color: var(--ripple-color, var(--lb-color-primary));
-          animation: ripple var(--ripple-duration, 600ms) linear forwards;
+          animation: ripple var(--ripple-duration, var(--lb-transition-duration-slow)) linear forwards;
           pointer-events: none;
           opacity: 0.3;
           transform: scale(0);
@@ -54,7 +54,8 @@ const Ripple = {
       ripple.style.setProperty("--ripple-color", binding?.value.color || "");
       ripple.style.setProperty(
         "--ripple-duration",
-        `${binding?.value.duration || 600}ms`
+        `${binding?.value.duration || "var(--lb-transition-duration-slow)"})
+    }ms`
       );
       ripple.style.width = `${size}px`;
       ripple.style.height = `${size}px`;
