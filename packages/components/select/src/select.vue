@@ -20,7 +20,7 @@
             <lb-tag
               v-for="(item, index) in modelLabel"
               :class="bem.e('selected-item')"
-              :key="index"
+              :key="modelValue[index]"
               type="info"
               closable
               @close="handleDelete(index)"
