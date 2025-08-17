@@ -32,7 +32,7 @@
         <input
           ref="inputRef"
           v-model="inputModel"
-          :readonly="readonly"
+          :readonly="inputReadonly"
           :disabled="disabled"
           :class="[bem.e('input')]"
         />
@@ -97,7 +97,7 @@ const appendTo = computed(() => document.body);
 
 const inputModel = ref<Omit<LbSelectValue, "object">>("");
 const inputRef = ref();
-const readonly = computed(() => !props.filterable);
+const inputReadonly = computed(() => !(props.filterable || props.multiple));
 const disabled = computed(() => props.disabled || props.loading);
 
 const modelValue = computed({
