@@ -29,6 +29,10 @@ export default {
       link: "/table/table",
     },
     {
+      text: "Tag 标签",
+      link: "/tag/tag",
+    },
+    {
       text: "Tree 树形控件",
       link: "/tree/tree",
     },
