@@ -9,8 +9,8 @@
           v-show="!disabled && visibleRef"
           ref="popperRef"
           :class="{
-            [`${popperClass}`]: popperClass,
             [bem.e('popper')]: true,
+            [`${popperClass}`]: popperClass,
           }"
         >
           <slot name="content">
