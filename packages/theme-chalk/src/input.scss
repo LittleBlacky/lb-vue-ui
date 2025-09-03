@@ -80,6 +80,8 @@
     position: relative;
     padding: var(--lb-input-padding);
     display: inline-flex;
+    flex-wrap: wrap;
+    width: var(--lb-input-width);
     align-items: center;
     curosr: var(--lb-input-other-cursor);
     background-color: var(--lb-input-bg-color);
@@ -100,6 +102,8 @@
   @include mix.e(inner) {
     cursor: var(--lb-input-text-cursor);
     flex-grow: 1;
+    width: 50px;
+    min-width: 50px;
     height: auto;
     border: none;
     outline: none;
