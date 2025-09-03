@@ -11,9 +11,11 @@
 
   // 缩放入效果
   // 顶部缩放
-  .lb-zoom-in-top-enter-acitve,
+  .lb-zoom-in-top-enter-active,
   .lb-zoom-in-top-leave-active {
-    transition: all var(--lb-transition-duration-fast) ease;
+    opacity: 1;
+    transform: scaleY(1);
+    transition: all var(--lb-transition-duration) ease;
     transform-origin: top center;
   }
   .lb-zoom-in-top-enter-from,
@@ -25,7 +27,9 @@
   // 底部缩放
   .lb-zoom-in-bottom-enter-active,
   .lb-zoom-in-bottom-leave-active {
-    transition: all var(--lb-transition-duration-fast) ease;
+    opacity: 1;
+    transform: scaleY(1);
+    transition: all var(--lb-transition-duration) ease;
     transform-origin: bottom center;
   }
   .lb-zoom-in-bottom-enter-from,
@@ -37,7 +41,9 @@
   // 左侧缩放
   .lb-zoom-in-left-enter-active,
   .lb-zoom-in-left-leave-active {
-    transition: all var(--lb-transition-duration-fast) ease;
+    opacity: 1;
+    transform: scaleX(1);
+    transition: all var(--lb-transition-duration) ease;
     transform-origin: left center;
   }
   .lb-zoom-in-left-enter-from,
@@ -49,7 +55,9 @@
   // 右侧缩放
   .lb-zoom-in-right-enter-active,
   .lb-zoom-in-right-leave-active {
-    transition: all var(--lb-transition-duration-fast) ease;
+    opacity: 1;
+    transform: scaleX(1);
+    transition: all var(--lb-transition-duration) ease;
     transform-origin: right center;
   }
   .lb-zoom-in-right-enter-from,
@@ -61,7 +69,9 @@
   // 中心缩放
   .lb-zoom-in-center-enter-active,
   .lb-zoom-in-center-leave-active {
-    transition: all var(--lb-transition-duration-fast) ease;
+    opacity: 1;
+    transform: scale(1);
+    transition: all var(--lb-transition-duration) ease;
     transform-origin: center center;
   }
   .lb-zoom-in-center-enter-from,

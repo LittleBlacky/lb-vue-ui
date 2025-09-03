@@ -27,5 +27,9 @@ const style = computed(() => {
     ...(color ? { color: color } : {}),
   };
 });
-const className = computed(() => [bem.b(), bem.is("spin", props.spin)]);
+const className = computed(() => [
+  bem.b(),
+  bem.is("spin", props.spin),
+  bem.is("reverse", props.reverse),
+]);
 </script>

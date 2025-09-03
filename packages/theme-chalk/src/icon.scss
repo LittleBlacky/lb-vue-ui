@@ -18,8 +18,12 @@
   height: 1em;
   vertical-align: middle;
   fill: currentColor;
+  transform: rotate(0deg);
+  transition: transform var(--lb-transition-duration-fast);
   @include when(spin) {
     animation: spin 2s linear infinite;
   }
+  @include when(reverse) {
+    transform: rotate(180deg);
+  }
 }
-
