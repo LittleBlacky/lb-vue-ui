@@ -54,11 +54,8 @@
   }
 
   @include mix.e(wrapper) {
-    display: flex;
     width: var(--lb-select-width);
     border: 1px solid var(--lb-color-primary);
-    flex-wrap: wrap;
-    gap: var(--lb-select-gap);
     position: relative;
     padding: var(--lb-select-padding);
     display: inline-flex;
@@ -71,9 +68,24 @@
     gap: var(--lb-select-gap);
   }
 
+  @include mix.e(input-wrapper) {
+    flex-grow: 1;
+    min-width: 0px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
   @include mix.e(selected-item) {
     max-width: 100%;
     flex-shrink: 0;
+  }
+
+  @include mix.m(no-data) {
+    padding: 8px 12px;
+    color: #999;
+    text-align: center;
+    font-size: 14px;
   }
 
   @include mix.when(filterable) {
@@ -82,12 +94,20 @@
 
   @include mix.e(input) {
     flex-grow: 1;
-    min-width: 0px;
+    min-width: 5rem;
     width: 0px;
     border: none;
     cursor: var(--lb-select-input-cursor);
     &:focus {
       outline: none;
     }
+  }
+
+  @include mix.e(suffix) {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    height: 100%;
+    color: var(--lb-select-text-color-placeholder);
   }
 }

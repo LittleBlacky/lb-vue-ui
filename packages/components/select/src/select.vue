@@ -13,29 +13,70 @@
       content="暂无数据"
       :popper-class="bem.e('dropdown-wrapper')"
       :append-to="appendTo"
+      transition="lb-zoom-in-top"
     >
       <div :class="[bem.e('wrapper')]">
-        <template v-if="props.multiple">
-          <slot name="tag" :selectedLabels="modelLabel">
-            <lb-tag
-              v-for="(item, index) in modelLabel"
-              :class="bem.e('selected-item')"
-              :key="modelValue[index]"
-              type="info"
-              closable
-              @close="handleDelete(index)"
+        <div :class="[bem.e('input-wrapper')]">
+          <template v-if="props.multiple">
+            <slot name="tag" :selectedLabels="modelLabel">
+              <lb-tag
+                v-for="(item, index) in modelLabel"
+                :class="bem.e('selected-item')"
+                :key="modelValue[index]"
+                type="info"
+                closable
+                @close="handleDelete(index)"
+              >
+                {{ item }}
+              </lb-tag>
+            </slot>
+          </template>
+          <input
+            ref="inputRef"
+            v-model="inputModel"
+            :readonly="inputReadonly"
+            :disabled="disabled"
+            :class="[bem.e('input')]"
+            :placeholder="placeholder"
+            @input="OnInput"
+            @keydown="handleKeydown"
+          />
+        </div>
+        <div :class="[bem.e('suffix')]">
+          <lb-icon name="arrow-down" size="12" :reverse="visibleRef">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              viewBox="0 0 512 512"
             >
-              {{ item }}
-            </lb-tag>
-          </slot>
-        </template>
-        <input
-          ref="inputRef"
-          v-model="inputModel"
-          :readonly="inputReadonly"
-          :disabled="disabled"
-          :class="[bem.e('input')]"
-        />
+              <path
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="48"
+                d="M112 184l144 144l144-144"
+              ></path>
+            </svg>
+          </lb-icon>
+          <lb-icon
+            v-if="props.multiple && modelValue.length"
+            name="clear"
+            size="12"
+            @click.stop="clear"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              viewBox="0 0 512 512"
+            >
+              <path
+                d="M256 48C141.31 48 48 141.31 48 256s93.31 208 208 208s208-93.31 208-208S370.69 48 256 48zm75.31 260.69a16 16 0 1 1-22.62 22.62L256 278.63l-52.69 52.68a16 16 0 0 1-22.62-22.62L233.37 256l-52.68-52.69a16 16 0 0 1 22.62-22.62L256 233.37l52.69-52.68a16 16 0 0 1 22.62 22.62L278.63 256z"
+                fill="currentColor"
+              ></path>
+            </svg>
+          </lb-icon>
+        </div>
       </div>
       <template #content>
         <ul :class="[bem.e('dropdown-menu')]" :style="dropdownStyle">
@@ -54,15 +95,20 @@
               </lb-select-option>
             </template>
           </slot>
+          <li v-if="!hasVisibleOptions" :class="bem.m('no-data')">
+            <slot name="no-data"> 无匹配数据: "{{ inputModel }}" </slot>
+          </li>
         </ul>
       </template>
     </lb-tooltip>
   </div>
 </template>
+
 <script setup lang="ts">
-import { ref, provide, computed, onMounted } from "vue";
+import { ref, provide, computed, onMounted, watch } from "vue";
 import { createNamespace } from "@lb-vue-ui/utils";
-import type { LbSelectProps, LbSelectEmits, LbSelectValue } from "./types";
+import { LbIcon } from "@lb-vue-ui/components";
+import type { LbSelectProps, LbSelectEmits } from "./types";
 import {
   LbTooltip,
   LbTag,
@@ -76,10 +122,8 @@ defineOptions({
 });
 
 const bem = createNamespace("select");
-
 const props = withDefaults(defineProps<LbSelectProps>(), {
   modelValue: null,
-  placeholder: "请选择",
   disabled: false,
   props: () => ({
     label: "label",
@@ -89,45 +133,24 @@ const props = withDefaults(defineProps<LbSelectProps>(), {
   offset: 9,
   multiple: false,
   visible: false,
+  filterable: false,
+  filterMethod: undefined,
   valueKey: "value",
   size: "base",
+  noDataText: "暂无数据",
+});
+
+const placeholder = computed(() => {
+  if (props.filterable && !props.multiple && modelLabel.value[0])
+    return modelLabel.value[0];
+  if (props.placeholder) return props.placeholder;
 });
 
 const appendTo = computed(() => document.body);
-
-const inputModel = ref<Omit<LbSelectValue, "object">>("");
+const inputModel = ref<string>("");
 const inputRef = ref();
-const inputReadonly = computed(() => !(props.filterable || props.multiple));
+const inputReadonly = computed(() => !props.filterable);
 const disabled = computed(() => props.disabled || props.loading);
-
-const modelValue = computed({
-  get: () => props.modelValue,
-  set: (value) => {
-    emits("update:modelValue", value);
-    emits("change", value);
-  },
-});
-
-const modelLabel = computed(() => {
-  const curValue = Array.isArray(modelValue.value)
-    ? [...modelValue.value]
-    : [modelValue.value];
-
-  const curLabel = curValue.map((v) => {
-    const item = selectOptions.value.find((item) => {
-      if (typeof item.value === "object" && props.valueKey) {
-        // @ts-ignore
-        return item.value[props.valueKey] === v[props.valueKey];
-      }
-      return item.value === v;
-    });
-    return item?.label || "";
-  });
-  if (!props.multiple) {
-    inputModel.value = curLabel[0] || "";
-  }
-  return curLabel;
-});
 
 const toggleVisible = () => {
   if (props.disabled) return;
@@ -153,7 +176,109 @@ const handleDelete = (index: number) => {
   }
 };
 
+const filterOptions = () => {
+  if (!props.filterable || !inputModel.value) {
+    selectOptions.value.forEach((option) => {
+      option.visible = true;
+    });
+    return;
+  }
+
+  const searchText = inputModel.value.toLowerCase();
+
+  selectOptions.value.forEach((option) => {
+    if (props.filterMethod && typeof props.filterMethod === "function") {
+      option.visible = props.filterMethod(searchText, option);
+    } else {
+      const label = option.label?.toString().toLowerCase() || "";
+      option.visible = label.includes(searchText);
+    }
+  });
+};
+
+const OnInput = () => {
+  if (!props.filterable) return;
+  filterOptions();
+  visibleRef.value = true;
+};
+
+const handleKeydown = (event: KeyboardEvent) => {
+  if (!props.multiple) return;
+  if (event.key !== "Backspace" && event.key !== "Delete") return;
+  if (inputModel.value !== "") return;
+  Array.isArray(modelValue.value) &&
+    modelValue.value.length > 0 &&
+    modelValue.value.pop();
+};
+
+const optionMap = computed(() => {
+  const { valueKey } = props;
+  const map = new Map();
+  selectOptions.value.forEach((item) => {
+    const key =
+      typeof item.value === "object" && item.value !== null && props.valueKey
+        ? item.value[valueKey]
+        : item.value;
+    map.set(key, item.label);
+  });
+  return map;
+});
+
 const selectOptions = ref<LbSelectOptionItem[]>([]);
+
+const modelValue = computed({
+  get: () => props.modelValue,
+  set: (value) => {
+    if (props.multiple) {
+      if (!Array.isArray(value)) {
+        value = [value];
+      }
+    } else {
+      if (Array.isArray(value)) {
+        value = value[0];
+      }
+    }
+    emits("update:modelValue", value);
+    emits("change", value);
+  },
+});
+
+const modelLabel = computed(() => {
+  const modelValueArr = Array.isArray(modelValue.value)
+    ? modelValue.value
+    : [modelValue.value];
+
+  return modelValueArr.map((v) => {
+    const lookupKey =
+      typeof v === "object" && v !== null && props.valueKey
+        ? v[props.valueKey]
+        : v;
+    return optionMap.value.get(lookupKey) || "";
+  });
+});
+
+const hasVisibleOptions = computed(() => {
+  return selectOptions.value.some((option) => option.visible);
+});
+
+watch(
+  [modelValue, modelLabel],
+  () => {
+    if (props.multiple) {
+      return;
+    }
+    inputModel.value = modelLabel.value[0] || "";
+  },
+  {
+    immediate: true,
+  }
+);
+
+const clear = () => {
+  modelValue.value = [];
+  inputModel.value = "";
+  filterOptions();
+};
 
 provide(LbSelectSymbol, {
   valueKey: props.valueKey,
@@ -162,6 +287,8 @@ provide(LbSelectSymbol, {
   multiple: props.multiple,
   selectOptions,
   toggleVisible,
+  filterable: props.filterable,
+  filterOptions,
 });
 
 onMounted(() => {

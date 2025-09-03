@@ -1,5 +1,6 @@
 <template>
   <li
+    v-show="visible"
     :class="classes"
     :style="styles"
     @click.stop="handleClick"
@@ -12,8 +13,9 @@
     </slot>
   </li>
 </template>
+
 <script setup lang="ts">
-import { computed, inject, onBeforeUnmount, onMounted } from "vue";
+import { computed, inject, onBeforeUnmount, onMounted, ref } from "vue";
 import type { LbSelectOptionProps } from "./types";
 import { createNamespace } from "@lb-vue-ui/utils";
 import {
@@ -36,6 +38,7 @@ const props = withDefaults(defineProps<LbSelectOptionProps>(), {
 });
 
 const selectContext = inject<LbSelectInject>(LbSelectSymbol);
+const visible = ref(true);
 
 const itemSelected = computed(() => {
   if (!selectContext) return false;
@@ -79,7 +82,11 @@ const handleClick = () => {
 };
 
 const classes = computed(() => {
-  return [bem.b(), bem.is("selected", itemSelected.value)];
+  return [
+    bem.b(),
+    bem.is("selected", itemSelected.value),
+    bem.is("hidden", !visible.value),
+  ];
 });
 
 const styles = computed(() => {
@@ -92,6 +99,7 @@ onMounted(() => {
     selectOptions.value.push({
       label: props.label,
       value: props.value,
+      visible: visible,
     });
   }
 });
@@ -103,3 +111,11 @@ onBeforeUnmount(() => {
   }
 });
 </script>
+
+<style lang="scss">
+.lb-select__option {
+  &.is-hidden {
+    display: none;
+  }
+}
+</style>

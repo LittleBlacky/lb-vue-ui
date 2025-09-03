@@ -25,6 +25,7 @@ export interface LbSelectProps {
   options?: Array<{ [key: string]: any }>;
   clearable?: boolean;
   filterable?: boolean;
+  filterMethod?: (value: string, option: LbSelectOptionsProps) => boolean;
   loading?: boolean;
   popperClass?: string;
   popperStyle?: Record<string, any>;
@@ -45,6 +46,12 @@ export interface LbSelectInject {
   modelValue: WritableComputedRef<LbSelectModelValue>;
   disabled: boolean;
   props: LbSelectOptionsProps;
-  selectOptions: Ref<Array<{ label: string | number; value: LbSelectValue }>>;
+  selectOptions: Ref<
+    Array<{
+      label: string | number;
+      value: LbSelectValue;
+      visible: Ref<boolean>;
+    }>
+  >;
   toggleVisible: () => void;
 }
