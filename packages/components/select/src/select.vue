@@ -11,8 +11,8 @@
       :disabled="disabled"
       trigger="click"
       content="暂无数据"
-      :popper-class="bem.e('dropdown-wrapper')"
       :append-to="appendTo"
+      :popper-class="bem.e('dropdown-wrapper')"
       transition="lb-zoom-in-top"
     >
       <div :class="[bem.e('wrapper')]">
@@ -39,7 +39,6 @@
             :class="[bem.e('input')]"
             :placeholder="placeholder"
             @input="OnInput"
-            @keydown="handleKeydown"
           />
         </div>
         <div :class="[bem.e('suffix')]">
@@ -141,6 +140,7 @@ const props = withDefaults(defineProps<LbSelectProps>(), {
   filterMethod: undefined,
   valueKey: "value",
   size: "base",
+  appendTo: "body",
   noDataText: "暂无数据",
 });
 
@@ -150,7 +150,6 @@ const placeholder = computed(() => {
   if (props.placeholder) return props.placeholder;
 });
 
-const appendTo = computed(() => document.body);
 const inputModel = ref<string>("");
 const inputRef = ref();
 const inputReadonly = computed(() => !props.filterable);
@@ -205,21 +204,21 @@ const OnInput = () => {
   visibleRef.value = true;
 };
 
-const handleKeydown = (event: KeyboardEvent) => {
-  if (!props.multiple) return;
-  if (event.key !== "Backspace" && event.key !== "Delete") return;
-  if (inputModel.value !== "") return;
-  Array.isArray(modelValue.value) &&
-    modelValue.value.length > 0 &&
-    modelValue.value.pop();
-};
+// const handleKeydown = (event: KeyboardEvent) => {
+//   if (!props.multiple) return;
+//   if (event.key !== "Backspace" && event.key !== "Delete") return;
+//   if (inputModel.value !== "") return;
+//   Array.isArray(modelValue.value) &&
+//     modelValue.value.length > 0 &&
+//     modelValue.value.pop();
+// };
 
 const optionMap = computed(() => {
   const { valueKey } = props;
   const map = new Map();
   selectOptions.value.forEach((item) => {
     const key =
-      typeof item.value === "object" && item.value !== null && props.valueKey
+      typeof item.value === "object" && item.value !== null && valueKey
         ? item.value[valueKey]
         : item.value;
     map.set(key, item.label);
@@ -258,6 +257,10 @@ const modelLabel = computed(() => {
         : v;
     return optionMap.value.get(lookupKey) || "";
   });
+});
+
+watch(modelLabel, (newVal) => {
+  console.log(newVal);
 });
 
 const hasVisibleOptions = computed(() => {

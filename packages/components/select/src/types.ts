@@ -27,6 +27,7 @@ export interface LbSelectProps {
   filterable?: boolean;
   filterMethod?: (value: string, option: LbSelectOptionsProps) => boolean;
   loading?: boolean;
+  appendTo?: HTMLElement | string | false;
   popperClass?: string;
   popperStyle?: Record<string, any>;
   inputProps?: Record<string, any>;
