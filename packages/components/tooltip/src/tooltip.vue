@@ -74,6 +74,7 @@ const props = withDefaults(defineProps<LbToolTipProps>(), {
   transition: "lb-fade",
   offset: 9,
   visible: false,
+  appendTo: "body",
 });
 const appendTo = computed(() => {
   if (props.appendTo) {
