@@ -17,7 +17,7 @@ export default {
       link: "/date-picker/date-picker",
     },
     {
-      text: "Form 表单",
+      text: "✅Form 表单",
       link: "/form/form",
     },
     {
