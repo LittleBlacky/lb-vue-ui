@@ -2,5 +2,43 @@
 @use 'mixins/mixins.scss' as mix;
 
 @include mix.b(form) {
+  display: block;
+  font-size: var(--lb-font-size-base);
 
+  --lb-form-item-margin-bottom: var(--lb-gap-small);
+  --lb-form-item-message-gap: var(--lb-gap-extra-small);
+  --lb-form-item-inline-message-gap: var(--lb-gap-small);
+  --lb-form-item-content-reserve: calc(
+    var(--lb-font-size-small) + var(--lb-gap-extra-small)
+  );
+
+  @include mix.m('inline') {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--lb-gap-small) var(--lb-gap-base);
+    align-items: flex-start;
+  }
+
+  --lb-form-label-width: auto;
+  --lb-form-label-text-align: left;
+
+  @include mix.m('label-left') {
+    --lb-form-label-text-align: left;
+  }
+  @include mix.m('label-right') {
+    --lb-form-label-text-align: right;
+  }
+  @include mix.m('label-top') {
+    --lb-form-label-width: 100%;
+    .lb-form-item {
+      flex-direction: column;
+    }
+  }
+
+  @include mix.m('size-small') {
+    font-size: var(--lb-font-size-small);
+  }
+  @include mix.m('size-large') {
+    font-size: var(--lb-font-size-large);
+  }
 };

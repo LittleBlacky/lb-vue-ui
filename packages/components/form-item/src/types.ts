@@ -1,7 +1,13 @@
 export interface LbFormItemProps {
-  // 定义组件的属性
-  // 例如: text?: string;
+  prop?: string;
+  label?: string;
+  labelWidth?: string | number;
+  labelAlign?: "left" | "right";
+  required?: boolean;
+  showMessage?: boolean;
+  inlineMessage?: boolean;
+  help?: string;
 }
 export interface LbFormItemEmits {
-  // (e: 'click', event: MouseEvent): void;
+  (e: "validate", isValid: boolean, message?: string): void;
 }

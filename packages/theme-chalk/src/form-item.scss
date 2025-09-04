@@ -2,5 +2,92 @@
 @use 'mixins/mixins.scss' as mix;
 
 @include mix.b(form-item) {
+  display: flex;
+  align-items: flex-start;
+  line-height: 1.6;
 
+  @include mix.m('inline') {
+    margin-bottom: 0;
+  }
+
+  @include mix.e('label') {
+    width: var(--lb-form-label-width);
+    max-width: var(--lb-form-label-width);
+    text-align: var(--lb-form-label-text-align);
+    padding: 0 var(--lb-gap-small) 0 0;
+    color: var(--lb-text-color-regular);
+    font-size: inherit;
+    line-height: var(--lb-height-base);
+    box-sizing: border-box;
+    white-space: nowrap;
+  }
+
+  @include mix.e('label-text') {
+    vertical-align: middle;
+  }
+
+  @include mix.e('asterisk') {
+    color: var(--lb-color-danger);
+    margin: 0 0.25em;
+  }
+
+  @include mix.e('content') {
+    flex: 1 1 auto;
+    min-width: 0;
+    // padding-bottom: var(--lb-form-item-content-reserve);
+  }
+
+  @include mix.e('message') {
+    margin-top: var(--lb-form-item-message-gap);
+    color: var(--lb-color-danger);
+    font-size: var(--lb-font-size-small);
+    line-height: 1.4;
+    display: block;
+  }
+
+  @include mix.m('inline-message') {
+    .lb-form-item__content {
+      padding-bottom: 0;
+    }
+    .lb-form-item__message {
+      display: inline-block;
+      margin-left: var(--lb-form-item-inline-message-gap);
+      margin-top: 0;
+      vertical-align: middle;
+    }
+  }
+
+  @include mix.e('help') {
+    margin-top: var(--lb-gap-extra-small);
+    color: var(--lb-text-color-secondary);
+    font-size: var(--lb-font-size-small);
+  }
+
+  @include mix.when('error') {
+    --lb-input-border-color: var(--lb-color-danger);
+    --lb-select-border-color: var(--lb-color-danger);
+    .lb-input {
+      --lb-input-border-color: var(--lb-color-danger);
+    }
+    .lb-input:focus-within {
+      --lb-input-border-color: var(--lb-color-danger);
+    }
+    .lb-date-picker {
+      --lb-date-picker-border-color: var(--lb-color-danger);
+    }
+    .lb-select {
+      --lb-select-border-color: var(--lb-color-danger);
+    }
+    .lb-radio__inner {
+      border-color: var(--lb-color-danger);
+    }
+    .lb-checkbox__inner {
+      border-color: var(--lb-color-danger);
+    }
+    .lb-switch__core,
+    .lb-switch__input {
+      outline-color: var(--lb-color-danger);
+      border-color: var(--lb-color-danger);
+    }
+  }
 };

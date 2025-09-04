@@ -8,10 +8,10 @@ export default {
       text: "Checkbox 多选框",
       link: "/checkbox/checkbox",
     },
-    {
-      text: "ColorPicker 取色器",
-      link: "/color-picker/color-picker",
-    },
+    // {
+    //   text: "ColorPicker 取色器",
+    //   link: "/color-picker/color-picker",
+    // },
     {
       text: "DatePicker 日期选择器",
       link: "/date-picker/date-picker",
@@ -29,13 +29,13 @@ export default {
       link: "/radio/radio",
     },
     {
-      text: "Select 选择框",
+      text: "✅Select 选择框",
       link: "/select/select",
     },
-    {
-      text: "Slider 滑块",
-      link: "/slider/slider",
-    },
+    // {
+    //   text: "Slider 滑块",
+    //   link: "/slider/slider",
+    // },
     {
       text: "Switch 选择器",
       link: "/switch/switch",

@@ -204,15 +204,6 @@ const OnInput = () => {
   visibleRef.value = true;
 };
 
-// const handleKeydown = (event: KeyboardEvent) => {
-//   if (!props.multiple) return;
-//   if (event.key !== "Backspace" && event.key !== "Delete") return;
-//   if (inputModel.value !== "") return;
-//   Array.isArray(modelValue.value) &&
-//     modelValue.value.length > 0 &&
-//     modelValue.value.pop();
-// };
-
 const optionMap = computed(() => {
   const { valueKey } = props;
   const map = new Map();
