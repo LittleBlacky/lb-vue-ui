@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="[bem.b(), bem.is('disabled', disabled)]"
+    :class="[bem.b(), bem.is('disabled', disabled), bem.m(size)]"
     @click="toggleVisible"
     ref="selectRef"
   >
