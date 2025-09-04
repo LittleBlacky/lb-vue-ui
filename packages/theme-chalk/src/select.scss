@@ -21,17 +21,8 @@
   --lb-select-disabled-border-color: var(--lb-disabled-border-color, #e4e7ed);
   --lb-select-disabled-text-color: var(--lb-disabled-text-color, #c0c4cc);
   --lb-select-font-size: var(--lb-font-size-base);
-  @include mix.m(small) {
-    --lb-select-padding: 4px 8px;
-    --lb-select-font-size: var(--lb-font-size-small);
-  }
-  @include mix.m(large) {
-    --lb-select-padding: 8px 12px;
-    --lb-select-font-size: var(--lb-font-size-large);
-  }
   --lb-select-transition-duration: var(--lb-transition-duration-fast, 0.2s);
   --lb-select-padding: 6px 10px;
-  --lb-select-gap: var(--lb-gap-small, 8px);
   --lb-select-count-color: var(--lb-select-text-color-placeholder);
   --lb-select-count-font-size: var(--lb-select-font-size);
   --lb-select-count-position-right: 10px;
@@ -45,6 +36,18 @@
 
 @include mix.b(select) {
   width: fit-content;
+  background-color: var(--lb-select-bg-color);
+  cursor: var(--lb-select-cursor);
+
+  @include mix.m(small) {
+    --lb-select-padding: 4px 8px;
+    --lb-select-font-size: var(--lb-font-size-small);
+  }
+  @include mix.m(large) {
+    --lb-select-padding: 8px 12px;
+    --lb-select-font-size: var(--lb-font-size-large);
+  }
+
   @include mix.e(dropdown-wrapper) {
     padding-left: 0px;
     padding-right: 0px;
@@ -58,11 +61,13 @@
     box-sizing: border-box;
   }
 
-  @include mix.m(disabled) {
+  @include mix.when(disabled) {
     --lb-select-bg-color: var(--lb-select-disabled-bg-color);
     --lb-select-border-color: var(--lb-select-disabled-border-color);
     --lb-select-text-color-placeholder: var(--lb-select-disabled-text-color);
     --lb-select-cursor: not-allowed;
+    --lb-select-other-cursor: not-allowed;
+    --lb-select-input-cursor: not-allowed;
   }
 
   @include mix.e(wrapper) {
@@ -72,7 +77,7 @@
     padding: var(--lb-select-padding);
     display: inline-flex;
     align-items: center;
-    curosr: var(--lb-select-other-cursor);
+    cursor: var(--lb-select-other-cursor);
     background-color: var(--lb-select-bg-color);
     border: 1px solid var(--lb-select-border-color);
     border-color: var(--lb-select-border-color);
@@ -107,6 +112,7 @@
   @include mix.e(input) {
     flex-grow: 1;
     min-width: 5rem;
+    background-color: var(--lb-select-bg-color);
     width: 0px;
     border: none;
     cursor: var(--lb-select-input-cursor);
@@ -120,5 +126,6 @@
     align-items: center;
     gap: 2px;
     color: var(--lb-select-text-color-placeholder);
+    cursor: var(--lb-select-cursor);
   }
 }

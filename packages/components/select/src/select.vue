@@ -43,7 +43,11 @@
           />
         </div>
         <div :class="[bem.e('suffix')]">
-          <lb-icon name="arrow-down" size="12" :reverse="visibleRef">
+          <lb-icon
+            name="arrow-down"
+            size="12"
+            :reverse="!disabled && visibleRef"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -153,12 +157,11 @@ const inputReadonly = computed(() => !props.filterable);
 const disabled = computed(() => props.disabled || props.loading);
 
 const toggleVisible = () => {
-  if (props.disabled) return;
+  if (disabled.value) return;
   visibleRef.value = !visibleRef.value;
 };
 
 const emits = defineEmits<LbSelectEmits>();
-
 const selectRef = ref<HTMLElement>();
 const visibleRef = ref(false);
 
@@ -197,7 +200,7 @@ const filterOptions = () => {
 };
 
 const OnInput = () => {
-  if (!props.filterable) return;
+  if (!props.filterable || props.disabled) return;
   filterOptions();
   visibleRef.value = true;
 };
