@@ -36,6 +36,7 @@
 }
 
 @include mix.b(tooltip) {
+  z-index: 2000;
   @include mix.e(trigger) {
     width: fit-content;
   }
