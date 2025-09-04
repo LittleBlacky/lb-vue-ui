@@ -1,3 +1,5 @@
+# Select 选择器
+
 用于在多个备选项中选中单个结果。
 
 ## 基础用法
@@ -19,6 +21,17 @@
 :::
 <preview path="./demos/Filterable.vue" />
 
+## 多选功能
+
+<preview path="./demos/Multiple.vue" />
+
+## value-key
+
+::: tip
+当选项的标签和值不是简单的字符串时，需要通过 value-key 指定选项的值的键名。
+:::
+<preview path="./demos/ValueKey.vue" />
+
 ## Select Props
 
 | 属性名                   | 说明           | 类型                                               | 可选值                   | 默认值  |
@@ -31,6 +44,7 @@
 | `filterable`             | 是否可搜索     | `boolean`                                          | `true \| false`          | `false` |
 | `filterable-method`      | 自定义筛选逻辑 | `(value: string, option: SelectOption) => boolean` | —                        | —       |
 | `multiple`               | 是否多选       | `boolean`                                          | `true \| false`          | `false` |
+| `value-key`              | 选项的值的键名 | `string`                                           | —                        | `value` |
 
 ## Select Events
 
