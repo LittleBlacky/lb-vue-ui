@@ -1,0 +1,173 @@
+@use 'common/vars' as *;
+@use 'mixins/mixins.scss' as mix;
+@use "mixins/function.scss" as fn;
+
+@include mix.b(checkbox) {
+  @include mix.generate-css-vars(
+    (
+      checkbox: (
+        border: (
+          width: fn.getCssVar(border, width),
+          style: fn.getCssVar(border, style),
+          color: fn.getCssVar(border, color),
+          radius: fn.getCssVar(border, radius, base),
+        ),
+        text: (
+          color: fn.getCssVar(text, color, regular),
+          size: fn.getCssVar(font, size, base),
+        ),
+        bg: (
+          color: fn.getCssVar(bg, color),
+        ),
+        disabled: (
+          text: (
+            color: fn.getCssVar(text, color, disabled),
+          ),
+          border: (
+            color: fn.getCssVar(border, color, light),
+          ),
+          bg: (
+            color: fn.getCssVar(fill, color, light),
+          ),
+        ),
+        inner: (
+          size: 0.875rem,
+          mark: (
+            size: 0.5rem,
+            width: 2px,
+          ),
+        ),
+      ),
+    )
+  );
+}
+
+@include mix.b(checkbox) {
+  display: inline-flex;
+  align-items: center;
+  outline: none;
+  font-size: fn.getCssVar(checkbox, text, size);
+  color: fn.getCssVar(checkbox, text, color);
+
+  @include mix.e(original) {
+    opacity: 0;
+    outline: none;
+    position: absolute;
+    z-index: -1;
+    &:checked {
+      + .lb-checkbox__label {
+        .lb-checkbox__inner {
+          background-color: fn.getCssVar(color, primary);
+          border-color: fn.getCssVar(color, primary);
+          &::after {
+            opacity: 1;
+            transform: translate(-50%, -52%) rotate(45deg) scale(1);
+          }
+        }
+        .lb-checkbox__text {
+          color: fn.getCssVar(color, primary);
+        }
+      }
+    }
+    &:focus {
+      + .lb-checkbox__label {
+        .lb-checkbox__inner {
+          box-shadow: 0 0 0 2px rgba(fn.getCssVar(color, primary), 0.2);
+        }
+      }
+    }
+  }
+
+  @include mix.e(label) {
+    display: inline-flex;
+    align-items: center;
+    padding-left: 0.5rem;
+    position: relative;
+  }
+
+  @include mix.e(inner) {
+    display: inline-block;
+    width: fn.getCssVar(checkbox, inner, size);
+    height: fn.getCssVar(checkbox, inner, size);
+    border: fn.getCssVar(checkbox, border, width)
+      fn.getCssVar(checkbox, border, style)
+      fn.getCssVar(checkbox, border, color);
+    border-radius: fn.getCssVar(checkbox, border, radius);
+    background-color: fn.getCssVar(checkbox, bg, color);
+    position: relative;
+    transition: all var(--lb-transition-duration);
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: calc(fn.getCssVar(checkbox, inner, size) * 0.3);
+      height: calc(fn.getCssVar(checkbox, inner, size) * 0.55);
+      border-right: fn.getCssVar(checkbox, inner, mark, width) solid fn.getCssVar(color, white);
+      border-bottom: fn.getCssVar(checkbox, inner, mark, width) solid fn.getCssVar(color, white);
+      transform: translate(-50%, -52%) rotate(45deg) scale(0);
+      transform-origin: center;
+      opacity: 0;
+      transition: all var(--lb-transition-duration);
+    }
+  }
+
+  @include mix.e(text) {
+    padding-left: 0.25rem;
+  }
+
+  @include mix.when(indeterminate) {
+    .lb-checkbox__inner {
+      background-color: fn.getCssVar(color, primary);
+      border-color: fn.getCssVar(color, primary);
+      &::after {
+        opacity: 1;
+        width: 0.5rem;
+        height: 0;
+        border: none;
+        background-color: fn.getCssVar(color, white);
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+  }
+
+  @include mix.when(disabled) {
+    cursor: not-allowed;
+    opacity: 0.6;
+    .lb-checkbox__inner {
+      background-color: fn.getCssVar(checkbox, disabled, bg, color);
+      border-color: fn.getCssVar(checkbox, disabled, border, color);
+      &::after {
+        border-color: fn.getCssVar(checkbox, disabled, text, color);
+      }
+    }
+    .lb-checkbox__text {
+      color: fn.getCssVar(checkbox, disabled, text, color);
+    }
+  }
+
+  @each $size in (small, base, large) {
+    @include mix.m(#{$size}) {
+      @if $size == small {
+        font-size: fn.getCssVar(font, size, small);
+        .lb-checkbox__inner {
+          width: 0.75rem;
+          height: 0.75rem;
+        }
+      } @else if $size == base {
+        font-size: fn.getCssVar(font, size, base);
+        .lb-checkbox__inner {
+          width: 0.875rem;;
+          height: 0.875rem;;
+        }
+      } @else if $size == large {
+        font-size: fn.getCssVar(font, size, large);
+        .lb-checkbox__inner {
+          width: 1.125rem;
+          height: 1.125rem;
+        }
+      }
+    }
+  }
+}
