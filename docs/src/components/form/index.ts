@@ -5,7 +5,7 @@ export default {
   collapsed: false,
   items: [
     {
-      text: "Checkbox 多选框",
+      text: "✅Checkbox 多选框",
       link: "/checkbox/checkbox",
     },
     // {
