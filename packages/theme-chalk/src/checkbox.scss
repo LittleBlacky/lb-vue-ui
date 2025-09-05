@@ -124,7 +124,7 @@
       &::after {
         opacity: 1;
         width: 0.5rem;
-        height: 0;
+        height: 2px;
         border: none;
         background-color: fn.getCssVar(color, white);
         transform: translate(-50%, -50%) scale(1);
