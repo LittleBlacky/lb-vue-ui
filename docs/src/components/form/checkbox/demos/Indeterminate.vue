@@ -20,7 +20,7 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
 
-const all = ["北京", "上海", "广州", "深圳"];
+const all = ["beijing", "shanghai", "guangzhou", "shenzhen"];
 const checkedList = ref<Array<string | number | boolean>>([
   "beijing",
   "guangzhou",
