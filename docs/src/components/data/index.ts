@@ -37,7 +37,7 @@ export default {
       link: "/tree/tree",
     },
     {
-      text: "Tour 漫游引导",
+      text: "✅Tour 漫游引导",
       link: "/tour/tour",
     },
   ].map((item) => {
