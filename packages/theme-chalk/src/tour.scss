@@ -1,0 +1,269 @@
+@use "common/vars" as *;
+@use "mixins/mixins" as *;
+@use "mixins/function" as fn;
+@use "image.scss";
+@use "button.scss";
+@use "animation/transition.scss" as *;
+
+// Tour组件CSS变量 - 定义在全局作用域，确保Teleport组件能访问
+:root {
+  // 基础层级变量 - 降低z-index，确保不覆盖页面元素
+  --lb-tour-z-index-base: 1000;
+  --lb-tour-z-index-mask: var(--lb-tour-z-index-base);
+  --lb-tour-z-index-spotlight: calc(var(--lb-tour-z-index-base) + 1);
+  --lb-tour-z-index-content: calc(var(--lb-tour-z-index-base) + 2);
+
+  // 遮罩和高亮相关变量
+  --lb-tour-mask-bg-color: rgba(0, 0, 0, 0.45);
+  --lb-tour-spotlight-border-width: 2px;
+  --lb-tour-spotlight-border-color: var(--lb-color-primary);
+  --lb-tour-spotlight-border-radius: 4px;
+  --lb-tour-spotlight-shadow: 0 0 0 9999px var(--lb-tour-mask-bg-color);
+
+  // 过渡动画变量
+  --lb-tour-transition-duration: 0.3s;
+}
+
+@include b(tour) {
+  // 内容区域变量
+  --lb-tour-content-min-width: 280px;
+  --lb-tour-content-max-width: 400px;
+  --lb-tour-content-bg-color: var(--lb-color-white);
+  --lb-tour-content-border-radius: var(--lb-border-radius-base);
+  --lb-tour-content-shadow:
+    0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 3px 6px -4px rgba(0, 0, 0, 0.12),
+    0 9px 28px 8px rgba(0, 0, 0, 0.05);
+  --lb-tour-content-border: 1px solid rgba(5, 5, 5, 0.06);
+  --lb-tour-content-padding: 20px;
+
+  // 关闭按钮变量
+  --lb-tour-close-size: 20px;
+  --lb-tour-close-color: var(--lb-text-color-secondary);
+  --lb-tour-close-hover-color: var(--lb-text-color-regular);
+  --lb-tour-close-hover-bg: rgba(0, 0, 0, 0.06);
+
+  // 内容样式变量
+  --lb-tour-cover-margin-bottom: 12px;
+  --lb-tour-cover-border-radius: 6px;
+  --lb-tour-header-margin-bottom: 8px;
+  --lb-tour-title-font-size: var(--lb-font-size-large);
+  --lb-tour-title-font-weight: var(--lb-font-weight-secondary);
+  --lb-tour-title-color: var(--lb-text-color-primary);
+  --lb-tour-description-font-size: var(--lb-font-size-base);
+  --lb-tour-description-color: var(--lb-text-color-regular);
+  --lb-tour-description-line-height: 1.5714;
+
+  // 底部操作区变量
+  --lb-tour-footer-padding: 12px 20px 20px;
+  --lb-tour-indicator-size: 6px;
+  --lb-tour-indicator-gap: var(--lb-gap-small);
+  --lb-tour-indicator-bg-color: var(--lb-text-color-placeholder);
+  --lb-tour-indicator-active-bg-color: var(--lb-color-primary);
+
+  // 按钮变量
+  --lb-tour-button-gap: var(--lb-gap-small);
+  --lb-tour-button-padding: 4px 15px;
+  --lb-tour-button-border-radius: var(--lb-border-radius-small);
+  --lb-tour-button-font-size: var(--lb-font-size-base);
+  --lb-tour-button-line-height: 1.5714;
+
+  // 上一步按钮变量
+  --lb-tour-button-prev-bg-color: var(--lb-color-white);
+  --lb-tour-button-prev-border-color: var(--lb-border-color);
+  --lb-tour-button-prev-color: var(--lb-text-color-primary);
+  --lb-tour-button-prev-hover-border-color: var(--lb-color-primary);
+  --lb-tour-button-prev-hover-color: var(--lb-color-primary);
+
+  // 下一步/完成按钮变量
+  --lb-tour-button-next-bg-color: var(--lb-color-primary);
+  --lb-tour-button-next-border-color: var(--lb-color-primary);
+  --lb-tour-button-next-color: var(--lb-color-white);
+  --lb-tour-button-next-hover-bg-color: var(--lb-color-primary-light-2);
+  --lb-tour-button-next-hover-border-color: var(--lb-color-primary-light-2);
+
+  // 动画变量
+  --lb-tour-transition-duration: var(--lb-transition-duration);
+  --lb-tour-transition-timing: cubic-bezier(0.645, 0.045, 0.355, 1);
+
+  // 遮罩层 - 使用clip-path创建挖洞效果
+  @include e(mask) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: var(--lb-tour-z-index-mask);
+    background-color: var(--lb-tour-mask-bg-color);
+    transition: clip-path var(--lb-tour-transition-duration) cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: auto; // 允许点击遮罩层关闭
+  }
+
+  // Tooltip样式覆盖
+  @include e(tooltip) {
+    z-index: var(--lb-tour-z-index-content) !important;
+
+    .lb-tooltip__content {
+      padding: 0;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+    }
+  }
+
+  // 内容区域
+  @include e(content) {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: var(--lb-tour-content-min-width);
+    max-width: var(--lb-tour-content-max-width);
+    background: var(--lb-tour-content-bg-color);
+    border-radius: var(--lb-tour-content-border-radius);
+    box-shadow: var(--lb-tour-content-shadow);
+    border: var(--lb-tour-content-border);
+  }
+
+  @include e(header) {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  // 关闭按钮
+  @include e(close) {
+    width: var(--lb-tour-close-size);
+    height: var(--lb-tour-close-size);
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: var(--lb-font-size-medium);
+    line-height: 1;
+    color: var(--lb-tour-close-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    z-index: 1;
+
+    &:hover {
+      color: var(--lb-tour-close-hover-color);
+      background: var(--lb-tour-close-hover-bg);
+    }
+  }
+
+  // 内容主体
+  @include e(body) {
+    padding: var(--lb-tour-content-padding);
+  }
+
+  // 封面图片
+  @include e(cover) {
+    margin-bottom: var(--lb-tour-cover-margin-bottom);
+
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: var(--lb-tour-cover-border-radius);
+    }
+  }
+
+  // 标题
+  @include e(title) {
+    margin: 0;
+    font-size: var(--lb-tour-title-font-size);
+    font-weight: var(--lb-tour-title-font-weight);
+    line-height: 1.5;
+    color: var(--lb-tour-title-color);
+  }
+
+  // 描述
+  @include e(description) {
+    margin: 0;
+    font-size: var(--lb-tour-description-font-size);
+    line-height: var(--lb-tour-description-line-height);
+    font-weight: 500;
+    color: var(--lb-tour-description-color);
+
+    p {
+      margin: 0;
+    }
+  }
+
+  // 底部操作区
+  @include e(footer) {
+    width: 100%;
+    padding: var(--lb-tour-footer-padding);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+  }
+
+  // 指示器
+  @include e(indicators) {
+    display: flex;
+    gap: var(--lb-tour-indicator-gap);
+  }
+
+  @include e(indicator) {
+    width: var(--lb-tour-indicator-size);
+    height: var(--lb-tour-indicator-size);
+    border-radius: 50%;
+    background-color: var(--lb-tour-indicator-bg-color);
+
+    @include m(active) {
+      background-color: var(--lb-tour-indicator-active-bg-color);
+    }
+  }
+
+  // 操作按钮区域
+  @include e(buttons) {
+    display: flex;
+    gap: var(--lb-tour-button-gap);
+  }
+
+  // 按钮样式
+  @include e(button) {
+    padding: var(--lb-tour-button-padding);
+    border-radius: var(--lb-tour-button-border-radius);
+    border: 1px solid transparent;
+    font-size: var(--lb-tour-button-font-size);
+    line-height: var(--lb-tour-button-line-height);
+    cursor: pointer;
+    outline: none;
+
+    @include m(prev) {
+      background: var(--lb-tour-button-prev-bg-color);
+      border-color: var(--lb-tour-button-prev-border-color);
+      color: var(--lb-tour-button-prev-color);
+
+      &:hover {
+        border-color: var(--lb-tour-button-prev-hover-border-color);
+        color: var(--lb-tour-button-prev-hover-color);
+      }
+    }
+
+    @include m(next) {
+      background: var(--lb-tour-button-next-bg-color);
+      border-color: var(--lb-tour-button-next-border-color);
+      color: var(--lb-tour-button-next-color);
+
+      &:hover {
+        background: var(--lb-tour-button-next-hover-bg-color);
+        border-color: var(--lb-tour-button-next-hover-border-color);
+      }
+    }
+
+    @include m(finish) {
+      background: var(--lb-tour-button-next-bg-color);
+      border-color: var(--lb-tour-button-next-border-color);
+      color: var(--lb-tour-button-next-color);
+
+      &:hover {
+        background: var(--lb-tour-button-next-hover-bg-color);
+        border-color: var(--lb-tour-button-next-hover-border-color);
+      }
+    }
+  }
+}

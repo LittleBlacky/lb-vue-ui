@@ -1,0 +1,163 @@
+@use 'common/vars' as *;
+@use 'mixins/mixins.scss' as mix;
+@use "mixins/function.scss" as fn;
+
+@include mix.b(tour-step) {
+  // 基础层级变量
+  --lb-tour-step-z-index-base: 2000;
+  --lb-tour-step-z-index-content: calc(var(--lb-tour-step-z-index-base) + 1);
+  
+  // 基础样式变量
+  --lb-tour-step-bg-color: var(--lb-color-white);
+  --lb-tour-step-border-radius: var(--lb-border-radius-base);
+  --lb-tour-step-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --lb-tour-step-padding: var(--lb-gap-base);
+  --lb-tour-step-max-width: 320px;
+  --lb-tour-step-min-width: 200px;
+  --lb-tour-step-font-size: var(--lb-font-size-base);
+  --lb-tour-step-line-height: 1.5714;
+  --lb-tour-step-transition-duration: var(--lb-transition-duration-fast);
+  --lb-tour-step-transition-timing: var(--lb-transition-timing-function);
+  
+  // 关闭按钮变量
+  --lb-tour-step-close-size: var(--lb-height-small);
+  --lb-tour-step-close-border-radius: 50%;
+  --lb-tour-step-close-color: var(--lb-color-info);
+  --lb-tour-step-close-hover-bg: var(--lb-color-info-light-8);
+  --lb-tour-step-close-hover-color: var(--lb-color-info-dark-2);
+  --lb-tour-step-close-icon-size: 12px;
+  
+  // 标题变量
+  --lb-tour-step-title-font-size: var(--lb-font-size-medium);
+  --lb-tour-step-title-font-weight: var(--lb-font-weight-secondary);
+  --lb-tour-step-title-color: var(--lb-color-dark);
+  --lb-tour-step-title-margin-bottom: var(--lb-gap-small);
+  --lb-tour-step-title-padding-right: 24px;
+  --lb-tour-step-title-line-height: 1.4;
+  
+  // 描述变量
+  --lb-tour-step-description-color: var(--lb-color-info);
+  --lb-tour-step-description-margin-bottom: var(--lb-gap-base);
+  --lb-tour-step-description-line-height: 1.5714;
+  
+  // 指示器变量
+  --lb-tour-step-indicators-margin-bottom: var(--lb-gap-base);
+  --lb-tour-step-indicator-text-font-size: var(--lb-font-size-small);
+  --lb-tour-step-indicator-text-color: var(--lb-color-info);
+  --lb-tour-step-indicator-text-bg: var(--lb-color-info-light-8);
+  --lb-tour-step-indicator-text-padding: 2px var(--lb-gap-small);
+  --lb-tour-step-indicator-text-border-radius: 12px;
+  
+  // 按钮区域变量
+  --lb-tour-step-button-gap: var(--lb-gap-small);
+  --lb-tour-step-button-line-height: 1.5714;
+  
+  // 移动端变量
+  --lb-tour-step-mobile-max-width: 280px;
+  --lb-tour-step-mobile-padding: 12px;
+  --lb-tour-step-mobile-title-font-size: var(--lb-font-size-base);
+  --lb-tour-step-mobile-title-margin-bottom: var(--lb-gap-small);
+  --lb-tour-step-mobile-description-font-size: 13px;
+  --lb-tour-step-mobile-description-margin-bottom: 12px;
+  --lb-tour-step-mobile-button-gap: var(--lb-gap-small);
+
+  position: relative;
+  background: var(--lb-tour-step-bg-color);
+  border-radius: var(--lb-tour-step-border-radius);
+  box-shadow: var(--lb-tour-step-shadow);
+  padding: var(--lb-tour-step-padding);
+  max-width: var(--lb-tour-step-max-width);
+  min-width: var(--lb-tour-step-min-width);
+  font-size: var(--lb-tour-step-font-size);
+  line-height: var(--lb-tour-step-line-height);
+  z-index: var(--lb-tour-step-z-index-content);
+
+  @include mix.e(content) {
+    position: relative;
+  }
+
+  @include mix.e(close) {
+    position: absolute;
+    top: var(--lb-gap-small);
+    right: var(--lb-gap-small);
+    width: var(--lb-tour-step-close-size);
+    height: var(--lb-tour-step-close-size);
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--lb-tour-step-close-border-radius);
+    color: var(--lb-tour-step-close-color);
+    transition: all var(--lb-tour-step-transition-duration) var(--lb-tour-step-transition-timing);
+
+    &:hover {
+      background: var(--lb-tour-step-close-hover-bg);
+      color: var(--lb-tour-step-close-hover-color);
+    }
+
+    svg {
+      width: var(--lb-tour-step-close-icon-size);
+      height: var(--lb-tour-step-close-icon-size);
+      fill: currentColor;
+    }
+  }
+
+  @include mix.e(title) {
+    font-size: var(--lb-tour-step-title-font-size);
+    font-weight: var(--lb-tour-step-title-font-weight);
+    color: var(--lb-tour-step-title-color);
+    line-height: var(--lb-tour-step-title-line-height);
+    margin-bottom: var(--lb-tour-step-title-margin-bottom);
+    padding-right: var(--lb-tour-step-title-padding-right);
+  }
+
+  @include mix.e(description) {
+    color: var(--lb-tour-step-description-color);
+    line-height: var(--lb-tour-step-description-line-height);
+    margin-bottom: var(--lb-tour-step-description-margin-bottom);
+    word-wrap: break-word;
+  }
+
+  @include mix.e(indicators) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--lb-tour-step-indicators-margin-bottom);
+  }
+
+  @include mix.e(indicator-text) {
+    font-size: var(--lb-tour-step-indicator-text-font-size);
+    color: var(--lb-tour-step-indicator-text-color);
+    background: var(--lb-tour-step-indicator-text-bg);
+    padding: var(--lb-tour-step-indicator-text-padding);
+    border-radius: var(--lb-tour-step-indicator-text-border-radius);
+  }
+
+  @include mix.e(buttons) {
+    display: flex;
+    gap: var(--lb-tour-step-button-gap);
+    justify-content: flex-end;
+  }
+
+  // 响应式设计
+  @media (max-width: 768px) {
+    max-width: var(--lb-tour-step-mobile-max-width);
+    padding: var(--lb-tour-step-mobile-padding);
+
+    @include mix.e(title) {
+      font-size: var(--lb-tour-step-mobile-title-font-size);
+      margin-bottom: var(--lb-tour-step-mobile-title-margin-bottom);
+    }
+
+    @include mix.e(description) {
+      font-size: var(--lb-tour-step-mobile-description-font-size);
+      margin-bottom: var(--lb-tour-step-mobile-description-margin-bottom);
+    }
+
+    @include mix.e(buttons) {
+      gap: var(--lb-tour-step-mobile-button-gap);
+    }
+  }
+};
