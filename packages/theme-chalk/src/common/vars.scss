@@ -2,14 +2,14 @@
 
 // 定义颜色映射（SCSS Map）
 $colors: (
-  "primary": #3498db,
-  "secondary": #2ecc71,
-  "success": #27ae60,
-  "warning": #f39c12,
-  "danger": #e74c3c,
-  "info": #909399,
-  "dark": #2c3e50,
-  "light": #ecf0f1,
+  primary: #3498db,
+  secondary: #2ecc71,
+  success: #27ae60,
+  warning: #f39c12,
+  danger: #e74c3c,
+  info: #909399,
+  dark: #2c3e50,
+  light: #ecf0f1,
 ) !default;
 
 :root {
@@ -43,6 +43,24 @@ $colors: (
         )};
     }
   }
+  
+  // 组件变量
+  // 要添加到这个文件中的通用变量
+  // 用于组件样式覆盖
+
+  // 按钮
+  --lb-button-bg-color: var(--lb-color-white);
+  --lb-button-text-color: var(--lb-text-color-regular);
+  --lb-button-border-color: var(--lb-border-color);
+  --lb-button-hover-text-color: var(--lb-color-primary);
+  --lb-button-hover-bg-color: var(--lb-color-primary-light-8);
+  --lb-button-hover-border-color: var(--lb-color-primary-light-6);
+  --lb-button-active-text-color: var(--lb-color-primary);
+  --lb-button-active-border-color: var(--lb-color-primary);
+  --lb-button-active-bg-color: var(--lb-color-primary-light-8);
+  --lb-button-disabled-text-color: var(--lb-text-color-placeholder);
+  --lb-button-disabled-bg-color: var(--lb-color-white);
+  --lb-button-disabled-border-color: var(--lb-border-color-light);
 
   --lb-bg-color: #ffffff;
   --lb-bg-color-page: #f2f3f5;
@@ -133,4 +151,6 @@ $colors: (
   /*z-index*/
   --lb-z-index-top: 2000;
   --lb-z-index-normal: 1000;
+  
+
 }

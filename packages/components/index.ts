@@ -26,3 +26,4 @@ export * from "./form";
 export * from "./form-item";
 export * from "./checkbox";
 export * from "./checkbox-group";
+export * from "./scrollbar";

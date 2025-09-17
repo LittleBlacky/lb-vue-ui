@@ -24,6 +24,10 @@ export default {
       text: "✅Splitter 分隔面板",
       link: "/splitter/splitter",
     },
+    {
+      text: "✅Scrollbar 滚动条",
+      link: "/scrollbar/scrollbar",
+    },
   ].map((item) => {
     return {
       ...item,

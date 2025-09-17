@@ -47,6 +47,9 @@ export const createNamespace = (block: string) => {
   const is = (name: string, state: boolean | undefined = true) =>
     state ? `${statePrefix}${name}` : "";
 
+  const when = (name: string, state: boolean | undefined = true) =>
+    state ? `${statePrefix}${name}` : "";
+
   return {
     namespace,
     b,
@@ -57,5 +60,6 @@ export const createNamespace = (block: string) => {
     em,
     bem,
     is,
+    when,
   };
 };
