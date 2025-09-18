@@ -17,7 +17,7 @@ export default {
       link: "/drawer/drawer",
     },
     {
-      text: "Loading 加载",
+      text: "✅Loading 加载",
       link: "/loading/loading",
     },
     {
