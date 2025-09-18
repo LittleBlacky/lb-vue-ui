@@ -9,12 +9,8 @@ export default {
       link: "/card/card",
     },
     {
-      text: "Image 图片",
+      text: "✅Image 图片",
       link: "/image/image",
-    },
-    {
-      text: "Infinite Scroll 无限滚动",
-      link: "/infinite-scroll/infinite-scroll",
     },
     {
       text: "Pagination 分页",
