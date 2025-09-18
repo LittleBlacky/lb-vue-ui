@@ -1,0 +1,209 @@
+@use 'common/vars' as *;
+@use 'mixins/mixins.scss' as mix;
+@use "mixins/function.scss" as fn;
+
+@include mix.b(progress) {
+  display: inline-block;
+  position: relative;
+  line-height: 1;
+  width: 100%;
+  
+  // 尺寸变体
+  &.m-small {
+    font-size: 12px;
+  }
+
+  &.m-medium {
+    font-size: 14px;
+  }
+
+  &.m-large {
+    font-size: 16px;
+  }
+
+  @each $type, $colors in $colors {
+    @include mix.when($type) {
+      .lb-progress__line-bar,
+      .lb-progress__circle-bar,
+      .lb-progress__dashboard-bar {
+        fill: var(--lb-color-#{$type});
+        stroke: var(--lb-color-#{$type});
+      }
+    }
+  }
+
+  // 禁用状态
+  @include mix.when(disabled) {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  // 可交互状态
+  @include mix.when(interactive) {
+    cursor: pointer;
+    
+    &:hover {
+      .lb-progress__line-svg {
+        filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
+      }
+    }
+  }
+
+  // 动画状态
+  @include mix.when(animated) {
+    .lb-progress__line-bar {
+      transition: width 0.3s ease-out;
+    }
+    
+    .lb-progress__circle-bar,
+    .lb-progress__dashboard-bar {
+      transition: stroke-dashoffset 0.3s ease-out;
+    }
+  }
+
+  // 线性进度条 (SVG实现)
+  @include mix.e(line) {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  @include mix.e(line-svg) {
+    display: block;
+    min-width: 0px;
+    transition: filter 0.3s ease;
+  }
+
+  @include mix.e(line-track) {
+    fill: var(--lb-bg-color-page);
+  }
+
+  @include mix.e(line-bar) {
+    fill: var(--lb-color-primary);
+    transition: width 0.3s ease-out;
+  }
+
+  @include mix.e(line-text) {
+    fill: white;
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    user-select: none;
+  }
+
+  @include mix.e(line-text-outer) {
+    margin-left: 12px;
+    color: var(--lb-text-color-regular);
+    font-size: 14px;
+    font-weight: 500;
+    min-width: 40px;
+    text-align: right;
+  }
+
+  @include mix.e(line-stripes) {
+    fill: rgba(255, 255, 255, 0.15);
+    animation: progress-stripes 1s linear infinite;
+  }
+
+  // 圆形进度条
+  @include mix.e(circle) {
+    position: relative;
+    display: inline-block;
+  }
+
+  @include mix.e(circle-svg) {
+    transform: rotate(-90deg);
+    background: transparent;
+  }
+
+  @include mix.e(circle-track) {
+    fill: none;
+    stroke: var(--lb-border-color-light);
+    stroke-width: 6;
+  }
+
+  @include mix.e(circle-bar) {
+    fill: none;
+    stroke: var(--lb-color-primary);
+    stroke-width: 6;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.3s ease-out;
+  }
+
+  @include mix.e(circle-text) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--lb-text-color-primary);
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    line-height: 1;
+  }
+
+  @include mix.e(circle-icon) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--lb-color-primary);
+    font-size: 16px;
+  }
+
+  // 条纹动画
+  @include mix.when(striped) {
+    .lb-progress__line-stripes {
+      display: block;
+    }
+  }
+
+  // 脉冲动画
+  @include mix.when(pulse) {
+    .lb-progress__line-bar {
+      animation: progress-pulse 2s ease-in-out infinite;
+    }
+  }
+}
+
+// 动画关键帧
+@keyframes progress-stripes {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(20px);
+  }
+}
+
+@keyframes progress-pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+// SVG条纹图案定义
+.lb-progress {
+  .lb-progress__line-svg {
+    defs {
+      pattern#stripePattern {
+        width: 20;
+        height: 20;
+        patternUnits: userSpaceOnUse;
+        patternTransform: rotate(45);
+        
+        rect {
+          width: 10;
+          height: 20;
+          fill: rgba(255, 255, 255, 0.15);
+        }
+      }
+    }
+  }
+}

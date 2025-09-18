@@ -25,6 +25,7 @@ export * from "./form";
 export * from "./form-item";
 export * from "./checkbox";
 export * from "./checkbox-group";
+export * from "./progress";
 export * from "./image";
 export * from "./image-preview";
 export * from "./scrollbar";

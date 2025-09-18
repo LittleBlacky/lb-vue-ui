@@ -17,6 +17,10 @@ export default {
       link: "/pagination/pagination",
     },
     {
+      text: "Progress 进度条",
+      link: "/progress/progress",
+    },
+    {
       text: "✅Skeleton 骨架屏",
       link: "/skeleton/skeleton",
     },
