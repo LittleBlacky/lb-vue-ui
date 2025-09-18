@@ -1,27 +1,31 @@
-import type { App } from "vue";
 import Loading from "./src/loading.vue";
-import vLoading from "./src/directive";
-import LoadingService from "./src/service";
+import LoadingDirective from "./src/directive";
+import LoadingService, { showLoading } from "./src/service";
+import { withInstallDirective, withInstall } from "@lb-vue-ui/utils";
+import type { App } from "vue";
 
-(Loading as any).install = (app: App) => {
-  app.component(Loading.name, Loading);
-  app.directive("loading", vLoading);
-  app.config.globalProperties.$loading = LoadingService;
+const LbLoadingDirective = withInstallDirective(LoadingDirective, "loading");
+
+const LbLoadingComponent = withInstall(Loading);
+
+const originalInstall = LbLoadingComponent.install;
+LbLoadingComponent.install = (app: App) => {
+  originalInstall(app);
+  app.directive("loading", LbLoadingDirective);
 };
 
-export const LbLoading = Loading;
+LbLoadingComponent.service = showLoading;
+
+export const LbLoading = LbLoadingComponent;
+export { LbLoadingDirective };
+export const LbLoadingService = LoadingService;
 
 export default LbLoading;
 
 export * from "./src/types";
 
-export { vLoading, LoadingService };
-
 declare module "vue" {
   export interface GlobalComponents {
     LbLoading: typeof LbLoading;
-  }
-  export interface ComponentCustomProperties {
-    $loading: typeof LoadingService;
   }
 }

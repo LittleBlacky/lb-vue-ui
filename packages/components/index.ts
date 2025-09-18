@@ -29,3 +29,4 @@ export * from "./checkbox-group";
 export * from "./scrollbar";
 export * from "./tour";
 export * from "./tour-step";
+export * from "./loading";

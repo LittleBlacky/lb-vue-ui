@@ -1,58 +1,106 @@
 @use 'common/vars' as *;
 @use 'mixins/mixins.scss' as mix;
+@use "mixins/function.scss" as fn;
 
 @include mix.b(loading) {
+  // Loading组件的CSS变量定义
+  --lb-loading-bg-color: rgba(255, 255, 255, 0.9);
+  --lb-loading-bg-color-dark: rgba(0, 0, 0, 0.7);
+  --lb-loading-spinner-size: 42px;
+  --lb-loading-spinner-color: var(--lb-color-primary);
+  --lb-loading-text-color: var(--lb-color-primary);
+  --lb-loading-text-size: var(--lb-font-size-base);
+  --lb-loading-text-margin: var(--lb-gap-extra-small);
+  --lb-loading-z-index: var(--lb-z-index-top);
+  --lb-loading-transition-duration: var(--lb-transition-duration);
+
   position: absolute;
-  z-index: 2000;
-  background-color: rgba(255, 255, 255, 0.9);
-  margin: 0;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  transition: opacity 0.3s;
+  z-index: var(--lb-loading-z-index);
+  background-color: var(--lb-loading-bg-color);
+  margin: 0;
+  transition: opacity var(--lb-loading-transition-duration);
 
-  &.is-fullscreen {
+  @include mix.m(fullscreen) {
     position: fixed;
   }
 
-  .lb-loading-spinner {
-    top: 50%;
-    margin-top: -21px;
-    width: 100%;
-    text-align: center;
+  @include mix.when(lock) {
+    overflow: hidden;
+  }
+
+  @include mix.e(spinner) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
 
-    .circular {
-      height: 42px;
-      width: 42px;
-      animation: loading-rotate 2s linear infinite;
-    }
+  @include mix.e(circular) {
+    width: var(--lb-loading-spinner-size);
+    height: var(--lb-loading-spinner-size);
+    animation: lb-loading-rotate 2s linear infinite;
+  }
 
-    .path {
-      animation: loading-dash 1.5s ease-in-out infinite;
-      stroke-dasharray: 90, 150;
-      stroke-dashoffset: 0;
-      stroke-width: 2;
-      stroke: #409eff;
-      stroke-linecap: round;
-    }
+  @include mix.e(path) {
+    stroke: var(--lb-loading-spinner-color);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: 0;
+    animation: lb-loading-dash 1.5s ease-in-out infinite;
+  }
 
-    .lb-loading-text {
-      color: #409eff;
-      margin: 3px 0;
-      font-size: 14px;
-    }
+  @include mix.e(icon) {
+    font-size: var(--lb-loading-spinner-size);
+    color: var(--lb-loading-spinner-color);
+    animation: lb-loading-rotate 2s linear infinite;
+  }
+
+  @include mix.e(text) {
+    margin: var(--lb-loading-text-margin) 0 0;
+    font-size: var(--lb-loading-text-size);
+    color: var(--lb-loading-text-color);
+    font-weight: var(--lb-font-weight-normal);
+    line-height: 1.4;
+  }
+
+  // 淡入淡出动画
+  &-fade-enter-active,
+  &-fade-leave-active {
+    transition: opacity var(--lb-loading-transition-duration);
+  }
+
+  &-fade-enter-from,
+  &-fade-leave-to {
+    opacity: 0;
+  }
+
+  &-fade-enter-to,
+  &-fade-leave-from {
+    opacity: 1;
   }
 }
 
-@keyframes loading-rotate {
+// 旋转动画
+@keyframes lb-loading-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
   100% {
     transform: rotate(360deg);
   }
 }
 
-@keyframes loading-dash {
+// 路径动画
+@keyframes lb-loading-dash {
   0% {
     stroke-dasharray: 1, 200;
     stroke-dashoffset: 0;
