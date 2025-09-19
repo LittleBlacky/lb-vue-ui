@@ -17,7 +17,7 @@ export default {
       link: "/pagination/pagination",
     },
     {
-      text: "Progress 进度条",
+      text: "✅Progress 进度条",
       link: "/progress/progress",
     },
     {

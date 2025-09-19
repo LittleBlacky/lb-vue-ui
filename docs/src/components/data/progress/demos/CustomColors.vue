@@ -8,7 +8,10 @@
     <div class="demo-section">
       <h3>自定义进度颜色数组</h3>
       <div class="demo-item">
-        <p>30% - 绿色</p>
+        <p>
+          {{ colorArray[currentColorIndex].percentage }} % -
+          {{ colorArray[currentColorIndex].color }}
+        </p>
         <lb-progress
           type="line"
           :percentage="colorArray[currentColorIndex].percentage"
